@@ -1,0 +1,332 @@
+/* OrderHistory.css - Farmer Order History styling adhering strictly to Naam Uzhavar Design System */
+
+.farmer-orders-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #ffffff;
+  padding: 16px 20px;
+  border-radius: var(--buyer-radius-lg, 12px);
+  border: 1px solid var(--buyer-border-light, #e3e3dd);
+  box-shadow: var(--buyer-shadow-card, 0 1px 2px rgba(31, 41, 51, 0.06));
+}
+
+@media (min-width: 992px) {
+  .farmer-orders-controls {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* Pagination row */
+.farmer-pagination-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-border-light, #e3e3dd);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  font-family: var(--buyer-font);
+}
+
+/* Mobile Cards Grid */
+.farmer-mobile-cards-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Responsive Switch: Desktop Table vs Mobile Cards */
+@media (max-width: 991.98px) {
+  .farmer-table-responsive {
+    display: none !important;
+  }
+  .farmer-mobile-cards-grid {
+    display: flex !important;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .farmer-pagination-row {
+    border-top: 1px solid var(--buyer-border-light, #e3e3dd);
+    border-radius: 12px;
+    margin-top: 12px;
+  }
+}
+
+@media (min-width: 992px) {
+  .farmer-mobile-cards-grid {
+    display: none !important;
+  }
+}
+
+.farmer-mobile-crop-card {
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-border-light, #e3e3dd);
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 1px 3px rgba(31, 41, 51, 0.05);
+  font-family: var(--buyer-font);
+}
+
+.farmer-mobile-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.farmer-mobile-buyer-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.3;
+}
+
+.mobile-card-body-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px 16px;
+  background-color: #f8fafc;
+  padding: 12px 8px 12px 12px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+.mobile-metric-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.mobile-metric-item.right-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  padding-right: 0;
+  margin-left: auto;
+  min-width: 0;
+}
+
+.mobile-metric-item.right-col .mobile-metric-label,
+.mobile-metric-item.right-col .mobile-metric-val {
+  text-align: right;
+  display: block;
+  width: 100%;
+}
+
+.mobile-metric-item.right-col > div {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+
+.mobile-metric-label {
+  font-size: 0.72rem;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.mobile-metric-val {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobile-metric-val.price {
+  font-family: var(--buyer-font-mono, monospace);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #166534;
+}
+
+.farmer-mobile-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.farmer-mobile-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.farmer-mobile-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ====================================================================
+   FARMER TABLE & DESKTOP STYLING (Agency Polish & Zero Wrapping)
+   ==================================================================== */
+.farmer-table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-border-light, #e3e3dd);
+  box-shadow: var(--buyer-shadow-card, 0 1px 2px rgba(31, 41, 51, 0.06));
+}
+
+.farmer-table {
+  width: 100%;
+  min-width: 860px;
+  border-collapse: collapse;
+  text-align: left;
+  margin: 0;
+  font-family: var(--buyer-font);
+}
+
+.farmer-table th {
+  background-color: #f8fafc;
+  padding: 10px 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--buyer-text-dim, #667085);
+  border-bottom: 1px solid var(--buyer-border-light, #e3e3dd);
+  white-space: nowrap;
+}
+
+.farmer-table td {
+  padding: 10px 8px;
+  font-size: 0.82rem;
+  color: var(--buyer-text-main, #1f2933);
+  border-bottom: 1px solid var(--buyer-border-light, #e3e3dd);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.farmer-table tr:last-child td {
+  border-bottom: none;
+}
+
+.farmer-table tr:hover td {
+  background-color: #fcfdfd;
+}
+
+.farmer-order-id {
+  font-family: var(--buyer-font-mono, monospace);
+  font-weight: 700;
+  color: #0f172a;
+  white-space: nowrap;
+  font-size: 0.82rem;
+}
+
+.farmer-buyer-cell {
+  max-width: 125px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.farmer-crop-cell {
+  max-width: 125px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.farmer-claim-btn {
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 6px;
+  background-color: #15803d;
+  color: #ffffff;
+  border: 1px solid #15803d;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  line-height: 1.2;
+}
+
+.farmer-claim-btn:hover {
+  background-color: #166534;
+  border-color: #166534;
+  transform: translateY(-1px);
+}
+
+.farmer-view-btn {
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid var(--buyer-border-light, #cbd5e1);
+  background-color: #ffffff;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  line-height: 1.2;
+}
+
+.farmer-view-btn:hover {
+  border-color: #94a3b8;
+  background-color: #f8fafc;
+}
+
+/* Status Pill Styling (Preserving Exact Red for NOT_ASSIGNED) */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.status-pill.danger {
+  background-color: #fcebe9;
+  color: #b42318;
+  border: 1px solid #f3c6c1;
+}
+
+.status-pill.success {
+  background-color: #eaf3ec;
+  color: #2f6b3a;
+  border: 1px solid #cfe3d2;
+}
+
+.status-pill.pending {
+  background-color: #faf1da;
+  color: #7a5200;
+  border: 1px solid #ebd9a8;
+}
+
+.status-pill.info {
+  background-color: #e8eff6;
+  color: #2b5c8a;
+  border: 1px solid #c5d5e5;
+}

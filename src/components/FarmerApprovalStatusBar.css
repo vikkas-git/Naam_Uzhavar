@@ -1,0 +1,643 @@
+/* Stylesheet for FarmerApprovalStatusBar component */
+
+.farmer-status-card {
+  background: #ffffff;
+  border: 1.5px solid #bbf7d0;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(22, 101, 52, 0.06);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+}
+
+.farmer-status-card:hover {
+  border-color: #86efac;
+  box-shadow: 0 6px 22px rgba(22, 101, 52, 0.1);
+}
+
+.farmer-status-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #16a34a, #22c55e, #15803d);
+}
+
+/* 1. TOP BAR */
+.farmer-status-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #f1f5f9;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.farmer-status-left-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-width: 0;
+}
+
+.farmer-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.farmer-pill-badge.amber {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+.farmer-pill-badge.green {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+.farmer-pill-badge.blue {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.status-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.status-pulse-dot.amber {
+  background-color: #f59e0b;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.35);
+  animation: pulseBeacon 1.5s infinite;
+}
+
+@keyframes pulseBeacon {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6);
+  }
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 6px rgba(245, 158, 11, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+  }
+}
+
+.farmer-order-id-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  box-sizing: border-box;
+}
+
+.farmer-id-prefix {
+  color: #64748b;
+  font-size: 0.76rem;
+}
+
+.farmer-id-value {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.farmer-copy-id-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.farmer-copy-id-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.farmer-order-selector-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.farmer-select-label {
+  color: #64748b;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.farmer-order-select-box {
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  font-size: 0.78rem;
+  color: #0f172a;
+  outline: none;
+  cursor: pointer;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* 2. PRODUCE SUMMARY STRIP */
+.farmer-produce-summary-strip {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid #f1f5f9;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.farmer-produce-thumb-wrap {
+  width: 58px;
+  height: 58px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  flex-shrink: 0;
+  background: #f8fafc;
+}
+
+.farmer-produce-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.farmer-produce-info-block {
+  flex: 1;
+  min-width: 0;
+}
+
+.farmer-produce-name-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.farmer-produce-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.farmer-produce-tamil-sub {
+  font-size: 0.9rem;
+  color: #475569;
+  font-weight: 500;
+}
+
+.farmer-grade-tag {
+  background: #dcfce7;
+  color: #15803d;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 6px;
+  border: 1px solid #bbf7d0;
+}
+
+.farmer-produce-meta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.84rem;
+  color: #475569;
+}
+
+.farmer-meta-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.farmer-meta-dot {
+  display: inline;
+  color: #cbd5e1;
+  margin: 0 2px;
+}
+
+.farmer-total-price {
+  color: #15803d;
+}
+
+.inline-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 2px;
+}
+
+/* 3. STEPPED PROGRESS TRACKER */
+.farmer-stepper-container {
+  padding: 20px 0 16px 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.farmer-stepper-track {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.farmer-step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  position: relative;
+  z-index: 2;
+  min-width: 0;
+}
+
+.farmer-step-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  transition: all 0.25s ease;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.farmer-step-circle.completed {
+  background: #16a34a;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3);
+}
+
+.farmer-step-circle.amber-pulse {
+  background: #fffbeb;
+  border: 2.5px solid #f59e0b;
+  color: #d97706;
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.15);
+  animation: amberPulse 1.8s infinite;
+}
+
+.farmer-step-circle.blue-pulse {
+  background: #eff6ff;
+  border: 2.5px solid #2563eb;
+  color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+  animation: bluePulse 1.8s infinite;
+}
+
+.farmer-step-circle.pending {
+  background: #f1f5f9;
+  border: 1.5px solid #cbd5e1;
+  color: #94a3b8;
+}
+
+@keyframes amberPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(245, 158, 11, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0);
+  }
+}
+
+@keyframes bluePulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(37, 99, 235, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+  }
+}
+
+.farmer-step-line {
+  flex: 1;
+  height: 3px;
+  background: #e2e8f0;
+  margin: 18px 0 0 0;
+  position: relative;
+  z-index: 1;
+}
+
+.farmer-step-line.active {
+  background: #16a34a;
+}
+
+.farmer-step-line.in-progress {
+  background: linear-gradient(90deg, #16a34a, #f59e0b);
+}
+
+.farmer-step-content {
+  max-width: 150px;
+  min-width: 0;
+}
+
+.farmer-step-title {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.farmer-step-sub {
+  margin: 3px 0 0 0;
+  font-size: 0.74rem;
+  color: #64748b;
+  line-height: 1.35;
+}
+
+/* 4. ACTION BUTTONS: TRACK DELIVERY MAP & SIMULATE NEXT STAGE ALONE */
+.farmer-action-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.farmer-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  box-sizing: border-box;
+}
+
+.farmer-action-btn.primary-green {
+  background: #166534;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(22, 101, 52, 0.25);
+}
+
+.farmer-action-btn.primary-green:hover {
+  background: #15803d;
+  transform: translateY(-1px);
+}
+
+.farmer-action-btn.outline {
+  background: #ffffff;
+  color: #1e293b;
+  border: 1.5px solid #cbd5e1;
+}
+
+.farmer-action-btn.outline:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVE STYLES (Strict Anti-Overflow, Clean Vertical Layout)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .farmer-status-card {
+    padding: 14px 14px 16px 14px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+
+  /* Top Bar */
+  .farmer-status-top-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding-bottom: 12px;
+  }
+
+  .farmer-status-left-group {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .farmer-pill-badge {
+    align-self: flex-start;
+  }
+
+  .farmer-order-id-chip {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+    padding: 6px 10px;
+  }
+
+  .farmer-order-selector-wrap {
+    width: 100%;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    margin-top: 2px;
+  }
+
+  .farmer-select-label {
+    font-size: 0.74rem;
+    color: #64748b;
+  }
+
+  .farmer-order-select-box {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 7px 10px;
+    font-size: 0.8rem;
+    border-radius: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Produce Strip */
+  .farmer-produce-summary-strip {
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+  }
+
+  .farmer-produce-thumb-wrap {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    margin-top: 2px;
+  }
+
+  .farmer-produce-title {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+
+  .farmer-produce-tamil-sub {
+    font-size: 0.82rem;
+  }
+
+  .farmer-produce-name-row {
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .farmer-produce-meta-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    font-size: 0.8rem;
+  }
+
+  .farmer-meta-dot {
+    display: none;
+  }
+
+  /* Stepper as Connected Vertical Timeline */
+  .farmer-stepper-container {
+    padding: 14px 0 10px 0;
+  }
+
+  .farmer-stepper-track {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    position: relative;
+    padding-left: 2px;
+  }
+
+  .farmer-step-item {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+    text-align: left;
+    width: 100%;
+    position: relative;
+    padding-bottom: 14px;
+  }
+
+  .farmer-step-item:last-child {
+    padding-bottom: 2px;
+  }
+
+  /* Vertical timeline line between circles */
+  .farmer-step-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 17px;
+    top: 36px;
+    bottom: -2px;
+    width: 2px;
+    background: #e2e8f0;
+    z-index: 1;
+  }
+
+  .farmer-step-item.completed:not(:last-child)::after {
+    background: #16a34a;
+  }
+
+  .farmer-step-circle {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .farmer-step-line {
+    display: none;
+  }
+
+  .farmer-step-content {
+    max-width: none;
+    flex: 1;
+    min-width: 0;
+    padding-top: 4px;
+  }
+
+  .farmer-step-title {
+    font-size: 0.86rem;
+  }
+
+  .farmer-step-sub {
+    font-size: 0.72rem;
+    margin-top: 2px;
+    line-height: 1.35;
+  }
+
+  /* Action Buttons */
+  .farmer-action-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 12px;
+  }
+
+  .farmer-action-btn {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+    padding: 11px 16px;
+    font-size: 0.88rem;
+  }
+}

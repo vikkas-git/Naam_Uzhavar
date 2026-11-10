@@ -1,0 +1,251 @@
+/* What this file does: Stylesheet for Buyer Overview dashboard metrics, quick actions, and consignment teasers. */
+/* Overview Page Styles */
+
+.buyer-summary-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.buyer-summary-card {
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-border-light);
+  border-radius: var(--buyer-radius-lg);
+  padding: 20px 24px;
+  box-shadow: var(--buyer-shadow-card);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.buyer-summary-card:hover {
+  border-color: #9ca3af;
+  box-shadow: var(--buyer-shadow-hover);
+}
+
+.buyer-summary-card.active-transit {
+  border-color: var(--buyer-accent-border);
+  background-color: var(--buyer-accent-subtle);
+}
+
+.buyer-summary-number-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.buyer-summary-number {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--buyer-text-main);
+  line-height: 1;
+}
+
+.buyer-summary-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--buyer-accent-text);
+  background-color: var(--buyer-accent-subtle);
+  padding: 3px 8px;
+  border-radius: var(--buyer-radius-full);
+}
+
+.buyer-summary-trend.neutral {
+  color: var(--buyer-text-muted);
+  background-color: #f1f5f9;
+}
+
+.buyer-summary-trend.green {
+  color: var(--buyer-accent-text);
+  background-color: var(--buyer-accent-subtle);
+}
+
+.pulse-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--buyer-primary);
+  box-shadow: 0 0 0 2px rgba(3, 105, 161, 0.3);
+  animation: pulseBeacon 1.4s infinite;
+}
+
+.buyer-summary-label {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--buyer-text-main);
+}
+
+.buyer-summary-hint {
+  font-size: 0.76rem;
+  color: var(--buyer-text-dim);
+  margin-top: 4px;
+}
+
+/* Active Transit Spotlight Card */
+.buyer-transit-spotlight-card {
+  background-color: #ffffff;
+  border: 1.5px solid var(--buyer-accent-border);
+  border-radius: var(--buyer-radius-lg);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow: var(--buyer-shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.buyer-transit-spotlight-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background-color: var(--buyer-primary);
+}
+
+.buyer-transit-spotlight-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.buyer-transit-icon-box {
+  width: 54px;
+  height: 54px;
+  border-radius: var(--buyer-radius-md);
+  background-color: var(--buyer-accent-subtle);
+  color: var(--buyer-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.buyer-transit-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.buyer-live-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  background-color: #fee2e2;
+  color: #b91c1c;
+  padding: 2px 7px;
+  border-radius: var(--buyer-radius-full);
+}
+
+.buyer-transit-id {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--buyer-text-muted);
+}
+
+.buyer-transit-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--buyer-text-main);
+  margin: 0;
+}
+
+.buyer-transit-meta {
+  font-size: 0.84rem;
+  color: var(--buyer-text-muted);
+  margin: 4px 0 0 0;
+}
+
+.buyer-transit-spotlight-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-shrink: 0;
+}
+
+.buyer-eta-pill {
+  text-align: right;
+}
+
+.buyer-eta-sub {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--buyer-text-dim);
+  letter-spacing: 0.04em;
+}
+
+.buyer-eta-val {
+  display: block;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--buyer-primary);
+}
+
+/* Featured Arrivals Section */
+.buyer-section-block {
+  margin-top: 8px;
+}
+
+.buyer-section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.buyer-section-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--buyer-text-main);
+  margin: 0;
+}
+
+.buyer-section-sub {
+  font-size: 0.85rem;
+  color: var(--buyer-text-muted);
+  margin: 4px 0 0 0;
+}
+
+.buyer-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  color: var(--buyer-primary);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: var(--buyer-radius-sm);
+  transition: all 0.15s ease;
+}
+
+.buyer-link-btn:hover {
+  background-color: var(--buyer-accent-subtle);
+  transform: translateX(2px);
+}
+
+@media (max-width: 768px) {
+  .buyer-transit-spotlight-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .buyer-transit-spotlight-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

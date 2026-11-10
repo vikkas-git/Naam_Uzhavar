@@ -1,0 +1,372 @@
+/* FarmerRegister.css - 50/50 Split Screen Design System */
+/* Follows BuyerRegister layout rhythm with Farmer Green (#2F6B3A) palette */
+
+/* Split Page View & Natural Vertical Scroll */
+.farmer-reg-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background-color: var(--buyer-bg-canvas, #f6f6f2);
+  box-sizing: border-box;
+}
+
+.farmer-reg-form-pane {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--buyer-bg-canvas, #f6f6f2);
+  padding: 10px clamp(12px, 2.5vw, 36px);
+  position: relative;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* Ensure inner card is NEVER clipped, NEVER cut in half, fits full page */
+.farmer-reg-card,
+.buyer-reg-form-inner.farmer-reg-card {
+  width: 100%;
+  max-width: 620px;
+  margin: 4px auto 10px auto;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e3e3dd;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  padding: clamp(14px, 2vw, 20px) clamp(16px, 2.5vw, 24px);
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
+}
+
+/* Compact header */
+.farmer-reg-card .buyer-form-header {
+  margin-bottom: 8px !important;
+}
+
+.farmer-reg-card .buyer-icon-box {
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  margin-bottom: 4px !important;
+}
+
+.farmer-reg-card .buyer-account-badge {
+  margin-bottom: 4px !important;
+  font-size: 0.72rem !important;
+  padding: 2px 8px !important;
+}
+
+.farmer-reg-card .buyer-form-title {
+  font-size: clamp(1.15rem, 1.8vw, 1.35rem) !important;
+  margin-bottom: 2px !important;
+  line-height: 1.2 !important;
+}
+
+.farmer-reg-card .buyer-form-subtitle {
+  font-size: 0.8rem !important;
+  margin-bottom: 6px !important;
+  line-height: 1.3 !important;
+}
+
+/* Farmer Visual Pane Enhancements */
+.farmer-reg-visual-pane {
+  background-color: #1e4a29 !important;
+}
+
+.farmer-reg-badge {
+  background: rgba(255, 255, 255, 0.16) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.farmer-reg-footer {
+  text-align: center;
+  font-size: 0.78rem;
+  color: #64748b;
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
+.farmer-reg-fields {
+  margin-bottom: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Farmer Primary Button Style Overrides */
+.farmer-login-theme .btn-primary,
+.farmer-reg-card .btn-primary,
+.farmer-btn-primary {
+  background-color: #2F6B3A !important;
+  border-color: #2F6B3A !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(47, 107, 58, 0.28) !important;
+  transition: all 0.15s ease-in-out;
+  height: 42px !important;
+  font-size: 0.92rem !important;
+  margin-top: 6px !important;
+}
+
+.farmer-login-theme .btn-primary:hover,
+.farmer-reg-card .btn-primary:hover,
+.farmer-btn-primary:hover {
+  background-color: #23552d !important;
+  border-color: #23552d !important;
+  box-shadow: 0 6px 18px rgba(47, 107, 58, 0.35) !important;
+}
+
+/* --------------------------------------------------------------------------
+   STRICT 50/50 DUAL COLUMN ROW (Balanced widths, zero horizontal overflow)
+   -------------------------------------------------------------------------- */
+.farmer-reg-dual-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 8px !important;
+}
+
+@media (min-width: 600px) {
+  .farmer-reg-dual-row {
+    flex-direction: row;
+    gap: 12px;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .farmer-reg-dual-row > div {
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+    width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .farmer-reg-dual-row .app-input-group {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-bottom: 0 !important;
+  }
+
+  .farmer-reg-dual-row .app-input-control {
+    font-size: 0.84rem !important;
+    padding-left: 6px !important;
+    padding-right: 4px !important;
+    height: 38px !important;
+    min-height: 38px !important;
+  }
+
+  .farmer-reg-dual-row .app-input-icon-left {
+    padding-left: 10px !important;
+    padding-right: 0 !important;
+  }
+
+  .farmer-reg-dual-row .app-input-icon-btn {
+    margin-right: 4px !important;
+    width: 26px !important;
+    height: 26px !important;
+  }
+}
+
+.farmer-field-single {
+  width: 100%;
+  margin-bottom: 8px !important;
+  box-sizing: border-box;
+}
+
+.farmer-field-single .app-input-group {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-bottom: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.farmer-field-single .app-input-control {
+  font-size: 0.85rem !important;
+  height: 38px !important;
+  min-height: 38px !important;
+}
+
+/* Compact input labels */
+.farmer-reg-card .app-input-label {
+  font-size: 0.79rem !important;
+  margin-bottom: 2px !important;
+  font-weight: 600 !important;
+}
+
+/* --------------------------------------------------------------------------
+   PHOTO UPLOAD DROPZONE (Farmer Green Theme - Sleek Compact Bar)
+   -------------------------------------------------------------------------- */
+.farmer-photo-group {
+  margin-bottom: 8px !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.farmer-photo-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem !important;
+  font-weight: 600;
+  color: var(--neutral-900, #1f2933);
+  margin-bottom: 3px !important;
+}
+
+.farmer-photo-dropzone {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 12px !important;
+  background-color: #fbfbf9;
+  border: 1.5px dashed #d5d5ce;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+  user-select: none;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 42px !important;
+}
+
+.farmer-photo-dropzone:hover {
+  border-color: #2F6B3A;
+  background-color: rgba(47, 107, 58, 0.03);
+}
+
+.farmer-photo-dropzone.is-dragging {
+  border-color: #2F6B3A;
+  background-color: rgba(47, 107, 58, 0.08);
+}
+
+.farmer-photo-dropzone.has-error {
+  border-color: #b42318;
+  background-color: #fcebe9;
+}
+
+.farmer-photo-preview-circle {
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  border-radius: 50%;
+  background: rgba(47, 107, 58, 0.08);
+  border: 1.5px solid rgba(47, 107, 58, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.farmer-photo-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.farmer-photo-prompt-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.farmer-photo-prompt-title {
+  font-size: 0.82rem !important;
+  font-weight: 600;
+  color: #1f2933;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.farmer-photo-prompt-sub {
+  font-size: 0.7rem !important;
+  color: #667085;
+  margin-top: 1px;
+}
+
+.farmer-photo-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.farmer-photo-btn-change {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid #d5d5ce;
+  background: #ffffff;
+  color: #2F6B3A;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.farmer-photo-btn-change:hover {
+  background: rgba(47, 107, 58, 0.08);
+  border-color: #2F6B3A;
+}
+
+.farmer-photo-btn-remove {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 8px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid #fca5a5;
+  background: #fef2f2;
+  color: #b91c1c;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.farmer-photo-btn-remove:hover {
+  background: #fee2e2;
+}
+
+.farmer-field-error {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #b42318;
+  margin-top: 3px;
+}
+
+.farmer-assurance-card {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  margin-top: 6px !important;
+  padding: 6px 12px !important;
+}
+
+.farmer-assurance-icon {
+  color: #2F6B3A;
+}
+
+.farmer-icon-box {
+  background-color: rgba(47, 107, 58, 0.1) !important;
+  color: #2F6B3A !important;
+}
+
+.farmer-account-badge {
+  background-color: rgba(47, 107, 58, 0.12) !important;
+  color: #2F6B3A !important;
+  border: 1px solid rgba(47, 107, 58, 0.25) !important;
+}

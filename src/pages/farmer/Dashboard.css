@@ -1,0 +1,195 @@
+/* Dashboard.css - Unified Farmer Overview styles adhering strictly to Naam Uzhavar Design System */
+
+.farmer-activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.farmer-activity-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 20px;
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-border-light, #e3e3dd);
+  border-radius: var(--buyer-radius-md, 8px);
+  box-shadow: var(--buyer-shadow-card, 0 1px 2px rgba(31, 41, 51, 0.06));
+  transition: all 0.15s ease;
+}
+
+.farmer-activity-row:hover {
+  border-color: #9ca3af;
+  box-shadow: var(--buyer-shadow-hover, 0 2px 8px rgba(31, 41, 51, 0.08));
+}
+
+@media (min-width: 768px) {
+  .farmer-activity-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.farmer-activity-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.farmer-act-buyer-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--buyer-text-main, #1f2933);
+  font-family: var(--buyer-font);
+}
+
+.farmer-act-crop-desc {
+  font-size: 0.88rem;
+  color: var(--buyer-text-muted, #4b5563);
+}
+
+.farmer-act-meta {
+  font-size: 0.80rem;
+  color: var(--buyer-text-dim, #667085);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.farmer-activity-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.farmer-activity-actions .buyer-btn-outline,
+.farmer-activity-actions .buyer-btn-primary,
+.farmer-activity-actions .buyer-btn-danger {
+  height: 38px;
+  min-height: 38px;
+  padding: 8px 16px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border-radius: var(--buyer-radius-md, 8px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.farmer-activity-actions .buyer-btn-outline {
+  background-color: #ffffff;
+  color: var(--buyer-text-main, #1f2933);
+  border: 1px solid var(--buyer-border-light, #e3e3dd);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.farmer-activity-actions .buyer-btn-outline:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+  color: var(--buyer-text-main, #1f2933);
+}
+
+.farmer-activity-actions .buyer-btn-primary {
+  background-color: var(--buyer-primary, #2F6B3A);
+  color: #ffffff;
+  border: 1px solid var(--buyer-primary, #2F6B3A);
+  box-shadow: 0 2px 6px rgba(47, 107, 58, 0.22);
+}
+
+.farmer-activity-actions .buyer-btn-primary:hover {
+  background-color: var(--buyer-primary-hover, #23522c);
+  border-color: var(--buyer-primary-hover, #23522c);
+  color: #ffffff;
+}
+
+.farmer-activity-actions .buyer-btn-danger {
+  background-color: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+  box-shadow: 0 1px 2px rgba(220, 38, 38, 0.08);
+}
+
+.farmer-activity-actions .buyer-btn-danger:hover {
+  background-color: #fecaca;
+  color: #b91c1c;
+  border-color: #f87171;
+}
+
+@media (max-width: 768px) {
+  .farmer-activity-actions {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .farmer-activity-actions .buyer-btn-outline {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+  .farmer-activity-actions .buyer-btn-primary,
+  .farmer-activity-actions .buyer-btn-danger {
+    flex: 1 1 calc(50% - 4px);
+  }
+}
+
+/* Status Pills */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: var(--buyer-radius-full, 9999px);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.status-pill.pending {
+  background-color: #faf1da;
+  color: #7a5200;
+  border: 1px solid #ebd9a8;
+}
+
+.status-pill.success {
+  background-color: #eaf3ec;
+  color: #2f6b3a;
+  border: 1px solid #cfe3d2;
+}
+
+.status-pill.info {
+  background-color: #e8eff6;
+  color: #2b5c8a;
+  border: 1px solid #c5d5e5;
+}
+
+.status-pill.danger {
+  background-color: #fcebe9;
+  color: #b42318;
+  border: 1px solid #f3c6c1;
+}
+
+.buyer-view-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--buyer-primary, #2F6B3A);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--buyer-radius-sm, 6px);
+  transition: all 0.15s ease;
+}
+
+.buyer-view-all-btn:hover {
+  background-color: var(--buyer-accent-subtle, #eaf3ec);
+}

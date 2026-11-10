@@ -1,0 +1,423 @@
+/* ==========================================================================
+   Naam Uzhavar - Premium Agricultural Loading Page & Delay Handler
+   Design System: Deep Botanical Pine, Steel Blue & Warm Paper Neutral
+   ========================================================================== */
+
+/* 1. Host Container Modes */
+.nu-loading-page-host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--buyer-font, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  color: var(--neutral-900, #1f2933);
+  box-sizing: border-box;
+}
+
+.nu-loading-page-host.is-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  inset: 0;
+  z-index: 9999;
+  width: 100%;
+  width: 100vw;
+  height: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: -webkit-fill-available;
+  background-color: rgba(246, 246, 242, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  box-sizing: border-box;
+}
+
+.nu-loading-page-host.is-embedded {
+  position: relative;
+  width: 100%;
+  min-height: 440px;
+  background-color: var(--buyer-bg-card, #ffffff);
+  border: 1px solid var(--neutral-200, #e3e3dd);
+  border-radius: var(--radius-xl, 16px);
+  padding: 48px 24px;
+  box-shadow: 0 1px 3px rgba(31, 41, 51, 0.04);
+  margin: 16px 0;
+}
+
+/* 2. Main Center Card */
+.nu-loading-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 520px;
+  width: 100%;
+  animation: nuFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 3. Spinner & Botanical Emblem Animation */
+.nu-spinner-wrapper {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nu-spinner-aura {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(47, 107, 58, 0.22) 0%, rgba(43, 92, 138, 0.08) 50%, transparent 75%);
+  animation: nuAuraPulse 2.4s ease-in-out infinite;
+}
+
+.nu-spinner-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid rgba(47, 107, 58, 0.14);
+  border-top-color: #2f6b3a; /* Botanical emerald */
+  border-right-color: #2b5c8a; /* Steel blue */
+  animation: nuRingSpin 1.1s cubic-bezier(0.5, 0.1, 0.4, 0.9) infinite;
+}
+
+.nu-spinner-icon-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #eaf3ec 0%, #e8eff6 100%);
+  border: 1px solid rgba(47, 107, 58, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #265a31;
+  box-shadow: 0 2px 8px rgba(38, 90, 49, 0.12);
+  animation: nuLeafFloat 2.6s ease-in-out infinite;
+}
+
+/* 4. Live Telemetry Badge */
+.nu-loading-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #eaf3ec;
+  border: 1px solid #cfe3d2;
+  color: #1e4a29;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  margin-bottom: 16px;
+}
+
+.nu-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #16a34a;
+  box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+  animation: nuDotPulse 1.8s infinite;
+}
+
+/* 5. Typography */
+.nu-loading-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1f2933;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+}
+
+.nu-loading-subtitle {
+  font-size: 0.92rem;
+  color: #4b5563;
+  margin: 0 0 24px 0;
+  line-height: 1.5;
+  max-width: 440px;
+}
+
+/* 6. Shimmer Progress Track */
+.nu-progress-track {
+  width: 100%;
+  max-width: 380px;
+  height: 6px;
+  background-color: #eeeee9;
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.nu-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg, #2f6b3a 0%, #2b5c8a 100%);
+  border-radius: 9999px;
+  animation: nuShimmerSlide 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* 7. Multi-Step Live Pipeline */
+.nu-loading-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 420px;
+  margin-bottom: 20px;
+  background-color: #fafaf8;
+  border: 1px solid #e8e8e2;
+  border-radius: 12px;
+  padding: 14px 18px;
+  text-align: left;
+}
+
+.nu-step-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: #667085;
+  transition: all 0.2s ease;
+}
+
+.nu-step-item.is-done {
+  color: #1e4a29;
+  font-weight: 500;
+}
+
+.nu-step-item.is-active {
+  color: #2b5c8a;
+  font-weight: 600;
+}
+
+.nu-step-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nu-step-icon.done-icon {
+  color: #2f6b3a;
+}
+
+.nu-step-icon.active-icon {
+  color: #2b5c8a;
+  animation: nuSpinMicro 2s linear infinite;
+}
+
+.nu-step-icon.pending-icon {
+  color: #9ca3af;
+}
+
+/* 8. Delay Notification Alert */
+.nu-delay-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background-color: #faf1da;
+  border: 1px solid #ebd9a8;
+  color: #7a5200;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  text-align: left;
+  width: 100%;
+  max-width: 420px;
+  animation: nuFadeInUp 0.3s ease-out forwards;
+  margin-top: 4px;
+}
+
+.nu-delay-icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* 9. Timeout / Offline Actions */
+.nu-action-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 420px;
+  margin-top: 14px;
+  animation: nuFadeInUp 0.35s ease-out forwards;
+}
+
+.nu-timeout-hint {
+  font-size: 0.82rem;
+  color: #667085;
+  margin-bottom: 4px;
+}
+
+.nu-btn-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.nu-btn-retry {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background-color: #2b5c8a;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.nu-btn-retry:hover {
+  background-color: #234b71;
+}
+
+.nu-btn-offline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-color: #ffffff;
+  color: #4b5563;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.nu-btn-offline:hover {
+  background-color: #f9fafb;
+  color: #1f2933;
+  border-color: #9ca3af;
+}
+
+/* 10. Keyframe Animations */
+@keyframes nuFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes nuFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes nuRingSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes nuSpinMicro {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes nuAuraPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 0.95;
+  }
+}
+
+@keyframes nuLeafFloat {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.04);
+  }
+}
+
+@keyframes nuDotPulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(22, 163, 74, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
+  }
+}
+
+@keyframes nuShimmerSlide {
+  0% {
+    left: -40%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* 11. Mobile Adaptations */
+@media (max-width: 576px) {
+  .nu-loading-page-host.is-embedded {
+    padding: 32px 16px;
+    min-height: 380px;
+  }
+
+  .nu-loading-title {
+    font-size: 1.18rem;
+  }
+
+  .nu-loading-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .nu-btn-row {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .nu-btn-retry,
+  .nu-btn-offline {
+    width: 100%;
+  }
+}
+

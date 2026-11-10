@@ -1,0 +1,755 @@
+/* What this file does: Stylesheet for Buyer live delivery tracking, map mock, progress timeline, and driver details. */
+/* Track Delivery Page Styles */
+
+.buyer-active-order-picker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.buyer-picker-label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--buyer-text-muted);
+}
+
+/* 5-Stage Status Indicator */
+.buyer-tracking-stepper-card {
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-border-light);
+  border-radius: var(--buyer-radius-lg);
+  padding: 24px 28px;
+  box-shadow: var(--buyer-shadow-card);
+}
+
+.buyer-stepper-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.buyer-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.buyer-step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+}
+
+.buyer-step.completed .buyer-step-circle {
+  background-color: var(--buyer-primary);
+  color: #ffffff;
+}
+
+.buyer-step.active .buyer-step-circle {
+  background-color: #10b981;
+  color: #ffffff;
+}
+
+.buyer-step.pending .buyer-step-circle {
+  background-color: #f1f5f9;
+  border: 2px solid var(--buyer-border-light);
+  color: var(--buyer-text-dim);
+}
+
+.pulse-circle {
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25);
+  animation: pulseBeacon 1.5s infinite;
+}
+
+.buyer-step-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--buyer-text-muted);
+}
+
+.buyer-step-title.active {
+  color: #10b981;
+  font-weight: 700;
+}
+
+.buyer-step-time {
+  font-size: 0.68rem;
+  color: var(--buyer-text-dim);
+  margin-top: 2px;
+}
+
+.buyer-step-line {
+  flex: 1;
+  height: 3px;
+  background-color: #f1f5f9;
+  margin: 0 8px 24px 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.buyer-step-line.completed {
+  background-color: var(--buyer-primary);
+}
+
+.buyer-step-line.active {
+  background: linear-gradient(90deg, var(--buyer-primary) 0%, #10b981 100%);
+}
+
+/* Map Tracking Layout */
+.buyer-map-tracking-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 20px;
+  align-items: start;
+}
+
+.buyer-map-container {
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-border-light);
+  border-radius: var(--buyer-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--buyer-shadow-card);
+  display: flex;
+  flex-direction: column;
+}
+
+.buyer-map-header-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background-color: #ffffff;
+  border-bottom: 1px solid var(--buyer-border-light);
+}
+
+.buyer-map-legend {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--buyer-text-muted);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot.hub {
+  background-color: var(--buyer-primary);
+}
+
+.dot.vehicle {
+  background-color: #10b981;
+}
+
+.dot.destination {
+  background-color: #dc2626;
+}
+
+.buyer-map-speed-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  background-color: var(--buyer-accent-subtle);
+  color: var(--buyer-accent-text);
+  padding: 4px 10px;
+  border-radius: var(--buyer-radius-full);
+}
+
+.buyer-svg-map-wrapper {
+  width: 100%;
+  background-color: #f1f5f9;
+  position: relative;
+}
+
+.buyer-logistics-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.svg-node-label {
+  font-size: 11px;
+  fill: #0f172a;
+}
+
+.svg-node-sub {
+  font-size: 9px;
+  fill: #64748b;
+}
+
+.buyer-animated-route-path {
+  stroke-dasharray: 10 5;
+  animation: dashMove 20s linear infinite;
+}
+
+@keyframes dashMove {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+.animate-ping-slow {
+  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.buyer-map-footer-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background-color: #ffffff;
+  border-top: 1px solid var(--buyer-border-light);
+}
+
+.buyer-gps-text {
+  font-size: 0.76rem;
+  color: var(--buyer-text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.live-gps-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--buyer-primary);
+  animation: pulseBeacon 1.2s infinite;
+}
+
+.buyer-map-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid var(--buyer-border-light);
+  border-radius: var(--buyer-radius-sm);
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--buyer-text-main);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.buyer-map-action-btn:hover {
+  background-color: var(--buyer-bg-canvas);
+}
+
+/* Sidebar Telemetry Cards */
+.buyer-telemetry-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.buyer-status-card,
+.buyer-driver-card,
+.buyer-farmer-dispatched-card {
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-border-light);
+  border-radius: var(--buyer-radius-lg);
+  padding: 18px 20px;
+  box-shadow: var(--buyer-shadow-card);
+}
+
+.buyer-status-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.buyer-radar-pulse {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(16, 185, 129, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pulse-dot-inner {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #10b981;
+}
+
+.buyer-status-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--buyer-text-dim);
+  display: block;
+}
+
+.buyer-status-main {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--buyer-text-main);
+  margin: 2px 0 0 0;
+}
+
+.buyer-status-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--buyer-border-light);
+}
+
+.buyer-status-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 0.68rem;
+  color: var(--buyer-text-dim);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.stat-val {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--buyer-text-main);
+  margin-top: 2px;
+}
+
+.stat-val.highlight {
+  color: var(--buyer-primary);
+}
+
+/* Driver Card Box Model & Typography */
+.buyer-driver-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.buyer-driver-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+}
+
+.buyer-driver-heading {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--buyer-text-main);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.buyer-vehicle-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  background-color: var(--buyer-accent-subtle);
+  color: var(--buyer-primary);
+  border: 1px solid var(--buyer-accent-border);
+  padding: 3px 10px;
+  border-radius: var(--buyer-radius-full);
+  display: inline-flex;
+  align-items: center;
+  letter-spacing: 0.01em;
+}
+
+.buyer-driver-profile-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0;
+}
+
+.buyer-driver-avatar {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--buyer-accent-subtle) 0%, #e2ecf5 100%);
+  border: 1.5px solid var(--buyer-accent-border);
+  color: var(--buyer-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(43, 92, 138, 0.1);
+}
+
+.buyer-driver-status-dot {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #10b981;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.35);
+}
+
+.buyer-driver-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.buyer-driver-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--buyer-text-main);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.buyer-driver-rating {
+  font-size: 0.76rem;
+  color: var(--buyer-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 3px;
+  font-weight: 600;
+}
+
+.buyer-rating-star {
+  color: #d97706;
+  font-weight: 700;
+}
+
+.buyer-dot {
+  color: var(--buyer-text-dim);
+}
+
+.buyer-deliveries-count {
+  color: var(--buyer-text-muted);
+  font-weight: 500;
+}
+
+/* Unified Vehicle Specs Container */
+.buyer-driver-vehicle-specs {
+  background-color: var(--buyer-bg-canvas);
+  border: 1px solid var(--buyer-border-light);
+  border-radius: var(--buyer-radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.buyer-driver-vehicle-specs .buyer-spec-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--buyer-border-light);
+  font-size: 0.82rem;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.buyer-driver-vehicle-specs .buyer-spec-row:last-child {
+  border-bottom: none;
+}
+
+.buyer-driver-vehicle-specs .spec-name {
+  color: var(--buyer-text-muted);
+  font-weight: 500;
+}
+
+.buyer-driver-vehicle-specs .spec-value {
+  color: var(--buyer-text-main);
+  font-weight: 600;
+  text-align: right;
+}
+
+.buyer-driver-vehicle-specs .spec-value.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-border-light);
+  padding: 2px 8px;
+  border-radius: var(--buyer-radius-sm);
+  color: var(--buyer-text-main);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+/* Delivery PIN Security Row */
+.buyer-driver-vehicle-specs .buyer-spec-row.pin-highlight {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border-top: 1px dashed var(--buyer-amber-border);
+  border-bottom: none;
+  padding: 10px 14px;
+  margin: 0;
+}
+
+.pin-label-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pin-icon {
+  color: var(--buyer-amber-text);
+  flex-shrink: 0;
+}
+
+.buyer-driver-vehicle-specs .buyer-spec-row.pin-highlight .spec-name {
+  color: var(--buyer-amber-text);
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.buyer-driver-vehicle-specs .spec-value.pin-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  color: var(--buyer-amber-text);
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-amber-border);
+  padding: 3px 10px;
+  border-radius: var(--buyer-radius-sm);
+  box-shadow: 0 1px 2px rgba(122, 82, 0, 0.08);
+}
+
+/* Actions Box Model */
+.buyer-driver-actions {
+  margin: 0;
+}
+
+.buyer-driver-actions .buyer-btn-primary.full-width {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 16px;
+  border-radius: var(--buyer-radius-md);
+  font-weight: 600;
+  font-size: 0.88rem;
+  background-color: var(--buyer-primary);
+  color: #ffffff;
+  text-decoration: none;
+  border: none;
+  box-shadow: 0 2px 6px rgba(43, 92, 138, 0.25);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.buyer-driver-actions .buyer-btn-primary.full-width:hover {
+  background-color: var(--buyer-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(43, 92, 138, 0.32);
+}
+
+.buyer-driver-actions .buyer-btn-primary.full-width:active {
+  background-color: var(--buyer-primary-active);
+  transform: translateY(0);
+}
+
+.buyer-farmer-dispatched-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.buyer-farmer-dispatched-card .buyer-spec-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 1024px) {
+  .buyer-map-tracking-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ==========================================================================
+   DEMO LOGISTICS MILESTONE CONTROLS & INACCESSIBLE STATE
+   ========================================================================== */
+.buyer-demo-controls-card {
+  background-color: #f8fafc;
+  border: 2px dashed #94a3b8;
+  border-radius: var(--buyer-radius-lg);
+  padding: 16px 18px;
+  box-shadow: var(--buyer-shadow-card);
+  margin-bottom: 4px;
+}
+
+.buyer-demo-controls-card:hover {
+  border-color: #64748b;
+}
+
+.buyer-demo-badge {
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.buyer-demo-advance-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background-color: #1e3a8a;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.25);
+  transition: all 0.2s ease;
+}
+
+.buyer-demo-advance-btn:hover {
+  background-color: #1e40af;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(30, 58, 138, 0.32);
+}
+
+.buyer-demo-advance-btn.success {
+  background-color: #166534;
+  box-shadow: 0 4px 12px rgba(22, 101, 52, 0.25);
+}
+
+.buyer-demo-advance-btn.success:hover {
+  background-color: #15803d;
+}
+
+.buyer-demo-delivered-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 16px;
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.86rem;
+}
+
+.buyer-tracking-inaccessible-card {
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-border-light);
+  border-radius: var(--buyer-radius-lg);
+  padding: 48px 24px;
+  text-align: center;
+  box-shadow: var(--buyer-shadow-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ==========================================================================
+   MOBILE RESPONSIVENESS FOR DELIVERY TRACKING (<= 640px)
+   ========================================================================== */
+@media (max-width: 640px) {
+  .buyer-tracking-stepper-card {
+    padding: 16px 12px;
+  }
+
+  .buyer-step-circle {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 6px;
+  }
+
+  .buyer-step-circle svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .buyer-step-title {
+    font-size: 0.7rem;
+    max-width: 66px;
+    line-height: 1.25;
+    word-break: break-word;
+  }
+
+  .buyer-step-line {
+    margin: 0 4px 18px 4px;
+  }
+
+  .buyer-map-header-overlay {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .buyer-demo-controls-card {
+    padding: 14px;
+  }
+
+  .buyer-demo-advance-btn {
+    padding: 11px 14px;
+    font-size: 0.84rem;
+  }
+
+  .buyer-tracking-inaccessible-card {
+    padding: 32px 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .buyer-tracking-stepper-card {
+    padding: 12px 8px;
+  }
+
+  .buyer-step-title {
+    font-size: 0.64rem;
+    max-width: 54px;
+  }
+
+  .buyer-step-line {
+    margin: 0 2px 18px 2px;
+  }
+}

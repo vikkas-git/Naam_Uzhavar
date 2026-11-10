@@ -1,0 +1,224 @@
+/* DriverDashboardLayout.css - Warm Amber EV Logistics Design System */
+/* Follows Naam Uzhavar Design System with Driver Logistics tokens */
+
+:root {
+  --driver-primary: #b45309;
+  --driver-hover: #92400e;
+  --driver-accent: #d97706;
+  --driver-tint: #fef3c7;
+  --driver-bg: #f9f9f6;
+  --driver-surface: #ffffff;
+  --driver-border: #e6e6dc;
+  --driver-text: #1f2937;
+  --driver-text-muted: #64748b;
+}
+
+.driver-theme {
+  --buyer-primary: var(--driver-primary);
+  --buyer-primary-hover: var(--driver-hover);
+  --buyer-accent: var(--driver-accent);
+}
+
+/* Driver Header & Topbar matching Header.png Reference */
+.driver-theme .buyer-topbar {
+  height: 64px;
+  background-color: #ffffff !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.driver-theme .buyer-brand-logo-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #b45309;
+  box-shadow: 0 2px 6px rgba(180, 83, 9, 0.22);
+}
+
+.driver-theme .buyer-brand-subtitle {
+  color: #b45309 !important;
+  font-weight: 700;
+}
+
+/* Centered Pill Navigation matching Header.png */
+.driver-theme .buyer-desktop-top-navbar {
+  height: 48px;
+  background-color: #ffffff !important;
+  border-bottom: 1px solid var(--buyer-border-light, #e3e3dd) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03) !important;
+}
+
+.driver-theme .buyer-top-nav-links {
+  background-color: #f1f5f9;
+  border: 1px solid var(--buyer-border-light, #e3e3dd);
+  border-radius: 9999px;
+  padding: 3px 6px;
+  gap: 8px;
+}
+
+.driver-theme .buyer-top-nav-item {
+  height: 32px;
+  padding: 0 16px;
+  border-radius: 9999px;
+  color: #4b5563;
+  font-size: 0.83rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.16s ease;
+}
+
+.driver-theme .buyer-top-nav-item:hover {
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+.driver-theme .buyer-top-nav-item.active {
+  background-color: #b45309 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 2px 6px rgba(180, 83, 9, 0.32) !important;
+}
+
+.driver-theme .buyer-top-nav-item.active svg {
+  color: #ffffff !important;
+}
+
+.driver-theme .buyer-top-nav-item.active:hover {
+  background-color: #92400e !important;
+  color: #ffffff !important;
+}
+
+.driver-fleet-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(180, 83, 9, 0.09);
+  color: #b45309;
+  border: 1px solid rgba(180, 83, 9, 0.22);
+  border-radius: 9999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.driver-hub-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fefce8;
+  border: 1px solid #fef08a;
+  color: #854d0e;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.driver-hub-indicator .battery-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: #15803d;
+  font-weight: 700;
+  font-family: monospace;
+}
+
+/* Nav Item styling for driver */
+.driver-theme .buyer-nav-item.active {
+  background-color: rgba(180, 83, 9, 0.12) !important;
+  color: #b45309 !important;
+  font-weight: 700;
+}
+
+.driver-theme .buyer-nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 3.5px;
+  background-color: #b45309;
+  border-radius: 0 4px 4px 0;
+}
+
+.driver-theme .buyer-mb-item.active {
+  color: #b45309 !important;
+}
+
+.driver-theme .buyer-mb-item.active svg {
+  color: #b45309 !important;
+}
+
+/* Driver Avatar Badge */
+.driver-avatar-ring {
+  border-color: #b45309 !important;
+  background: rgba(180, 83, 9, 0.1) !important;
+}
+
+/* Driver Signout Modal theme */
+.driver-signout-icon-ring {
+  background: rgba(180, 83, 9, 0.12) !important;
+  color: #b45309 !important;
+}
+
+/* Toast */
+.driver-toast-notification {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  background: #1f2937;
+  color: #ffffff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-left: 4px solid #b45309;
+  animation: slideUp 0.2s ease-out;
+}
+
+.driver-toast-notification.success {
+  border-left-color: #16a34a;
+}
+
+.driver-toast-notification.error {
+  border-left-color: #dc2626;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Driver Profile Dropdown Links - Remove Underline */
+.driver-theme .buyer-dropdown-item,
+.driver-theme .buyer-dropdown-menu a,
+.driver-theme a.buyer-dropdown-item {
+  text-decoration: none !important;
+}
+
+.driver-theme .buyer-dropdown-item:hover,
+.driver-theme .buyer-dropdown-menu a:hover,
+.driver-theme a.buyer-dropdown-item:hover,
+.driver-theme .buyer-dropdown-item:focus,
+.driver-theme .buyer-dropdown-menu a:focus,
+.driver-theme a.buyer-dropdown-item:focus {
+  text-decoration: none !important;
+}
+
+

@@ -1,0 +1,1009 @@
+/* ==========================================================================
+   NAAM UZHAVAR – REDESIGNED LOGIN PAGE STYLESHEET
+   Matching Reference UI: Dual-Pane Card on Agricultural Nature Background,
+   3 Role Selection Cards (Farmer #15803d, Buyer #1e40af, Driver #b45309),
+   and Single Common Login Form.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Root Container with Agricultural Landscape Background & Corner Leaves
+   -------------------------------------------------------------------------- */
+.role-select-root {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #eaf6ed;
+  background-image: 
+    radial-gradient(ellipse at top left, rgba(220, 252, 231, 0.7) 0%, rgba(240, 253, 244, 0.4) 60%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(220, 252, 231, 0.6) 100%),
+    url('/hero-farm.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: inherit;
+  color: #0f172a;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Decorative Natural Leaf Accents in Corners */
+.role-leaf-decor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.65;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.role-leaf-decor.top-right {
+  top: 0;
+  right: 0;
+  width: 220px;
+  height: 220px;
+  background-image: radial-gradient(circle at 100% 0%, rgba(34, 197, 94, 0.18) 0%, transparent 70%);
+}
+
+.role-leaf-decor.bottom-left {
+  bottom: 0;
+  left: 0;
+  width: 240px;
+  height: 240px;
+  background-image: radial-gradient(circle at 0% 100%, rgba(21, 128, 61, 0.16) 0%, transparent 70%);
+}
+
+/* --------------------------------------------------------------------------
+   Top Navigation Bar (Logo Brand Lockup & Language Selector)
+   -------------------------------------------------------------------------- */
+.role-select-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px clamp(16px, 4vw, 48px);
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.role-select-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 6px 16px 6px 8px;
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.role-select-brand:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.1);
+}
+
+.role-select-logo-img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #16a34a;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.2);
+  flex-shrink: 0;
+}
+
+.role-select-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.role-select-brand-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.role-select-brand-sub {
+  font-size: 0.68rem;
+  color: #15803d;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.role-select-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.role-select-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 9999px;
+  padding: 7px 16px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.role-select-lang-btn:hover {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #0f172a;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.role-select-back-btn {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid rgba(226, 232, 240, 0.9) !important;
+  color: #334155 !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05) !important;
+  backdrop-filter: blur(8px);
+}
+
+.role-select-back-btn:hover {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* --------------------------------------------------------------------------
+   Centered Main Wrapper & Dual-Pane Card Container
+   -------------------------------------------------------------------------- */
+.role-login-main-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px clamp(16px, 3vw, 40px) 40px clamp(16px, 3vw, 40px);
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.role-login-card-container {
+  display: flex;
+  width: 100%;
+  max-width: 1140px;
+  min-height: 640px;
+  background: #ffffff;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 
+    0 24px 60px -12px rgba(15, 23, 42, 0.18),
+    0 0 0 1px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+  animation: cardFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   LEFT PANE: Visual & Value Proposition
+   -------------------------------------------------------------------------- */
+.role-login-visual-pane {
+  flex: 1 1 45%;
+  max-width: 480px;
+  background: linear-gradient(180deg, #f0fdf4 0%, #ecfdf5 55%, #e6f7ec 100%);
+  padding: clamp(28px, 4vw, 40px) clamp(24px, 3vw, 36px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid #e2e8f0;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.role-visual-header {
+  margin-bottom: 20px;
+}
+
+.role-visual-title {
+  font-size: clamp(1.6rem, 2.4vw, 2.15rem);
+  font-weight: 800;
+  color: #064e3b;
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  margin: 0 0 10px 0;
+}
+
+.role-visual-subtitle {
+  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+  color: #475569;
+  line-height: 1.45;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Illustrated Agricultural Landscape Art Frame */
+.role-visual-art-frame {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 24px -6px rgba(15, 23, 42, 0.12);
+  background: #0f2e1d;
+}
+
+.role-visual-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.role-visual-art-frame:hover .role-visual-bg-img {
+  transform: scale(1.04);
+}
+
+.role-visual-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6, 78, 59, 0.1) 0%, rgba(6, 78, 59, 0.65) 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 16px;
+}
+
+.role-partners-silhouette {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.88);
+  padding: 8px 18px;
+  border-radius: 999px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.role-partner-figure {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease;
+}
+
+.role-partner-figure:hover {
+  transform: scale(1.15);
+}
+
+.role-partner-figure.farmer-figure {
+  background: #dcfce7;
+  border: 1.5px solid #16a34a;
+}
+
+.role-partner-figure.buyer-figure {
+  background: #dbeafe;
+  border: 1.5px solid #2563eb;
+}
+
+.role-partner-figure.driver-figure {
+  background: #fef3c7;
+  border: 1.5px solid #b45309;
+}
+
+.figure-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+/* 3 Circular Feature Badges at Bottom of Left Pane */
+.role-visual-features-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+.role-feature-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.role-feature-icon-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  margin-bottom: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease;
+}
+
+.role-feature-col:hover .role-feature-icon-circle {
+  transform: translateY(-2px);
+}
+
+.role-feature-icon-circle.green-circle {
+  background: #15803d;
+}
+
+.role-feature-icon-circle.blue-circle {
+  background: #1e40af;
+}
+
+.role-feature-icon-circle.orange-circle {
+  background: #b45309;
+}
+
+.role-feature-name {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.role-feature-desc {
+  font-size: 0.68rem;
+  color: #64748b;
+  line-height: 1.35;
+}
+
+/* --------------------------------------------------------------------------
+   RIGHT PANE: Welcome Back, 3 Role Cards, Single Unified Login Form
+   -------------------------------------------------------------------------- */
+.role-login-form-pane {
+  flex: 1.2 1 55%;
+  background: #ffffff;
+  padding: clamp(28px, 4vw, 42px) clamp(24px, 4vw, 48px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.role-form-header-box {
+  margin-bottom: 20px;
+}
+
+.role-form-title {
+  font-size: clamp(1.75rem, 2.4vw, 2.2rem);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.role-form-subtitle {
+  font-size: clamp(0.88rem, 1.2vw, 0.98rem);
+  color: #64748b;
+  margin: 6px 0 0 0;
+  font-weight: 500;
+}
+
+/* Feedback Notifications */
+.role-login-feedback {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.role-login-feedback.error {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+.role-login-feedback.success {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+/* --------------------------------------------------------------------------
+   3 Role Selection Cards (Farmer #15803d, Buyer #1e40af, Driver #b45309)
+   -------------------------------------------------------------------------- */
+.role-tri-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.role-choice-card {
+  border: 1.5px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 18px 12px 16px 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  background: #ffffff;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  user-select: none;
+}
+
+.role-choice-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.08);
+}
+
+/* Top-Right Checkmark Indicator */
+.role-card-check-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 900;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  animation: checkPop 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes checkPop {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.role-card-check-badge.farmer-check {
+  background: #15803d;
+}
+
+.role-card-check-badge.buyer-check {
+  background: #1e40af;
+}
+
+.role-card-check-badge.driver-check {
+  background: #b45309;
+}
+
+/* Icon Wraps */
+.role-choice-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  transition: transform 0.2s ease;
+}
+
+.role-choice-card:hover .role-choice-icon-wrap {
+  transform: scale(1.08);
+}
+
+.farmer-icon-wrap {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.buyer-icon-wrap {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.driver-icon-wrap {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+/* Labels & Descriptions */
+.role-choice-label {
+  font-size: 0.98rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.farmer-label {
+  color: #15803d;
+}
+
+.buyer-label {
+  color: #1e40af;
+}
+
+.driver-label {
+  color: #b45309;
+}
+
+.role-choice-desc {
+  font-size: 0.72rem;
+  color: #64748b;
+  line-height: 1.35;
+}
+
+/* Selected States with Theme Colors */
+.role-choice-card.farmer-choice.is-selected {
+  border-color: #15803d;
+  background: #f0fdf4;
+  box-shadow: 0 8px 24px -4px rgba(21, 128, 61, 0.16), 0 0 0 1px #15803d;
+  transform: translateY(-2px);
+}
+
+.role-choice-card.buyer-choice.is-selected {
+  border-color: #1e40af;
+  background: #eff6ff;
+  box-shadow: 0 8px 24px -4px rgba(30, 64, 175, 0.16), 0 0 0 1px #1e40af;
+  transform: translateY(-2px);
+}
+
+.role-choice-card.driver-choice.is-selected {
+  border-color: #b45309;
+  background: #fffbeb;
+  box-shadow: 0 8px 24px -4px rgba(180, 83, 9, 0.16), 0 0 0 1px #b45309;
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   Single Common Login Form Controls
+   -------------------------------------------------------------------------- */
+.role-unified-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.role-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.role-field-label {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.role-input-box {
+  display: flex;
+  align-items: center;
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 0 14px;
+  height: 48px;
+  transition: all 0.18s ease;
+  box-sizing: border-box;
+}
+
+.role-input-box:focus-within {
+  background: #ffffff;
+  border-color: #15803d;
+  box-shadow: 0 0 0 3.5px rgba(21, 128, 61, 0.12);
+}
+
+.role-input-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.role-unified-input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.94rem;
+  color: #0f172a;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.role-unified-input::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.role-pass-toggle-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.role-pass-toggle-btn:hover {
+  color: #334155;
+}
+
+/* Auxiliary Row: Remember Me & Forgot Password */
+.role-form-aux-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2px 0 20px 0;
+}
+
+.role-remember-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.86rem;
+  color: #475569;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 500;
+}
+
+.role-checkbox {
+  width: 17px;
+  height: 17px;
+  accent-color: #15803d;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.role-forgot-link-btn {
+  background: transparent;
+  border: none;
+  color: #15803d;
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+  transition: color 0.15s ease, text-decoration 0.15s ease;
+}
+
+.role-forgot-link-btn:hover {
+  color: #166534;
+  text-decoration: underline;
+}
+
+/* Dynamic Role-Colored Submit Button */
+.role-unified-login-btn {
+  width: 100%;
+  height: 50px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  color: #ffffff;
+  font-size: 1.02rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.role-unified-login-btn:hover:not(:disabled) {
+  transform: translateY(-1.5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+  filter: brightness(1.06);
+}
+
+.role-unified-login-btn:active:not(:disabled) {
+  transform: translateY(0);
+  filter: brightness(0.96);
+}
+
+.role-unified-login-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Quick Demo Sign In Link */
+.role-quick-demo-link {
+  width: 100%;
+  background: #f8fafc;
+  border: 1.5px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-top: 12px;
+  color: #334155;
+  font-size: 0.84rem;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.role-quick-demo-link:hover:not(:disabled) {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+/* Register Footer */
+.role-register-footer {
+  text-align: center;
+  margin-top: 22px;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.role-register-action-link {
+  font-weight: 700;
+  text-decoration: none;
+  transition: text-decoration 0.15s ease;
+}
+
+.role-register-action-link:hover {
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   FORGOT PASSWORD MODAL
+   -------------------------------------------------------------------------- */
+.role-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 16px;
+  animation: fadeIn 0.2s ease;
+}
+
+.role-modal-card {
+  background: #ffffff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.25);
+  overflow: hidden;
+  animation: popUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes popUp {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.role-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.role-modal-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+}
+
+.role-modal-close {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.role-modal-close:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.role-modal-body {
+  padding: 24px;
+}
+
+.role-modal-info {
+  font-size: 0.9rem;
+  color: #475569;
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+}
+
+.role-modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.role-modal-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 12px 0;
+  color: #15803d;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE LAYOUT BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 992px) {
+  .role-login-card-container {
+    flex-direction: column;
+    max-width: 680px;
+  }
+
+  .role-login-visual-pane {
+    max-width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .role-visual-art-frame {
+    height: 180px;
+  }
+}
+
+@media (max-width: 640px) {
+  .role-select-topbar {
+    padding: 12px 14px;
+  }
+
+  .role-select-brand {
+    padding: 4px 10px 4px 6px;
+  }
+
+  .role-select-logo-img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .role-select-brand-name {
+    font-size: 0.92rem;
+  }
+
+  .role-select-brand-sub {
+    font-size: 0.6rem;
+  }
+
+  .role-select-lang-btn {
+    padding: 5px 12px;
+    font-size: 0.78rem;
+  }
+
+  .role-select-back-btn {
+    padding: 5px 10px !important;
+  }
+
+  .role-back-home-text {
+    display: none;
+  }
+
+  .role-login-main-wrapper {
+    padding: 10px 12px 30px 12px;
+  }
+
+  .role-login-card-container {
+    border-radius: 20px;
+  }
+
+  .role-login-visual-pane {
+    padding: 24px 16px;
+  }
+
+  .role-visual-title {
+    font-size: 1.4rem;
+  }
+
+  .role-visual-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .role-visual-art-frame {
+    height: 140px;
+    margin-bottom: 16px;
+  }
+
+  .role-login-form-pane {
+    padding: 24px 16px;
+  }
+
+  .role-form-title {
+    font-size: 1.5rem;
+  }
+
+  .role-tri-cards-grid {
+    gap: 8px;
+  }
+
+  .role-choice-card {
+    padding: 12px 6px;
+    border-radius: 14px;
+  }
+
+  .role-choice-icon-wrap {
+    width: 38px;
+    height: 38px;
+    margin-bottom: 6px;
+  }
+
+  .role-choice-label {
+    font-size: 0.84rem;
+  }
+
+  .role-choice-desc {
+    font-size: 0.64rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .role-card-check-badge {
+    width: 16px;
+    height: 16px;
+    font-size: 0.6rem;
+    top: 6px;
+    right: 6px;
+  }
+}

@@ -1,0 +1,365 @@
+/* Requests.css - Styling for Farmer Buyer Requests page adhering strictly to Naam Uzhavar Design System */
+
+.farmer-requests-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #ffffff;
+  padding: 16px 20px;
+  border-radius: var(--buyer-radius-lg, 12px);
+  border: 1px solid var(--buyer-border-light, #e3e3dd);
+  box-shadow: var(--buyer-shadow-card, 0 1px 2px rgba(31, 41, 51, 0.06));
+}
+
+@media (min-width: 992px) {
+  .farmer-requests-controls {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+/* Search Box matching Buyer style */
+.farmer-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-border-light, #e3e3dd);
+  border-radius: var(--buyer-radius-md, 8px);
+  padding: 6px 12px;
+  width: 100%;
+  max-width: 320px;
+  box-sizing: border-box;
+  transition: all 0.15s ease;
+}
+
+.farmer-search-box:focus-within {
+  border-color: var(--buyer-primary, #2F6B3A);
+  box-shadow: 0 0 0 3px rgba(47, 107, 58, 0.12);
+}
+
+.farmer-search-icon {
+  color: var(--buyer-text-dim, #667085);
+  flex-shrink: 0;
+}
+
+.farmer-search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  font-size: 0.88rem;
+  color: var(--buyer-text-main, #1f2933);
+  font-family: inherit;
+}
+
+.farmer-search-input::placeholder {
+  color: var(--buyer-text-dim, #9ca3af);
+}
+
+.farmer-search-clear {
+  border: none;
+  background: transparent;
+  color: var(--buyer-text-dim, #9ca3af);
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.farmer-search-clear:hover {
+  color: var(--buyer-text-main, #1f2933);
+  background-color: #f3f4f6;
+}
+
+/* Request Cards Grid */
+.farmer-requests-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+@media (min-width: 768px) {
+  .farmer-requests-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .farmer-requests-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.farmer-request-card {
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-border-light, #e3e3dd);
+  border-radius: var(--buyer-radius-lg, 12px);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  box-shadow: var(--buyer-shadow-card, 0 1px 2px rgba(31, 41, 51, 0.06));
+  transition: all 0.15s ease;
+  font-family: var(--buyer-font);
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.farmer-request-card:hover {
+  border-color: #9ca3af;
+  box-shadow: var(--buyer-shadow-hover, 0 2px 8px rgba(31, 41, 51, 0.08));
+}
+
+.request-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.request-buyer-strip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.request-buyer-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--buyer-primary, #2F6B3A);
+  flex-shrink: 0;
+}
+
+.request-buyer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.request-buyer-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--buyer-text-main, #1f2933);
+}
+
+.request-buyer-type {
+  font-size: 0.78rem;
+  color: var(--buyer-text-dim, #667085);
+}
+
+/* Term Box */
+.request-produce-term-box {
+  background-color: #fbfbf9;
+  border: 1px solid var(--buyer-border-light, #e3e3dd);
+  border-radius: var(--buyer-radius-md, 8px);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.term-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.84rem;
+}
+
+.term-label {
+  color: var(--buyer-text-muted, #4b5563);
+}
+
+.term-val {
+  font-weight: 600;
+  color: var(--buyer-text-main, #1f2933);
+}
+
+.term-val.price {
+  color: var(--buyer-primary, #2F6B3A);
+  font-weight: 700;
+}
+
+/* Card Footer & Action Buttons Matching Buyer Module */
+.request-card-footer {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--buyer-border-light, #e3e3dd);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.request-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.78rem;
+}
+
+.request-meta-id {
+  font-weight: 600;
+  color: var(--buyer-text-dim, #667085);
+}
+
+.request-meta-order {
+  font-weight: 600;
+  color: var(--buyer-primary, #2F6B3A);
+  background-color: var(--buyer-accent-subtle, #eaf3ec);
+  padding: 2px 8px;
+  border-radius: var(--buyer-radius-full, 9999px);
+  border: 1px solid var(--primary-200, #cfe3d2);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.request-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.request-card-action-btns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.request-card-actions .buyer-btn-outline,
+.request-card-actions .buyer-btn-primary,
+.request-card-actions .buyer-btn-danger {
+  height: 38px;
+  min-height: 38px;
+  padding: 8px 16px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  border-radius: var(--buyer-radius-md, 8px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.request-card-actions .buyer-btn-outline {
+  background-color: #ffffff;
+  color: var(--buyer-text-main, #1f2933);
+  border: 1px solid var(--buyer-border-light, #e3e3dd);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.request-card-actions .buyer-btn-outline:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+  color: var(--buyer-text-main, #1f2933);
+}
+
+.request-card-actions .buyer-btn-primary {
+  background-color: var(--buyer-primary, #2F6B3A);
+  color: #ffffff;
+  border: 1px solid var(--buyer-primary, #2F6B3A);
+  box-shadow: 0 2px 6px rgba(47, 107, 58, 0.22);
+}
+
+.request-card-actions .buyer-btn-primary:hover {
+  background-color: var(--buyer-primary-hover, #23522c);
+  border-color: var(--buyer-primary-hover, #23522c);
+  color: #ffffff;
+}
+
+.request-card-actions .buyer-btn-danger {
+  background-color: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+  box-shadow: 0 1px 2px rgba(220, 38, 38, 0.08);
+}
+
+.request-card-actions .buyer-btn-danger:hover {
+  background-color: #fecaca;
+  color: #b91c1c;
+  border-color: #f87171;
+}
+
+.request-card-action-btns .buyer-btn-primary,
+.request-card-action-btns .buyer-btn-danger {
+  flex: 1 1 50%;
+  min-width: 0;
+}
+
+.request-card-actions .buyer-btn-outline.full-width {
+  width: 100%;
+}
+
+@media (max-width: 380px) {
+  .request-card-action-btns {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .request-card-action-btns .buyer-btn-primary,
+  .request-card-action-btns .buyer-btn-danger {
+    flex: 1 1 100%;
+  }
+}
+
+/* Filter Chips (Horizontal scrollable on mobile) */
+.farmer-filter-chips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+  flex-wrap: nowrap;
+}
+
+.farmer-filter-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.farmer-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-border-light, #e3e3dd);
+  color: var(--buyer-text-muted, #4b5563);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  user-select: none;
+  font-family: inherit;
+  flex-shrink: 0;
+}
+
+.farmer-filter-chip:hover {
+  background-color: #f1f5f9;
+  color: var(--buyer-text-main, #1f2933);
+}
+
+.farmer-filter-chip.active {
+  background-color: var(--buyer-primary, #2F6B3A);
+  color: #ffffff;
+  border-color: var(--buyer-primary, #2F6B3A);
+  box-shadow: 0 2px 6px rgba(47, 107, 58, 0.25);
+}
+
+.farmer-chip-count {
+  font-size: 0.74rem;
+  opacity: 0.85;
+}

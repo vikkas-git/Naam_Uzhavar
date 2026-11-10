@@ -1,0 +1,13 @@
+/* What this file does: Farmer Profile Stylesheet strictly inheriting the Buyer Profile Design System */
+@import '../buyer/Profile.css';
+
+/* Farmer-specific design tokens and minor enhancements */
+.buyer-profile-firm-name {
+  color: var(--buyer-text-main, #1f2933);
+}
+
+.buyer-category-pill {
+  color: var(--buyer-primary, #2F6B3A);
+  background-color: var(--buyer-accent-subtle, #eaf3ec);
+  border: 1px solid var(--buyer-accent-border, #c3e2cb);
+}

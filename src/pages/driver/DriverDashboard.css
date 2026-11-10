@@ -1,0 +1,830 @@
+/* ==========================================================================
+   DriverDashboard.css - Naam Uzhavar Driver Dispatch Terminal
+   Matches the exact Buyer Module UI Architecture & Design Language (Track.css & Overview.css)
+   Enhanced with Warm Amber (#b45309, #d97706) EV Logistics styling
+   ========================================================================== */
+
+@import '../buyer/Track.css';
+
+/* Driver Section Specific Overrides & Enhancements */
+.driver-view-header {
+  margin-bottom: 24px;
+}
+
+/* Duty Status Switch in Topbar and Cockpit */
+.driver-duty-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.driver-duty-toggle-btn.on-duty {
+  background: #ecfdf5;
+  color: #065f46;
+  border-color: #a7f3d0;
+}
+
+.driver-duty-toggle-btn.on-duty:hover {
+  background: #d1fae5;
+}
+
+.driver-duty-toggle-btn.off-duty {
+  background: #f1f5f9;
+  color: #475569;
+  border-color: #cbd5e1;
+}
+
+.driver-duty-toggle-btn.off-duty:hover {
+  background: #e2e8f0;
+}
+
+.driver-duty-toggle-btn .duty-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.driver-duty-toggle-btn.on-duty .duty-dot {
+  background-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+  animation: pulseDuty 1.6s infinite;
+}
+
+.driver-duty-toggle-btn.off-duty .duty-dot {
+  background-color: #94a3b8;
+}
+
+@keyframes pulseDuty {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* Offline Banner Card */
+.driver-offline-card {
+  background: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  border-radius: 16px;
+  padding: 40px 24px;
+  text-align: center;
+  max-width: 560px;
+  margin: 40px auto;
+}
+
+.driver-offline-icon {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px auto;
+}
+
+/* Trip Selector Chips Row */
+.driver-trip-selector-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 4px 0 14px 0;
+  margin-bottom: 12px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.driver-trip-chip {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.driver-trip-chip:hover {
+  border-color: #b45309;
+  color: #b45309;
+  background: #fffbeb;
+}
+
+.driver-trip-chip.active {
+  background: #b45309;
+  border-color: #b45309;
+  color: #ffffff;
+  box-shadow: 0 3px 10px rgba(180, 83, 9, 0.25);
+}
+
+.driver-trip-chip.active .chip-badge {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+}
+
+.driver-trip-chip .chip-badge {
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 6px;
+}
+
+/* Tactile In-Cab Milestone Action Card in Telemetry Sidebar */
+.driver-action-card {
+  background-color: #ffffff;
+  border: 1.5px solid #fed7aa;
+  border-radius: var(--buyer-radius-lg, 14px);
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(143, 90, 18, 0.08);
+}
+
+.driver-action-header {
+  margin-bottom: 14px;
+}
+
+.driver-milestone-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #fef3c7;
+  color: #92400e;
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 8px;
+}
+
+.driver-milestone-tag.in-transit {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.driver-milestone-tag.delivered {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.driver-action-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+}
+
+.driver-action-desc {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* Large In-Cab Primary Action Button */
+.driver-primary-cta {
+  width: 100%;
+  min-height: 52px;
+  font-size: 1rem;
+  font-weight: 700;
+  background-color: #b45309;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(180, 83, 9, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  padding: 12px 18px;
+  margin-top: 14px;
+}
+
+.driver-primary-cta:hover {
+  background-color: #92400e;
+  box-shadow: 0 8px 24px rgba(180, 83, 9, 0.35);
+  transform: translateY(-1px);
+}
+
+.driver-primary-cta:active {
+  transform: translateY(1px);
+}
+
+.driver-primary-cta.pin-cta {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  box-shadow: 0 6px 18px rgba(217, 119, 6, 0.32);
+}
+
+.driver-primary-cta.pin-cta:hover {
+  background: linear-gradient(135deg, #b45309 0%, #92400e 100%);
+}
+
+.driver-delivered-banner {
+  background: #f0fdf4;
+  border: 1.5px solid #86efac;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  color: #166534;
+  margin-top: 14px;
+}
+
+.driver-delivered-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.driver-delivered-subtitle {
+  font-size: 0.82rem;
+  color: #15803d;
+  line-height: 1.4;
+}
+
+/* Secondary Reset Action */
+.driver-reset-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: transparent;
+  color: #b45309;
+  border: 1px dashed rgba(180, 83, 9, 0.4);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  transition: all 0.15s ease;
+}
+
+.driver-reset-btn:hover {
+  background: #fffbeb;
+  border-color: #b45309;
+}
+
+/* Consignment Spec Badge in Sidebar */
+.driver-consignment-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.driver-consignment-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 1.5px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+.driver-consignment-info {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.driver-consignment-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.driver-payout-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+  font-weight: 800;
+  font-size: 0.86rem;
+  padding: 4px 10px;
+  border-radius: 8px;
+  margin-top: 2px;
+}
+
+/* Main Left Column enclosing Map and Waypoints */
+.driver-map-main-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* Waypoints Grid: Side-by-side Origin & Destination under the map */
+.driver-waypoints-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 767.98px) {
+  .driver-waypoints-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* Contact Cards (Farmer & Buyer) in Telemetry Sidebar */
+.driver-contact-card {
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-border-light, #e2e8f0);
+  border-radius: var(--buyer-radius-lg, 14px);
+  padding: 16px 18px;
+  box-shadow: var(--buyer-shadow-card, 0 1px 3px rgba(0, 0, 0, 0.05));
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.driver-contact-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.driver-contact-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.driver-contact-tag.origin {
+  background: #f0fdf4;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.driver-contact-tag.destination {
+  background: #fffbeb;
+  color: #b45309;
+  border: 1px solid #fef3c7;
+}
+
+.driver-contact-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 2px;
+}
+
+.driver-contact-person {
+  font-size: 0.84rem;
+  color: #475569;
+  margin-bottom: 4px;
+}
+
+.driver-contact-address {
+  font-size: 0.78rem;
+  color: #64748b;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.driver-contact-action-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.driver-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 12px;
+  background: #f8fafc;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  flex: 1;
+}
+
+.driver-contact-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: #94a3b8;
+}
+
+.driver-contact-btn.primary {
+  background: #b45309;
+  color: #ffffff;
+  border-color: #b45309;
+}
+
+.driver-contact-btn.primary:hover {
+  background: #92400e;
+}
+
+/* Modals (PIN & Crate Inspection & Withdrawal) */
+.driver-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.driver-modal-card {
+  background: #ffffff;
+  border-radius: 18px;
+  max-width: 460px;
+  width: 100%;
+  padding: 28px 24px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22);
+  position: relative;
+  animation: driverModalPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes driverModalPop {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.driver-modal-x-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.driver-modal-x-btn:hover {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.driver-modal-icon-wrap {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #fef3c7;
+  color: #d97706;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px auto;
+}
+
+.driver-modal-icon-wrap.success {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.driver-modal-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.driver-modal-desc {
+  font-size: 0.86rem;
+  color: #64748b;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* PIN Display and Keypad */
+.driver-pin-boxes-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.driver-pin-single-box {
+  width: 52px;
+  height: 60px;
+  border: 2px solid #cbd5e1;
+  border-radius: 12px;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0f172a;
+  transition: all 0.15s ease;
+}
+
+.driver-pin-single-box.filled {
+  border-color: #b45309;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.12);
+}
+
+.driver-keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 290px;
+  margin: 0 auto 20px auto;
+}
+
+.driver-keypad-btn {
+  height: 48px;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.driver-keypad-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.driver-keypad-btn:active {
+  background: #cbd5e1;
+  transform: scale(0.96);
+}
+
+.driver-pin-err {
+  font-size: 0.82rem;
+  color: #dc2626;
+  font-weight: 600;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.driver-pin-hint {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin-top: 14px;
+  text-align: center;
+}
+
+/* Crate Inspection Checklist inside Modal */
+.driver-checklist-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.driver-checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.86rem;
+  color: #334155;
+  user-select: none;
+}
+
+.driver-checklist-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #b45309;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+/* Manifest Card View for Trips Page */
+.driver-trips-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+.driver-trip-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+}
+
+.driver-trip-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+}
+
+.driver-trip-card.is-active {
+  border-color: #b45309;
+  background: #fffbeb;
+}
+
+.driver-trip-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.driver-trip-route-visual {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+  margin: 14px 0;
+}
+
+.driver-route-nodes-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.driver-route-node-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.driver-route-node-dot.pickup {
+  background: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+}
+
+.driver-route-node-dot.dropoff {
+  background: #b45309;
+  box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.2);
+}
+
+.driver-route-connector-line {
+  flex: 1;
+  width: 2px;
+  background: #cbd5e1;
+  margin: 4px 0;
+}
+
+.driver-route-texts-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Earnings Hero & Wallet Styles */
+.driver-wallet-hero {
+  background: linear-gradient(135deg, #b45309 0%, #d97706 50%, #f59e0b 100%);
+  color: #ffffff;
+  border-radius: var(--buyer-radius-lg, 14px);
+  padding: 26px 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 25px rgba(180, 83, 9, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.driver-rate-card {
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-border-light, #e2e8f0);
+  border-radius: var(--buyer-radius-lg, 14px);
+  padding: 22px;
+  box-shadow: var(--buyer-shadow-card, 0 1px 3px rgba(0, 0, 0, 0.05));
+}
+
+.driver-rate-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.88rem;
+}
+
+.driver-rate-item:last-child {
+  border-bottom: none;
+}
+
+/* Vehicle Profile Specifics */
+.driver-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.driver-spec-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.driver-spec-box-label {
+  font-size: 0.74rem;
+  color: #64748b;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+}
+
+.driver-spec-box-val {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+/* Manifest & Payment History Table Styles (Clean Anti-Slop Table) */
+.driver-manifest-table-wrap {
+  background: #ffffff;
+  border: 1px solid var(--buyer-border-light, #e2e8f0);
+  border-radius: var(--buyer-radius-lg, 12px);
+  overflow-x: auto;
+  box-shadow: var(--buyer-shadow-card, 0 1px 3px rgba(0, 0, 0, 0.05));
+  -webkit-overflow-scrolling: touch;
+}
+
+.driver-manifest-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.86rem;
+}
+
+.driver-manifest-table th {
+  background-color: #f8fafc;
+  color: #475569;
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 14px 18px;
+  border-bottom: 1.5px solid #e2e8f0;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.driver-manifest-table td {
+  padding: 16px 18px;
+  vertical-align: middle;
+  border-bottom: 1px solid #f1f5f9;
+  color: #1e293b;
+  line-height: 1.45;
+}
+
+.driver-manifest-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.driver-manifest-table tbody tr:hover td {
+  background-color: #fbfcfe;
+}

@@ -1,0 +1,193 @@
+/* What this file does: Stylesheet for Coming Soon placeholder screen for Farmer & Driver portals */
+
+.coming-soon-root {
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--neutral-50, #f6f6f2);
+  color: var(--neutral-900, #1f2933);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+  font-family: inherit;
+}
+
+.coming-soon-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px clamp(16px, 4vw, 36px);
+  background: #ffffff;
+  border-bottom: 1px solid var(--neutral-200, #e3e3dd);
+  box-shadow: var(--shadow-card, 0 1px 2px rgba(31, 41, 51, 0.06));
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.coming-soon-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.coming-soon-logo-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #16a34a;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.18);
+  flex-shrink: 0;
+}
+
+.coming-soon-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.coming-soon-brand-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--primary-900, #1e4a29);
+  line-height: 1.2;
+}
+
+.coming-soon-brand-sub {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.coming-soon-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.coming-soon-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #1e4a29;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.coming-soon-lang-btn:hover {
+  background: #dcfce7;
+  border-color: #86efac;
+}
+
+.coming-soon-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 5vw, 48px) 16px;
+}
+
+.coming-soon-card {
+  max-width: 620px;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid var(--neutral-200, #e3e3dd);
+  border-radius: 16px;
+  padding: clamp(28px, 6vw, 44px) clamp(20px, 5vw, 36px);
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(31, 41, 51, 0.06);
+}
+
+.coming-soon-icon-wrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  margin: 0 auto 16px auto;
+}
+
+.coming-soon-card.role-farmer .coming-soon-icon-wrap {
+  background: #f0fdf4;
+  border: 2px solid #bbf7d0;
+}
+
+.coming-soon-card.role-driver .coming-soon-icon-wrap {
+  background: #fffbeb;
+  border: 2px solid #fde68a;
+}
+
+.coming-soon-card.role-general .coming-soon-icon-wrap {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+}
+
+.coming-soon-title {
+  font-size: clamp(1.4rem, 4vw, 1.85rem);
+  font-weight: 800;
+  color: var(--neutral-900, #1f2933);
+  margin-bottom: 12px;
+}
+
+.coming-soon-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #475569;
+  margin-bottom: 24px;
+}
+
+.coming-soon-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  background: #f8fafc;
+  border: 1px solid var(--neutral-200, #e3e3dd);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 28px;
+}
+
+.coming-soon-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.coming-soon-feature-bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--primary-600, #2f6b3a);
+  flex-shrink: 0;
+}
+
+.coming-soon-card.role-driver .coming-soon-feature-bullet {
+  background-color: #8f5a12;
+}
+
+.coming-soon-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 480px) {
+  .coming-soon-actions {
+    flex-direction: row;
+  }
+}

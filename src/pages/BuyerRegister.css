@@ -1,0 +1,1251 @@
+/* What this file does: Stylesheet for BuyerRegister multi-step onboarding, credentials form, and review screen. */
+/* ==========================================================================
+   Naam Uzhavar - Premium Buyer Registration Interface
+   Design System: Deep Botanical Pine & Crisp Slate (Taste-Skill Compliant)
+   Exact match with BuyerLogin visual tokens and layout rhythm.
+   Centered Left Storytelling Pane & Fully Responsive Layout.
+   ========================================================================== */
+
+/* Design Tokens for Buyer Registration */
+:root {
+  --buyer-bg-canvas: #f6f6f2;          /* Soft warm paper canvas */
+  --buyer-bg-card: #ffffff;            /* Pure white card surface */
+  --buyer-primary: #2b5c8a;            /* Steel Blue (Commercial Buyer) */
+  --buyer-primary-hover: #234b71;      /* Hover state */
+  --buyer-primary-active: #1c3d5d;     /* Pressed state */
+  --buyer-primary-text: #ffffff;       /* Crisp white */
+  --buyer-accent-subtle: #e8eff6;      /* Active sidebar / info badge fill */
+  --buyer-accent-text: #2b5c8a;        /* High-contrast metadata text */
+  --buyer-accent-border: #c5d5e5;      /* Selected container outline */
+  --buyer-border-light: #e3e3dd;       /* Neutral border */
+  --buyer-border-focus: #2b5c8a;       /* Focus border */
+  --buyer-text-main: #1f2933;          /* Deep charcoal text (never pure black) */
+  --buyer-text-muted: #4b5563;         /* Secondary text */
+  --buyer-text-dim: #667085;           /* Dim text / placeholder */
+  --buyer-error-bg: #fcebe9;
+  --buyer-error-text: #b42318;
+  --buyer-error-border: #f3c6c1;
+  --buyer-shadow-card: 0 1px 2px rgba(31, 41, 51, 0.06);
+  --buyer-shadow-overlay: 0 8px 24px rgba(31, 41, 51, 0.16);
+  --buyer-radius-sm: 6px;
+  --buyer-radius-md: 8px;
+  --buyer-radius-lg: 12px;
+  --buyer-radius-xl: 16px;
+  --buyer-radius-full: 9999px;
+  --buyer-font: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+/* Page Root Wrapper (Locked to viewport to stop entire page from scrolling) */
+.buyer-reg-page {
+  height: 100vh;
+  max-height: 100vh;
+  width: 100vw;
+  max-width: 100vw;
+  background-color: var(--buyer-bg-canvas);
+  font-family: var(--buyer-font);
+  color: var(--buyer-text-main);
+  display: flex;
+  position: fixed;
+  inset: 0;
+  overflow: hidden; /* Stop entire page from moving */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Split Screen Container */
+.buyer-reg-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.buyer-reg-container .btn-primary {
+  background-color: var(--buyer-primary) !important;
+  border-color: var(--buyer-primary) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.28) !important;
+}
+
+.buyer-reg-container .btn-primary:hover {
+  background-color: var(--buyer-primary-hover) !important;
+  border-color: var(--buyer-primary-hover) !important;
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35) !important;
+}
+
+/* --------------------------------------------------------------------------
+   LEFT SIDE: CINEMATIC VISUAL STORYTELLING (Sticky & Stationary - Never Scrolls)
+   -------------------------------------------------------------------------- */
+.buyer-reg-visual-pane {
+  flex: 0 0 38%;
+  width: 38%;
+  max-width: 460px;
+  min-width: 340px;
+  height: 100vh;
+  max-height: 100vh;
+  position: relative;
+  background-color: #1e4a29;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(28px, 4vh, 44px) clamp(20px, 2.5vw, 36px);
+  color: #ffffff;
+  overflow: hidden; /* Left pane stays completely sticky */
+  box-sizing: border-box;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+/* Clean scrim - no grid mesh or multi-color gradients */
+.buyer-reg-visual-scrim {
+  display: none;
+}
+
+.buyer-reg-visual-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Top Center Brand Lockup */
+.buyer-reg-brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-decoration: none;
+  color: #ffffff;
+  margin: 0 auto;
+  text-align: left;
+  flex-shrink: 0;
+}
+
+.buyer-reg-brand-logo-card {
+  width: 48px;
+  height: 48px;
+  background: #ffffff;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #16a34a;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.buyer-reg-brand-logo-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.buyer-reg-brand-name-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.buyer-reg-brand-title {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.buyer-reg-brand-subtitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: #4ade80;
+  letter-spacing: 0.02em;
+}
+
+/* Central Visual Narrative (Centered) */
+.buyer-reg-visual-narrative {
+  margin: auto auto;
+  padding: 14px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.buyer-reg-procurement-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: var(--buyer-accent-subtle);
+  color: var(--buyer-accent-text);
+  border: 1px solid var(--buyer-accent-border);
+  padding: 6px 16px;
+  border-radius: var(--buyer-radius-full);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+.buyer-reg-visual-headline {
+  font-size: clamp(24px, 2.2vw, 32px);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  margin-bottom: 14px;
+  text-align: center;
+  max-width: 360px;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
+}
+
+.buyer-reg-visual-headline span {
+  display: block;
+}
+
+.buyer-reg-visual-headline .highlight-word {
+  color: #38bdf8; /* Radiant Light Sky Blue */
+}
+
+.buyer-reg-visual-description {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 340px;
+  margin: 0 auto 18px auto;
+  font-weight: 500;
+  text-align: center;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Supported Commercial Buyer Categories (2 Rows Centered) */
+.buyer-reg-category-chips {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.buyer-reg-chips-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.buyer-reg-category-chip {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 5px 11px;
+  border-radius: var(--buyer-radius-full);
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.22);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Bottom Visual Footer (Centered) */
+.buyer-reg-visual-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 12px;
+  width: 100%;
+  text-align: center;
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
+.buyer-reg-visual-footer-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* --------------------------------------------------------------------------
+   RIGHT SIDE: REGISTRATION FORM CONTENT PANE (Fully Responsive)
+   -------------------------------------------------------------------------- */
+.buyer-reg-form-pane {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: var(--buyer-bg-canvas);
+  padding: clamp(20px, 3.2vw, 40px) clamp(16px, 4vw, 56px);
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Custom Sleek Scrollbar for Registration Pane */
+.buyer-reg-form-pane::-webkit-scrollbar {
+  width: 6px;
+}
+
+.buyer-reg-form-pane::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.buyer-reg-form-pane::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+.buyer-reg-form-pane::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Top Utility Bar */
+.buyer-reg-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  min-height: 40px;
+  box-sizing: border-box;
+}
+
+.buyer-reg-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--buyer-text-muted);
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: var(--buyer-radius-sm);
+  transition: all 0.15s ease;
+  min-height: 36px;
+}
+
+.buyer-reg-back-link:hover {
+  color: var(--buyer-text-main);
+  background: #f1f5f9;
+}
+
+.buyer-reg-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid var(--buyer-border-light);
+  border-radius: var(--buyer-radius-full);
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--buyer-text-main);
+  cursor: pointer;
+  min-height: 34px;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+
+.buyer-reg-lang-btn:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+/* Central Form Container Card */
+.buyer-reg-form-inner {
+  width: 100%;
+  max-width: 640px;
+  margin: 14px auto 32px auto;
+  background: var(--buyer-bg-card);
+  border-radius: var(--buyer-radius-lg);
+  border: 1px solid var(--buyer-border-light);
+  box-shadow: var(--buyer-shadow-card);
+  padding: clamp(24px, 3.8vw, 40px) clamp(18px, 3.5vw, 36px);
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Mobile-only Header */
+.buyer-reg-mobile-header {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--buyer-border-light);
+}
+
+.buyer-reg-mobile-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #16a34a;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.15);
+  flex-shrink: 0;
+}
+
+/* Header Area */
+.buyer-reg-header {
+  margin-bottom: 24px;
+}
+
+.buyer-reg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--buyer-accent-subtle);
+  color: var(--buyer-accent-text);
+  border: 1px solid var(--buyer-accent-border);
+  padding: 3px 10px;
+  border-radius: var(--buyer-radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.buyer-reg-title {
+  font-size: clamp(22px, 2.6vw, 28px);
+  font-weight: 800;
+  color: var(--buyer-text-main);
+  letter-spacing: -0.025em;
+  margin-bottom: 6px;
+  line-height: 1.25;
+}
+
+.buyer-reg-subtitle {
+  font-size: 14px;
+  color: var(--buyer-text-muted);
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   FORM SECTIONS & DIVIDERS
+   ========================================================================== */
+.buyer-reg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.buyer-section-block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.buyer-section-header {
+  padding-bottom: 8px;
+  border-bottom: 1.5px solid #f1f5f9;
+}
+
+.buyer-section-heading {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--buyer-text-main);
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.buyer-section-subtext {
+  font-size: 12.5px;
+  color: var(--buyer-text-muted);
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+/* 2-Column Responsive Form Row on Desktop */
+.buyer-fields-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Single Field Group */
+.buyer-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.buyer-input-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--buyer-text-main);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.buyer-input-label .required-star {
+  color: #dc2626;
+  margin-left: 2px;
+}
+
+.buyer-input-helper {
+  font-size: 12px;
+  color: var(--buyer-text-muted);
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* Input Container with Leading Icons */
+.buyer-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--buyer-border-light);
+  border-radius: var(--buyer-radius-md);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: all 0.16s ease;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.buyer-input-wrapper:hover {
+  border-color: #cbd5e1;
+}
+
+.buyer-input-wrapper.is-focused {
+  border-color: var(--buyer-border-focus);
+  box-shadow: 0 0 0 3px rgba(15, 74, 48, 0.12);
+  background: #ffffff;
+}
+
+.buyer-input-wrapper.has-error {
+  border-color: var(--buyer-error-text);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+  background: #fffafa;
+}
+
+/* Leading Icon */
+.buyer-input-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--buyer-text-dim);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.16s ease;
+}
+
+.buyer-input-wrapper.is-focused .buyer-input-icon {
+  color: var(--buyer-primary);
+}
+
+.buyer-input-wrapper.has-error .buyer-input-icon {
+  color: var(--buyer-error-text);
+}
+
+/* Text Input Element */
+.buyer-text-input {
+  width: 100%;
+  min-height: 46px;
+  padding: 11px 14px 11px 42px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--buyer-text-main);
+  font-weight: 500;
+  outline: none;
+  border-radius: var(--buyer-radius-md);
+  box-sizing: border-box;
+}
+
+.buyer-text-input::placeholder {
+  color: var(--buyer-text-dim);
+  font-weight: 400;
+}
+
+/* Inline Error */
+.buyer-field-error {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--buyer-error-text);
+  margin-top: 2px;
+  animation: regFadeIn 0.15s ease;
+}
+
+/* ==========================================================================
+   1. PHOTO UPLOAD COMPONENT
+   ========================================================================== */
+.buyer-photo-dropzone {
+  border: 1.5px dashed #cbd5e1;
+  border-radius: var(--buyer-radius-md);
+  padding: 16px 14px;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.buyer-photo-dropzone:hover {
+  border-color: var(--buyer-primary);
+  background: var(--buyer-accent-subtle);
+}
+
+.buyer-photo-dropzone.is-dragging {
+  border-color: var(--buyer-primary);
+  background: var(--buyer-accent-subtle);
+  box-shadow: 0 0 0 3px rgba(3, 105, 161, 0.15);
+}
+
+.buyer-photo-dropzone.has-error {
+  border-color: var(--buyer-error-text);
+  background: #fef2f2;
+}
+
+/* Icon / Preview Circle */
+.buyer-photo-preview-circle {
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid var(--buyer-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--buyer-accent-text);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  flex-shrink: 0;
+}
+
+.buyer-photo-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.buyer-photo-prompt-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.buyer-photo-prompt-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--buyer-text-main);
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.buyer-photo-prompt-sub {
+  font-size: 12px;
+  color: var(--buyer-text-muted);
+}
+
+.buyer-photo-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.buyer-photo-btn-change {
+  background: #ffffff;
+  border: 1px solid var(--buyer-border-light);
+  border-radius: var(--buyer-radius-sm);
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--buyer-text-main);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.buyer-photo-btn-change:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.buyer-photo-btn-remove {
+  background: #fee2e2;
+  border: none;
+  border-radius: var(--buyer-radius-sm);
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #b91c1c;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.buyer-photo-btn-remove:hover {
+  background: #fecaca;
+}
+
+/* ==========================================================================
+   2. PHONE NUMBER INPUT WITH +91 (Clean & Responsive - No OTP)
+   ========================================================================== */
+.buyer-phone-combo {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.buyer-country-prefix {
+  padding: 0 14px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--buyer-text-muted);
+  border-right: 1px solid var(--buyer-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: #f8fafc;
+  height: 44px;
+  border-radius: var(--buyer-radius-md) 0 0 var(--buyer-radius-md);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.buyer-phone-input {
+  flex: 1;
+  min-height: 46px;
+  padding: 11px 14px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--buyer-text-main);
+  font-weight: 500;
+  outline: none;
+  border-radius: 0 var(--buyer-radius-md) var(--buyer-radius-md) 0;
+  box-sizing: border-box;
+}
+
+.buyer-phone-input::placeholder {
+  color: var(--buyer-text-dim);
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   5. BUYER TYPE DROPDOWN SELECTOR
+   ========================================================================== */
+.buyer-select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.buyer-select-button {
+  width: 100%;
+  min-height: 46px;
+  background: #ffffff;
+  border: 1px solid var(--buyer-border-light);
+  border-radius: var(--buyer-radius-md);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--buyer-text-main);
+  text-align: left;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  transition: all 0.16s ease;
+  box-sizing: border-box;
+}
+
+.buyer-select-button:hover {
+  border-color: #cbd5e1;
+}
+
+.buyer-select-button.is-focused,
+.buyer-select-button.is-open {
+  border-color: var(--buyer-border-focus);
+  box-shadow: 0 0 0 3px rgba(15, 74, 48, 0.12);
+}
+
+.buyer-select-button.has-error {
+  border-color: var(--buyer-error-text);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.buyer-select-selection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.buyer-select-icon-box {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--buyer-accent-subtle);
+  color: var(--buyer-accent-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.buyer-select-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid var(--buyer-border-light);
+  border-radius: var(--buyer-radius-md);
+  box-shadow: var(--buyer-shadow-overlay);
+  z-index: 50;
+  overflow: hidden;
+  animation: regScaleUp 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.buyer-select-option {
+  width: 100%;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: var(--buyer-text-main);
+  text-align: left;
+  transition: background 0.12s ease;
+  box-sizing: border-box;
+}
+
+.buyer-select-option:hover {
+  background: #f1f5f9;
+}
+
+.buyer-select-option.is-selected {
+  background: var(--buyer-accent-subtle);
+  color: var(--buyer-accent-text);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   7. ADDRESS TEXTAREA
+   ========================================================================== */
+.buyer-textarea-wrapper {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid var(--buyer-border-light);
+  border-radius: var(--buyer-radius-md);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  transition: all 0.16s ease;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.buyer-textarea-wrapper:hover {
+  border-color: #cbd5e1;
+}
+
+.buyer-textarea-wrapper.is-focused {
+  border-color: var(--buyer-border-focus);
+  box-shadow: 0 0 0 3px rgba(15, 74, 48, 0.12);
+}
+
+.buyer-textarea-wrapper.has-error {
+  border-color: var(--buyer-error-text);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+  background: #fffafa;
+}
+
+.buyer-textarea-icon {
+  position: absolute;
+  top: 13px;
+  left: 14px;
+  color: var(--buyer-text-dim);
+  pointer-events: none;
+  display: flex;
+}
+
+.buyer-textarea-input {
+  width: 100%;
+  min-height: 82px;
+  padding: 11px 14px 11px 42px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--buyer-text-main);
+  font-weight: 500;
+  outline: none;
+  resize: vertical;
+  line-height: 1.5;
+  border-radius: var(--buyer-radius-md);
+  box-sizing: border-box;
+}
+
+.buyer-textarea-input::placeholder {
+  color: var(--buyer-text-dim);
+}
+
+/* ==========================================================================
+   FORM COMPLETION & ACTIONS
+   ========================================================================== */
+.buyer-confirm-row {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 13px 16px !important;
+  background: #f8fafc;
+  border: 1.5px solid var(--buyer-border-light);
+  border-radius: var(--buyer-radius-md);
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.buyer-confirm-row:hover {
+  background: var(--buyer-accent-subtle);
+  border-color: var(--buyer-accent-border);
+}
+
+.buyer-confirm-checkbox {
+  width: 18px !important;
+  height: 18px !important;
+  min-height: 18px !important;
+  max-height: 18px !important;
+  min-width: 18px !important;
+  max-width: 18px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  accent-color: var(--buyer-primary);
+  flex-shrink: 0 !important;
+  cursor: pointer;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+
+.buyer-confirm-text {
+  font-size: 13.5px;
+  color: var(--buyer-text-main);
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+
+/* Primary Submit Button */
+.buyer-reg-submit-btn {
+  width: 100%;
+  min-height: 48px;
+  background-color: var(--buyer-primary);
+  color: var(--buyer-primary-text);
+  border: 1px solid transparent;
+  border-radius: var(--buyer-radius-md);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 14px rgba(15, 74, 48, 0.2);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.buyer-reg-submit-btn:hover:not(:disabled) {
+  background-color: var(--buyer-primary-hover);
+  box-shadow: var(--buyer-shadow-hover);
+}
+
+.buyer-reg-submit-btn:hover:not(:disabled) .buyer-btn-icon-pill {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.buyer-reg-submit-btn:active:not(:disabled) {
+  background-color: var(--buyer-primary-active);
+}
+
+.buyer-reg-submit-btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.buyer-btn-icon-pill {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.18s ease;
+  flex-shrink: 0;
+}
+
+.buyer-reg-spinner {
+  animation: regSpin 0.75s linear infinite;
+}
+
+/* Login Link Row */
+.buyer-reg-login-row {
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--buyer-text-muted);
+  font-weight: 500;
+}
+
+.buyer-reg-login-link {
+  background: transparent;
+  border: none;
+  color: var(--buyer-primary);
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px 6px;
+  margin-left: 4px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.buyer-reg-login-link:hover {
+  color: var(--buyer-primary-hover);
+}
+
+/* Success Celebration State */
+.buyer-reg-success-box {
+  background: var(--buyer-accent-subtle);
+  border: 1.5px solid var(--buyer-accent-border);
+  border-radius: var(--buyer-radius-md);
+  padding: 24px;
+  text-align: center;
+  animation: regFadeIn 0.25s ease;
+  box-sizing: border-box;
+}
+
+.buyer-reg-success-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--buyer-primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px auto;
+  box-shadow: 0 4px 14px rgba(3, 105, 161, 0.3);
+}
+
+/* Pane Footer */
+.buyer-reg-footer {
+  margin-top: auto;
+  padding-top: 18px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--buyer-text-dim);
+}
+
+/* ==========================================================================
+   ANIMATIONS
+   ========================================================================== */
+@keyframes regSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes regFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes regScaleUp {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (Adaptive Breakpoints for All Devices)
+   ========================================================================== */
+
+/* Large Tablets & Medium Laptops (<= 1080px) */
+@media (max-width: 1080px) {
+  .buyer-reg-visual-pane {
+    flex: 0 0 36%;
+    padding: 30px 20px;
+  }
+  .buyer-reg-visual-headline {
+    font-size: 27px;
+  }
+  .buyer-reg-form-pane {
+    padding: 24px 20px;
+  }
+}
+
+/* Tablets & Mobile (<= 900px) */
+@media (max-width: 900px) {
+  .buyer-reg-page {
+    position: relative;
+    inset: auto;
+    height: auto;
+    max-height: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .buyer-reg-container {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    flex-direction: column;
+  }
+
+  /* Hide Large Desktop Image Pane on Mobile/Tablet */
+  .buyer-reg-visual-pane {
+    display: none;
+  }
+
+  /* Form Pane Full Viewport */
+  .buyer-reg-form-pane {
+    height: auto;
+    max-height: none;
+    overflow-y: visible;
+    flex: 1 1 100%;
+    width: 100%;
+    padding: 20px 16px 36px 16px;
+    min-height: 100dvh;
+  }
+
+  /* Show Brand Header at Top on Mobile */
+  .buyer-reg-mobile-header {
+    display: flex;
+  }
+
+  .buyer-reg-top-bar {
+    margin-bottom: 8px;
+  }
+
+  .buyer-reg-form-inner {
+    margin: 8px auto 24px auto;
+    padding: 24px 18px;
+    box-shadow: none;
+    border: 1px solid var(--buyer-border-light);
+  }
+
+  /* Responsive Fields Row */
+  .buyer-fields-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+/* Mobile Devices (<= 640px) */
+@media (max-width: 640px) {
+  .buyer-reg-title {
+    font-size: 21px;
+  }
+
+  .buyer-reg-subtitle {
+    font-size: 13.5px;
+  }
+
+  .buyer-photo-dropzone {
+    padding: 14px 12px;
+  }
+
+  .buyer-photo-preview-circle {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+  }
+
+  .buyer-reg-submit-btn {
+    min-height: 48px;
+    font-size: 14.5px;
+  }
+}
+
+/* Small Screens (<= 400px) */
+@media (max-width: 400px) {
+  .buyer-reg-form-pane {
+    padding: 12px 10px 24px 10px;
+  }
+
+  .buyer-reg-form-inner {
+    padding: 18px 12px;
+    border-radius: var(--buyer-radius-md);
+  }
+
+  .buyer-text-input,
+  .buyer-phone-input,
+  .buyer-textarea-input {
+    font-size: 13.5px;
+  }
+
+  .buyer-country-prefix {
+    padding: 0 10px;
+    font-size: 13.5px;
+  }
+}

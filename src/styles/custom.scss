@@ -1,0 +1,105 @@
+// What this file does: Bootstrap 5 Sass variable customizations, theme configuration, and brand utility classes.
+
+// 1. Functions first
+@import "bootstrap/scss/functions";
+
+// 2. Variable overrides before variables import
+$primary: #2f6b3a;
+$success: #2f6b3a;
+$info: #2b5c8a;
+$warning: #7a5200;
+$danger: #b42318;
+$body-color: #1f2933;
+$body-bg: #f6f6f2;
+$border-color: #e3e3dd;
+$font-family-sans-serif: 'Plus Jakarta Sans', 'Noto Sans Tamil', 'Mukta Malar', system-ui, sans-serif;
+$border-radius: 8px;
+$border-radius-lg: 12px;
+$border-radius-xl: 16px;
+$headings-line-height: 1.35;
+$line-height-base: 1.5;
+
+// 3. Default Bootstrap variables & foundation
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+// 4. Layout & Core Components
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/helpers";
+
+// 5. Components actually used
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/dropdown";
+@import "bootstrap/scss/button-group";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/badge";
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/close";
+@import "bootstrap/scss/modal";
+@import "bootstrap/scss/offcanvas";
+@import "bootstrap/scss/placeholders";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/spinners";
+
+// 6. Utilities API
+@import "bootstrap/scss/utilities/api";
+
+// 7. Tamil anti-clipping & Typography rules
+.badge,
+.btn,
+.nav-link,
+.dropdown-item {
+  line-height: 1.35;
+}
+
+// 8. Custom Brand Utilities
+.btn-ghost {
+  background: transparent;
+  color: var(--primary-700, #265a31);
+  border-color: transparent;
+  &:hover, &:focus {
+    background: var(--primary-50, #f3f8f4);
+    color: var(--primary-900, #1e4a29);
+    border-color: transparent;
+  }
+}
+
+.btn-harvest {
+  background-color: var(--driver-primary, #8f5a12);
+  border-color: var(--driver-primary, #8f5a12);
+  color: #ffffff;
+  &:hover, &:focus {
+    background-color: var(--driver-hover, #764a0e);
+    border-color: var(--driver-hover, #764a0e);
+    color: #ffffff;
+  }
+}
+
+.bg-amber {
+  background-color: #faf1da !important;
+  color: #7a5200 !important;
+}
+
+.ui-card-interactive {
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+  &:hover {
+    border-color: #9ca3af !important;
+    box-shadow: 0 2px 8px rgba(31, 41, 51, 0.08) !important;
+  }
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+

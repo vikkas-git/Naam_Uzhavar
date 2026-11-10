@@ -1,0 +1,260 @@
+/* What this file does: Stylesheet for Buyer Orders list, order status pills, and consignment cards. */
+/* Orders Page Styles */
+
+.buyer-order-tab-pills {
+  display: flex;
+  gap: 8px;
+}
+
+.buyer-tab-pill {
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-border-light);
+  border-radius: var(--buyer-radius-full);
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--buyer-text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.buyer-tab-pill:hover {
+  background-color: var(--buyer-bg-canvas);
+  color: var(--buyer-text-main);
+}
+
+.buyer-tab-pill.active {
+  background-color: var(--buyer-primary);
+  border-color: var(--buyer-primary);
+  color: #ffffff;
+}
+
+.buyer-order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.buyer-order-card {
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-border-light);
+  border-radius: var(--buyer-radius-lg);
+  padding: 20px 24px;
+  box-shadow: var(--buyer-shadow-card);
+  transition: all 0.2s ease;
+}
+
+.buyer-order-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: var(--buyer-shadow-hover);
+}
+
+.buyer-order-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.buyer-order-id-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.buyer-order-id {
+  font-family: monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--buyer-text-main);
+}
+
+.buyer-order-time {
+  font-size: 0.78rem;
+  color: var(--buyer-text-dim);
+}
+
+.buyer-order-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--buyer-radius-full);
+}
+
+.buyer-order-status-badge.in_transit {
+  background-color: var(--buyer-accent-subtle);
+  color: var(--buyer-primary);
+}
+
+.buyer-order-status-badge.preparing {
+  background-color: #f1f5f9;
+  color: var(--buyer-text-muted);
+}
+
+.buyer-order-status-badge.confirmed {
+  background-color: #e0f2fe;
+  color: var(--buyer-primary);
+}
+
+.buyer-order-status-badge.delivered {
+  background-color: #f1f5f9;
+  color: #475569;
+}
+
+.status-live-beacon {
+  width: 7px;
+  height: 7px;
+  background-color: var(--buyer-primary);
+  border-radius: 50%;
+  animation: pulseBeacon 1.4s infinite;
+}
+
+.buyer-order-card-body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 14px 0;
+  border-top: 1px solid var(--buyer-border-light);
+  border-bottom: 1px solid var(--buyer-border-light);
+}
+
+.buyer-order-produce-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.buyer-order-produce-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--buyer-text-main);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.buyer-badge-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  background-color: var(--buyer-bg-canvas);
+  border: 1px solid var(--buyer-border-light);
+  padding: 2px 7px;
+  border-radius: var(--buyer-radius-full);
+  color: var(--buyer-text-muted);
+}
+
+.buyer-badge-tag.green {
+  background-color: var(--buyer-accent-subtle);
+  border-color: var(--buyer-accent-border);
+  color: var(--buyer-accent-text);
+}
+
+.buyer-order-produce-hub {
+  font-size: 0.82rem;
+  color: var(--buyer-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+}
+
+.buyer-order-metrics {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.buyer-metric-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-label {
+  font-size: 0.72rem;
+  color: var(--buyer-text-dim);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.metric-val {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--buyer-text-main);
+}
+
+.metric-val.total {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--buyer-text-main, #0f172a);
+}
+
+.buyer-order-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+
+.buyer-driver-mini {
+  font-size: 0.78rem;
+  color: var(--buyer-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.buyer-order-actions {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .buyer-order-tab-pills {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+    margin-top: 6px;
+  }
+
+  .buyer-tab-pill {
+    width: 100%;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: 0.88rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .buyer-order-card-body {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .buyer-order-metrics {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .buyer-order-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .buyer-order-actions {
+    width: 100%;
+  }
+
+  .buyer-order-actions button {
+    width: 100%;
+  }
+}

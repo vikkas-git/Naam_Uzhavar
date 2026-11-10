@@ -1,0 +1,247 @@
+/* Skeleton.css - High-End Anti-Slop Shimmer Skeleton System for Naam Uzhavar */
+/* Provides seamless loading states matching exact layouts across Buyer and Farmer modules */
+
+@keyframes nu-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Base Shimmer Element */
+.nu-skeleton-item {
+  display: block;
+  background: linear-gradient(
+    90deg,
+    rgba(31, 41, 51, 0.05) 0%,
+    rgba(31, 41, 51, 0.11) 50%,
+    rgba(31, 41, 51, 0.05) 100%
+  );
+  background-size: 200% 100%;
+  animation: nu-shimmer 1.6s ease-in-out infinite;
+  border-radius: var(--buyer-radius-md, 8px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Theme Accents for Farmer Module */
+.farmer-theme .nu-skeleton-item {
+  background: linear-gradient(
+    90deg,
+    rgba(47, 107, 58, 0.04) 0%,
+    rgba(47, 107, 58, 0.12) 50%,
+    rgba(47, 107, 58, 0.04) 100%
+  );
+  background-size: 200% 100%;
+}
+
+/* Theme Accents for Buyer Module */
+.buyer-theme .nu-skeleton-item {
+  background: linear-gradient(
+    90deg,
+    rgba(43, 92, 138, 0.04) 0%,
+    rgba(43, 92, 138, 0.11) 50%,
+    rgba(43, 92, 138, 0.04) 100%
+  );
+  background-size: 200% 100%;
+}
+
+.nu-skeleton-circle {
+  border-radius: 9999px !important;
+}
+
+.nu-skeleton-card-shell {
+  background-color: var(--buyer-bg-card, #ffffff);
+  border: 1px solid var(--buyer-border-light, #e3e3dd);
+  border-radius: var(--buyer-radius-lg, 12px);
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(31, 41, 51, 0.05);
+  box-sizing: border-box;
+}
+
+/* 1. Header Skeleton */
+.nu-skeleton-header-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.nu-skeleton-header-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 260px;
+}
+
+/* 2. Metric Cards Skeleton (3 or 4 horizontal summary boxes) */
+.nu-skeleton-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.nu-skeleton-metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nu-skeleton-metric-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 3. Filter Bar Skeleton */
+.nu-skeleton-filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+
+.nu-skeleton-filter-chips {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.nu-skeleton-filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* 4. Table Skeleton */
+.nu-skeleton-table-shell {
+  background-color: var(--buyer-bg-card, #ffffff);
+  border: 1px solid var(--buyer-border-light, #e3e3dd);
+  border-radius: var(--buyer-radius-lg, 12px);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(31, 41, 51, 0.05);
+}
+
+.nu-skeleton-table-header {
+  display: grid;
+  padding: 14px 20px;
+  background-color: rgba(31, 41, 51, 0.02);
+  border-bottom: 1px solid var(--buyer-border-light, #e3e3dd);
+  align-items: center;
+  gap: 16px;
+}
+
+.nu-skeleton-table-row {
+  display: grid;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(227, 227, 221, 0.6);
+  align-items: center;
+  gap: 16px;
+}
+
+.nu-skeleton-table-row:last-child {
+  border-bottom: none;
+}
+
+/* 5. Crop Grid Skeleton (Marketplace Cards) */
+.nu-skeleton-crop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 20px;
+}
+
+.nu-skeleton-crop-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+
+.nu-skeleton-crop-image {
+  width: 100%;
+  height: 180px;
+  border-radius: var(--buyer-radius-lg, 12px) var(--buyer-radius-lg, 12px) 0 0;
+}
+
+.nu-skeleton-crop-body {
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 6. Profile Skeleton */
+.nu-skeleton-profile-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 991.98px) {
+  .nu-skeleton-profile-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nu-skeleton-profile-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.nu-skeleton-profile-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 7. Track & Timeline Skeleton */
+.nu-skeleton-track-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 991.98px) {
+  .nu-skeleton-track-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nu-skeleton-timeline-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 16px;
+  gap: 12px;
+}
+
+/* Subtle fade in for mounting */
+.nu-skeleton-fade-in {
+  animation: nu-fade-in 0.25s ease-out;
+}
+
+@keyframes nu-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

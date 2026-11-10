@@ -1,0 +1,270 @@
+/* What this file does: Stylesheet for Buyer Profile layout, verified business card, and edit actions. */
+/* Profile Page Styles */
+
+.buyer-profile-layout {
+  width: 100%;
+  max-width: 100%;
+}
+
+.buyer-profile-box {
+  background-color: #ffffff;
+  border: 1px solid var(--buyer-border-light);
+  border-radius: var(--buyer-radius-lg);
+  box-shadow: var(--buyer-shadow-card);
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+}
+
+.buyer-profile-top-banner {
+  padding: 28px 32px;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  border-bottom: 1px solid var(--buyer-border-light);
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.buyer-profile-photo-wrapper {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.buyer-profile-photo-large {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ffffff;
+}
+
+.buyer-profile-photo-fallback {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: var(--buyer-accent-subtle);
+  color: var(--buyer-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #ffffff;
+}
+
+.buyer-profile-photo-change-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--buyer-primary);
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.15s ease;
+}
+
+.buyer-profile-photo-change-btn:hover {
+  transform: scale(1.1);
+  background-color: var(--buyer-primary-hover);
+}
+
+.buyer-profile-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.buyer-profile-name-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.buyer-profile-firm-name {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--buyer-text-main);
+  margin: 0;
+}
+
+.buyer-verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background-color: var(--buyer-accent-subtle);
+  color: var(--buyer-accent-text);
+  border: 1px solid var(--buyer-accent-border);
+  padding: 2px 8px;
+  border-radius: var(--buyer-radius-full);
+}
+
+.buyer-profile-firm-sub {
+  font-size: 0.88rem;
+  color: var(--buyer-text-muted);
+  margin: 2px 0 6px 0;
+}
+
+.buyer-profile-meta-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.buyer-category-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background-color: #f1f5f9;
+  color: var(--buyer-text-muted);
+  padding: 3px 10px;
+  border-radius: var(--buyer-radius-full);
+}
+
+.buyer-id-pill {
+  font-size: 0.75rem;
+  font-family: monospace;
+  font-weight: 700;
+  color: var(--buyer-text-dim);
+}
+
+/* 8-Field Details Grid */
+.buyer-profile-details-grid {
+  padding: 28px 32px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.buyer-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background-color: var(--buyer-bg-canvas);
+  padding: 16px 20px;
+  border-radius: var(--buyer-radius-md);
+  border: 1px solid var(--buyer-border-light);
+  transition: all 0.18s ease;
+}
+
+.buyer-detail-item:hover {
+  border-color: #cbd5e1;
+  background-color: #ffffff;
+}
+
+.buyer-detail-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.detail-label {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--buyer-text-dim);
+  letter-spacing: 0.03em;
+}
+
+.detail-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--buyer-text-main);
+}
+
+.detail-subtext {
+  font-size: 0.76rem;
+  color: var(--buyer-text-muted);
+}
+
+.detail-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--buyer-radius-full);
+  width: fit-content;
+  margin-top: 2px;
+}
+
+.detail-status-pill.green {
+  background-color: var(--buyer-accent-subtle);
+  color: var(--buyer-accent-text);
+}
+
+.buyer-doc-preview-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #f8fafc;
+  border: 1px solid var(--buyer-border-light);
+  padding: 4px 10px;
+  border-radius: var(--buyer-radius-md);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--buyer-text-muted);
+  width: fit-content;
+}
+
+.buyer-doc-mini-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.buyer-profile-footer-actions {
+  padding: 20px 32px;
+  background-color: var(--buyer-bg-canvas);
+  border-top: 1px solid var(--buyer-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .buyer-profile-top-banner {
+    padding: 20px 16px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .buyer-profile-header-text {
+    align-items: center;
+  }
+
+  .buyer-profile-details-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 20px 16px;
+  }
+
+  .buyer-detail-item {
+    padding: 14px 16px;
+  }
+
+  .buyer-profile-footer-actions {
+    padding: 16px;
+    flex-direction: column;
+  }
+
+  .buyer-profile-footer-actions button {
+    width: 100%;
+  }
+}
