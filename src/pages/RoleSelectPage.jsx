@@ -569,7 +569,7 @@ export default function RoleSelectPage({
     activeRole === 'buyer'
       ? ROUTES.BUYER_REGISTER
       : activeRole === 'driver'
-      ? `${ROUTES.COMING_SOON}?role=driver`
+      ? ROUTES.DRIVER_REGISTER
       : ROUTES.FARMER_REGISTER;
 
   return (
@@ -655,19 +655,6 @@ export default function RoleSelectPage({
                 alt="Agricultural Paddy Fields"
                 className="role-visual-bg-img"
               />
-              <div className="role-visual-overlay">
-                <div className="role-partners-silhouette">
-                  <div className="role-partner-figure farmer-figure" title="Farmer">
-                    <span className="figure-icon">🌾</span>
-                  </div>
-                  <div className="role-partner-figure buyer-figure" title="Commercial Buyer">
-                    <span className="figure-icon">🧺</span>
-                  </div>
-                  <div className="role-partner-figure driver-figure" title="Logistics Driver">
-                    <span className="figure-icon">🚚</span>
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* 3 Circular Feature Badges at Bottom */}
@@ -767,11 +754,6 @@ export default function RoleSelectPage({
                 <div className="role-choice-label farmer-label">
                   {lang === 'ta' ? 'விவசாயி' : 'Farmer'}
                 </div>
-                <div className="role-choice-desc">
-                  {lang === 'ta'
-                    ? 'உங்கள் விவசாய விளைபொருட்களை நேரடியாக விற்று, பயிர்களை நிர்வகிக்கவும்.'
-                    : 'Sell your agricultural produce directly and manage your crops and orders.'}
-                </div>
               </div>
 
               {/* Card 2: Buyer */}
@@ -797,11 +779,6 @@ export default function RoleSelectPage({
                 <div className="role-choice-label buyer-label">
                   {lang === 'ta' ? 'வாங்குபவர்' : 'Buyer'}
                 </div>
-                <div className="role-choice-desc">
-                  {lang === 'ta'
-                    ? 'புதிய பண்ணை விளைபொருட்களைக் கண்டறிந்து, ஆர்டர் செய்து விநியோகங்களை கண்காணிக்கவும்.'
-                    : 'Discover fresh farm produce, place orders, and track your deliveries.'}
-                </div>
               </div>
 
               {/* Card 3: Driver */}
@@ -826,11 +803,6 @@ export default function RoleSelectPage({
                 </div>
                 <div className="role-choice-label driver-label">
                   {lang === 'ta' ? 'ஓட்டுநர்' : 'Driver'}
-                </div>
-                <div className="role-choice-desc">
-                  {lang === 'ta'
-                    ? 'ஒதுக்கப்பட்ட பயணங்களை நிர்வகித்து, விளைபொருட்களை சேகரித்து விநியோகங்களை முடிக்கவும்.'
-                    : 'Manage assigned trips, collect produce, and complete deliveries.'}
                 </div>
               </div>
             </div>

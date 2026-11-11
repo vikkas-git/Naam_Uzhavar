@@ -1,0 +1,442 @@
+/* DriverRegister.css - 50/50 Split Screen Design System for Logistics Drivers */
+/* Follows BuyerRegister/FarmerRegister layout rhythm with Earth Ochre / Amber (#8F5A12, #b45309) palette */
+
+/* Split Page View & Natural Vertical Scroll */
+.driver-reg-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background-color: var(--buyer-bg-canvas, #f6f6f2);
+  box-sizing: border-box;
+}
+
+/* Left Visual Storytelling Pane (Deep Ochre / Earth Amber #78350f) */
+.driver-reg-visual-pane {
+  background-color: #78350f !important;
+}
+
+.driver-reg-badge {
+  background: rgba(254, 243, 199, 0.22) !important;
+  color: #fef3c7 !important;
+  border: 1px solid rgba(254, 243, 199, 0.4) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Right Content Pane: strictly aligned to top with smooth natural scrolling */
+.driver-reg-form-pane,
+.buyer-reg-form-pane.driver-reg-form-pane {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start !important;
+  align-items: center;
+  background-color: var(--buyer-bg-canvas, #f6f6f2);
+  padding: clamp(20px, 3.2vw, 36px) clamp(16px, 3.2vw, 44px);
+  position: relative;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Top Utility Bar (Back to Home & Language Switcher) */
+.driver-reg-form-pane .buyer-reg-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto 12px auto;
+  min-height: 40px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+/* Ensure inner card is NEVER clipped, fits full page */
+.driver-reg-card,
+.buyer-reg-form-inner.driver-reg-card {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto 24px auto;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e3e3dd;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: clamp(22px, 3.2vw, 34px) clamp(18px, 3vw, 30px);
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible !important;
+  max-height: none !important;
+  height: auto !important;
+}
+
+/* Header Brand Lockup */
+.driver-reg-card .buyer-form-header {
+  margin-bottom: 16px !important;
+}
+
+.driver-icon-box {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  border-radius: 12px !important;
+  background: #fef3c7 !important;
+  border: 1.5px solid #fde68a !important;
+  color: #b45309 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-bottom: 10px !important;
+}
+
+.driver-account-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  background-color: #fef3c7 !important;
+  color: #b45309 !important;
+  border: 1px solid #fde68a !important;
+  font-size: 0.74rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  padding: 3px 10px !important;
+  border-radius: 9999px !important;
+  margin-bottom: 8px !important;
+  text-transform: uppercase;
+}
+
+.driver-reg-card .buyer-form-title {
+  font-size: clamp(1.35rem, 2vw, 1.6rem) !important;
+  font-weight: 700 !important;
+  color: #1f2933 !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 4px !important;
+  line-height: 1.25 !important;
+}
+
+.driver-reg-card .buyer-form-subtitle {
+  font-size: 0.88rem !important;
+  color: #4b5563 !important;
+  margin-bottom: 14px !important;
+  line-height: 1.45 !important;
+}
+
+/* Section Dividers inside form */
+.driver-form-section-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #b45309;
+  margin-top: 14px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* Primary Button in Ochre/Amber */
+.driver-btn-primary {
+  background-color: #b45309 !important;
+  border-color: #b45309 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(180, 83, 9, 0.28) !important;
+  transition: all 0.15s ease-in-out;
+  height: 44px !important;
+  font-size: 0.94rem !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  margin-top: 10px !important;
+}
+
+.driver-btn-primary:hover {
+  background-color: #92400e !important;
+  border-color: #92400e !important;
+  box-shadow: 0 6px 18px rgba(180, 83, 9, 0.35) !important;
+}
+
+/* Strict Dual Column Rows */
+.driver-reg-dual-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 12px !important;
+}
+
+@media (min-width: 600px) {
+  .driver-reg-dual-row {
+    flex-direction: row;
+    gap: 12px;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .driver-reg-dual-row > div {
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+    width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .driver-reg-dual-row .app-input-group {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-bottom: 0 !important;
+  }
+
+  .driver-reg-dual-row .app-input-control {
+    font-size: 0.88rem !important;
+    padding-left: 8px !important;
+    padding-right: 6px !important;
+    height: 42px !important;
+    min-height: 42px !important;
+  }
+
+  .driver-reg-dual-row .app-input-icon-left {
+    padding-left: 12px !important;
+    padding-right: 0 !important;
+  }
+
+  .driver-reg-dual-row .app-input-icon-btn {
+    margin-right: 4px !important;
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
+.driver-field-single {
+  width: 100%;
+  margin-bottom: 12px !important;
+  box-sizing: border-box;
+}
+
+.driver-field-single .app-input-group {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-bottom: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.driver-field-single .app-input-control {
+  font-size: 0.88rem !important;
+  height: 42px !important;
+  min-height: 42px !important;
+}
+
+.driver-reg-card .app-input-label {
+  font-size: 0.82rem !important;
+  margin-bottom: 3px !important;
+  font-weight: 600 !important;
+  color: #1f2933 !important;
+}
+
+/* Native Select Styling matching Input */
+.driver-select-control {
+  width: 100%;
+  height: 42px;
+  min-height: 42px;
+  background-color: #ffffff;
+  border: 1px solid var(--neutral-200, #e3e3dd);
+  border-radius: 8px;
+  padding: 0 12px;
+  font-size: 0.88rem;
+  color: #1f2933;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.driver-select-control:focus {
+  border-color: #b45309;
+  box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.14);
+}
+
+/* Photo Upload Dropzone */
+.driver-photo-group {
+  margin-bottom: 14px !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.driver-photo-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.84rem !important;
+  font-weight: 600;
+  color: var(--neutral-900, #1f2933);
+  margin-bottom: 4px !important;
+}
+
+.driver-photo-dropzone {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px !important;
+  background-color: #fafbf9;
+  border: 1.5px dashed #cbd5e1;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background-color 0.18s ease;
+  user-select: none;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 58px !important;
+}
+
+.driver-photo-dropzone:hover {
+  border-color: #b45309;
+  background-color: #fffbeb;
+}
+
+.driver-photo-dropzone.is-dragging {
+  border-color: #b45309;
+  background-color: #fef3c7;
+}
+
+.driver-photo-dropzone.has-error {
+  border-color: #b42318;
+  background-color: #fcebe9;
+}
+
+.driver-photo-preview-circle {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  border-radius: 50%;
+  background: #fef3c7;
+  border: 1.5px solid #fde68a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.driver-photo-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.driver-photo-prompt-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.driver-photo-prompt-title {
+  font-size: 0.86rem !important;
+  font-weight: 600;
+  color: #1f2933;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.driver-photo-prompt-sub {
+  font-size: 0.74rem !important;
+  color: #667085;
+  margin-top: 2px;
+}
+
+.driver-photo-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.driver-photo-btn-change {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid #fde68a;
+  background: #ffffff;
+  color: #b45309;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-height: 32px;
+}
+
+.driver-photo-btn-change:hover {
+  background: #fef3c7;
+  border-color: #b45309;
+}
+
+.driver-photo-btn-remove {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid #fca5a5;
+  background: #fef2f2;
+  color: #b91c1c;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-height: 32px;
+}
+
+.driver-photo-btn-remove:hover {
+  background: #fee2e2;
+}
+
+.driver-field-error {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #b42318;
+  margin-top: 3px;
+}
+
+.driver-assurance-card {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  margin-top: 16px !important;
+  padding: 10px 14px !important;
+}
+
+.driver-assurance-icon {
+  color: #b45309;
+}
+
+.driver-link {
+  color: #b45309 !important;
+}
+
+.driver-link:hover {
+  color: #92400e !important;
+  text-decoration: underline;
+}
+
+.driver-reg-footer {
+  text-align: center;
+  font-size: 0.78rem;
+  color: #64748b;
+  margin-top: 4px;
+  margin-bottom: 24px;
+}
+

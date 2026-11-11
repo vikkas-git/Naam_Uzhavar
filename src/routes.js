@@ -33,6 +33,7 @@ export const ROUTES = {
   FARMER_DASHBOARD_PROFILE: '/farmer-dashboard/profile',
   // Driver Module Routes
   DRIVER_LOGIN: '/role-select?role=driver',
+  DRIVER_REGISTER: '/driver-register',
   DRIVER_DASHBOARD: '/driver-dashboard',
   DRIVER_DASHBOARD_TRIPS: '/driver-dashboard/trips',
   DRIVER_DASHBOARD_EARNINGS: '/driver-dashboard/earnings',

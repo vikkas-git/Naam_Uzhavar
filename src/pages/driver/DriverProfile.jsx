@@ -34,14 +34,6 @@ export default function DriverProfile() {
     lang
   } = useDriver();
 
-  if (isDataLoading && !profile) {
-    return (
-      <div className="buyer-view-container animate-fade-in">
-        <ProfileSkeleton />
-      </div>
-    );
-  }
-
   const photoInputRef = useRef(null);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [failedPhoto, setFailedPhoto] = useState(null);
@@ -92,6 +84,14 @@ export default function DriverProfile() {
     saveProfile(updated);
     setEditModalOpen(false);
   };
+
+  if (isDataLoading && !profile) {
+    return (
+      <div className="buyer-view-container animate-fade-in">
+        <ProfileSkeleton />
+      </div>
+    );
+  }
 
   return (
     <div className="buyer-view-container animate-fade-in">

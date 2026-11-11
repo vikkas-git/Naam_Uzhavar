@@ -293,6 +293,113 @@ if (isDbConnected()) {
 // ============================================================================
 
 /**
+ * POST /api/driver/auth/register
+ * Register a new logistics driver with commercial EV vehicle & license
+ */
+router.post('/auth/register', async (req, res) => {
+  try {
+    const {
+      name,
+      tamilName,
+      phone,
+      email,
+      password,
+      pin,
+      avatar,
+      assignedHub,
+      operatingZone,
+      vehicleModel,
+      vehicleNumber,
+      licenseNumber,
+      licenseExpiry,
+      upiId
+    } = req.body;
+
+    if (!name || !phone) {
+      return res.status(400).json({ message: 'Driver name and mobile phone are required.' });
+    }
+
+    const cleanPhone = String(phone).replace(/\D/g, '');
+    const cleanLicense = String(licenseNumber || '').trim().toUpperCase();
+    const cleanVehicleNo = String(vehicleNumber || '').trim().toUpperCase();
+
+    // Generate unique Driver ID
+    const randomSuffix = Math.floor(10 + Math.random() * 90);
+    const newDriverId = `DRV-TN-2026-${randomSuffix}`;
+
+    const newDriverData = {
+      driverId: newDriverId,
+      name: String(name).trim(),
+      tamilName: String(tamilName || name).trim(),
+      phone: String(phone).trim(),
+      email: email ? String(email).trim().toLowerCase() : `${cleanPhone}@logistics.naamuzhavar.com`,
+      password: password || pin || '1234',
+      pin: pin || password || '1234',
+      role: 'driver',
+      avatar: avatar || 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=300&auto=format&fit=crop&q=80',
+      assignedHub: assignedHub || 'Dindigul Central Hub',
+      operatingZone: operatingZone || 'Coimbatore - Dindigul - Madurai Corridor',
+      dutyStatus: 'ON_DUTY',
+      vehicle: {
+        model: vehicleModel || 'Tata Ace EV Cargo',
+        vehicleNumber: cleanVehicleNo || 'TN 57 AB 1234',
+        type: 'Zero-Emission EV Light Commercial Vehicle (LCV)',
+        batteryCapacityKwh: 21.3,
+        currentBatteryPct: 92,
+        estimatedRangeKm: 78,
+        maxPayloadKg: 600,
+        healthPct: 99,
+        chargingStatus: 'DISCHARGING'
+      },
+      license: {
+        licenseNumber: cleanLicense || 'TN-57-2022-004812',
+        validUntil: licenseExpiry || '2028-12-31',
+        verified: true,
+        badge: 'Verified EV Logistics Partner'
+      },
+      wallet: {
+        balance: 1000,
+        todayEarnings: 0,
+        totalWithdrawn: 0,
+        upiId: upiId || ''
+      },
+      metrics: {
+        rating: 5.0,
+        totalDispatches: 0,
+        onTimeRatePct: 100.0,
+        totalDistanceKm: 0,
+        co2SavedKg: 0
+      }
+    };
+
+    let createdDriver = newDriverData;
+
+    if (isDbConnected()) {
+      // Check duplicate
+      const existing = await Driver.findOne({
+        $or: [{ phone: String(phone).trim() }, { driverId: newDriverId }]
+      });
+      if (existing) {
+        return res.status(400).json({ message: 'A driver with this mobile number is already registered.' });
+      }
+      createdDriver = await Driver.create(newDriverData);
+    }
+
+    const token = generateDriverToken(createdDriver.driverId);
+
+    return res.status(201).json({
+      success: true,
+      message: 'Driver registration successful',
+      token,
+      driver: createdDriver
+    });
+  } catch (error) {
+    console.error('Driver Register Error:', error);
+    return res.status(500).json({ message: error.message || 'Error creating driver account' });
+  }
+});
+
+/**
  * POST /api/driver/auth/login
  * Driver authentication via Driver ID or Mobile + 4-digit PIN
  */

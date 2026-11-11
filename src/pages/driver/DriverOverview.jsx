@@ -63,14 +63,6 @@ export default function DriverOverview() {
     lang
   } = useDriver();
 
-  if (isDataLoading && (!trips || trips.length === 0)) {
-    return (
-      <div className="farmer-view-container animate-fade-in">
-        <DashboardSkeleton />
-      </div>
-    );
-  }
-
   // Active ongoing dispatches only (strictly excluding DELIVERED)
   const activeDispatches = useMemo(() => {
     return (trips || []).filter(
@@ -205,6 +197,14 @@ export default function DriverOverview() {
   const buyerMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
     activeTrip?.dropoff?.address || 'Gandhipuram Coimbatore'
   )}`;
+
+  if (isDataLoading && (!trips || trips.length === 0)) {
+    return (
+      <div className="farmer-view-container animate-fade-in">
+        <DashboardSkeleton />
+      </div>
+    );
+  }
 
   return (
     <div className="buyer-view-container animate-fade-in">

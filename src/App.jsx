@@ -9,6 +9,7 @@ import HomePage from './pages/HomePage';
 import RoleSelectPage from './pages/RoleSelectPage';
 import BuyerRegister from './pages/BuyerRegister';
 import FarmerRegister from './pages/FarmerRegister';
+import DriverRegister from './pages/DriverRegister';
 import ComingSoonPage from './pages/ComingSoonPage';
 import NotFoundPage from './pages/NotFoundPage';
 import BuyerDashboardLayout from './components/BuyerDashboardLayout';
@@ -404,6 +405,17 @@ export default function App() {
         {/* Driver Aliases */}
         <Route path="/driver" element={<Navigate to={ROUTES.DRIVER_DASHBOARD} replace />} />
         <Route path="/driver/dashboard" element={<Navigate to={ROUTES.DRIVER_DASHBOARD} replace />} />
+        <Route path="/driver-login" element={<Navigate to={ROUTES.DRIVER_LOGIN} replace />} />
+        <Route path="/driver/login" element={<Navigate to={ROUTES.DRIVER_LOGIN} replace />} />
+        <Route
+          path={ROUTES.DRIVER_REGISTER}
+          element={
+            <ProtectedRoute role="driver" mode="guest">
+              <DriverRegister />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/driver/register" element={<Navigate to={ROUTES.DRIVER_REGISTER} replace />} />
         <Route path="/driver/*" element={<Navigate to={ROUTES.DRIVER_DASHBOARD} replace />} />
 
         {/* 8. Placeholder Portals */}

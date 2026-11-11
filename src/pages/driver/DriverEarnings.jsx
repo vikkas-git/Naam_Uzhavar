@@ -30,14 +30,6 @@ import './DriverDashboard.css';
 export default function DriverEarnings() {
   const { profile, metrics, trips, withdrawEarnings, isDataLoading, lang } = useDriver();
 
-  if (isDataLoading && !profile) {
-    return (
-      <div className="buyer-view-container animate-fade-in">
-        <EarningsSkeleton />
-      </div>
-    );
-  }
-
   const [withdrawModalOpen, setWithdrawModalOpen] = useState(false);
   const [withdrawAmount, setWithdrawAmount] = useState('');
   const [withdrawChannel, setWithdrawChannel] = useState('UPI'); // 'UPI' | 'BANK' | 'EV_CARD'
@@ -92,6 +84,14 @@ export default function DriverEarnings() {
     setWithdrawAmount('');
     setShowDriverSms(false);
   };
+
+  if (isDataLoading && !profile) {
+    return (
+      <div className="buyer-view-container animate-fade-in">
+        <EarningsSkeleton />
+      </div>
+    );
+  }
 
   return (
     <div className="buyer-view-container animate-fade-in">

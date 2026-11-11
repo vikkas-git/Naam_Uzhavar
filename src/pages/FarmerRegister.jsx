@@ -575,7 +575,7 @@ export default function FarmerRegister({
                       style={{ pointerEvents: 'none' }}
                     >
                       <Upload size={14} style={{ display: 'inline', marginRight: 4 }} />
-                      <span>{t('upload') || 'Upload'}</span>
+                      <span>{t('uploadBtn') || (t('upload') === 'upload' ? 'Upload' : t('upload'))}</span>
                     </button>
                   )}
                 </div>
