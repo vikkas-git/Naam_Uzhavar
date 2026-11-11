@@ -82,12 +82,9 @@ router.post('/', async (req, res, next) => {
     if (typeof cropId === 'string' && cropId.match(/^[0-9a-fA-F]{24}$/)) {
       crop = await Crop.findById(cropId);
     } else {
-      // Fallback for mock IDs like "crop-tomato-01"
+      // Find by domain id or partial name match
       const cleanName = String(cropId).replace(/^crop-/, '').split('-')[0];
-      crop = await Crop.findOne({ name: new RegExp(cleanName, 'i') });
-      if (!crop) {
-        crop = await Crop.findOne({});
-      }
+      crop = (await Crop.findOne({ _id: cropId })) || (await Crop.findOne({ name: new RegExp(cleanName, 'i') }));
     }
 
     if (!crop) {

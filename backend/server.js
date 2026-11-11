@@ -3,6 +3,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 
 // Load environment variables from .env file
 dotenv.config();
@@ -40,11 +41,28 @@ app.use(
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Health Check Endpoint
-app.get('/api/health', (req, res) => {
-  res.json({
-    status: 'ok',
-    message: 'Naam Uzhavar Backend API is running',
+// Health Check Endpoint - Diagnostics for MongoDB database connectivity & collection stats
+app.get('/api/health', async (req, res) => {
+  const isConnected = mongoose.connection.readyState === 1;
+  let collections = {};
+  if (isConnected) {
+    try {
+      const collList = await mongoose.connection.db.listCollections().toArray();
+      for (const c of collList) {
+        collections[c.name] = await mongoose.connection.db.collection(c.name).countDocuments();
+      }
+    } catch {}
+  }
+
+  res.status(isConnected ? 200 : 503).json({
+    status: isConnected ? 'ok' : 'degraded',
+    message: isConnected ? 'Naam Uzhavar Backend API is running with active MongoDB database' : 'Database connection offline',
+    database: {
+      connected: isConnected,
+      host: isConnected ? mongoose.connection.host : 'offline',
+      name: isConnected ? mongoose.connection.name : 'naam-uzhavar',
+      collections
+    },
     timestamp: new Date().toISOString()
   });
 });

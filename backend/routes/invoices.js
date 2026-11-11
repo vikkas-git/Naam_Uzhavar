@@ -1,10 +1,13 @@
 // routes/invoices.js - Accounting invoices generated from verified delivered consignments
 // Viva Note: Invoices are derived from completed/delivered orders belonging to the authenticated buyer.
+// Backed by the permanent 'invoices' collection in MongoDB.
+
 const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middleware/auth');
 const Order = require('../models/Order');
 const Buyer = require('../models/Buyer');
+const Invoice = require('../models/Invoice');
 
 const isObjectId = (id) => typeof id === 'string' && /^[0-9a-fA-F]{24}$/.test(id);
 
@@ -27,91 +30,114 @@ router.use(authMiddleware);
 // GET /api/invoices - Retrieve commercial invoices for delivered orders
 router.get('/', async (req, res, next) => {
   try {
-    // 1. Find all delivered orders for this buyer
     const buyerIds = await resolveBuyerIds(req.buyer.id);
+
+    // 1. Fetch any directly persisted invoices from the MongoDB 'invoices' collection
+    const existingInvoices = await Invoice.find({
+      buyer: { $in: buyerIds }
+    }).sort({ invoiceDate: -1, createdAt: -1 });
+
+    // 2. Find all delivered orders for this buyer (case-insensitive & dual enum check)
     const deliveredOrders = await Order.find({
       buyer: { $in: buyerIds },
-
-      status: 'delivered'
+      $or: [
+        { status: { $regex: /^delivered$/i } },
+        { deliveryStatus: 'DELIVERED' },
+        { orderStatus: 'DELIVERED' }
+      ]
     })
       .populate('crop')
       .sort({ updatedAt: -1 });
 
-    // 2. Map delivered orders to invoice format
-    const dynamicInvoices = deliveredOrders.map((order) => {
-      const crop = order.crop || {};
-      const dateStr = new Date(order.updatedAt || order.createdAt).toLocaleDateString('en-GB', {
+    // 3. For any delivered order without an invoice, snapshot into MongoDB 'invoices' collection
+    for (const order of deliveredOrders) {
+      const invNum = `INV-${order.orderId.replace(/^NU-/, '')}`;
+      const exists = existingInvoices.some((inv) => inv.orderId === order.orderId || inv.invoiceNumber === invNum);
+      if (!exists) {
+        const crop = order.crop || {};
+        const unitPrice = crop.pricePerKg || (order.quantityKg > 0 ? Math.round(order.totalPrice / order.quantityKg) : 40);
+        try {
+          const createdInv = await Invoice.create({
+            invoiceNumber: invNum,
+            orderId: order.orderId,
+            order: order._id,
+            buyer: req.buyer.id,
+            buyerName: req.buyer.businessName || req.buyer.name || 'Commercial Procurement Partner',
+            farmerId: order.farmerId || crop.farmerId || 'FMR-TN-2026-01',
+            cropName: crop.name || order.cropDetails?.name || 'Farm Fresh Produce',
+            tamilCropName: crop.nameTa || order.cropDetails?.nameTa || '',
+            grade: crop.grade || order.cropDetails?.grade || 'Grade A',
+            quantityKg: order.quantityKg || 100,
+            unitPrice,
+            subtotal: order.totalPrice || unitPrice * (order.quantityKg || 100),
+            taxAmount: 0,
+            totalAmount: order.totalPrice || unitPrice * (order.quantityKg || 100),
+            status: 'PAID',
+            hub: crop.hub || order.cropDetails?.hub || 'Dindigul Central Hub',
+            farmer: {
+              name: crop.farmerName || order.cropDetails?.farmerName || 'Local Producer',
+              phone: '+91 94432 78190',
+              location: crop.hub || order.cropDetails?.hub || 'Pollachi Hub'
+            },
+            invoiceDate: order.updatedAt || order.createdAt || new Date()
+          });
+          existingInvoices.unshift(createdInv);
+        } catch (createErr) {
+          console.warn('Notice creating invoice snapshot:', createErr.message);
+        }
+      }
+    }
+
+    // 4. Map MongoDB invoices to frontend structure
+    const invoices = existingInvoices.map((inv) => {
+      const dateStr = new Date(inv.invoiceDate || inv.createdAt).toLocaleDateString('en-GB', {
         day: '2-digit',
         month: 'short',
         year: 'numeric'
       });
 
       return {
-        id: `INV-${order.orderId.replace('NU-', '')}`,
-        orderId: order.orderId,
+        id: inv.invoiceNumber || `INV-${inv._id}`,
+        _id: inv._id,
+        invoiceNumber: inv.invoiceNumber,
+        orderId: inv.orderId,
         invoiceDate: dateStr,
-        cropName: crop.name || 'Farm Fresh Produce',
-        tamilCropName: crop.nameTa || '',
-        grade: crop.grade || 'Grade A',
-        quantityKg: order.quantityKg,
-        unitPrice: crop.pricePerKg || Math.round(order.totalPrice / (order.quantityKg || 1)),
-        totalAmount: order.totalPrice,
-        status: 'paid',
-        hub: crop.hub || 'Dindigul Central',
-        farmer: {
-          name: crop.farmerName || 'Local Producer',
+        cropName: inv.cropName,
+        tamilCropName: inv.tamilCropName || '',
+        grade: inv.grade || 'Grade A',
+        quantityKg: inv.quantityKg,
+        unitPrice: inv.unitPrice,
+        totalAmount: inv.totalAmount,
+        status: (inv.status || 'PAID').toLowerCase(),
+        hub: inv.hub,
+        farmer: inv.farmer || {
+          name: 'Local Producer',
           phone: '+91 98421 78210',
-          location: crop.hub || 'Tamil Nadu'
+          location: inv.hub || 'Tamil Nadu'
         }
       };
     });
-
-    // 3. Fallback archived records for initial viva demonstration if no orders are delivered yet
-    const archivedInvoices = [
-      {
-        id: 'INV-2026-00088',
-        orderId: 'NU-2026-00088',
-        invoiceDate: '15 Oct 2026',
-        cropName: 'Sirumalai Hill Bananas',
-        tamilCropName: 'சிறுமலை வாழை',
-        grade: 'Grade A',
-        quantityKg: 300,
-        unitPrice: 38,
-        totalAmount: 11400,
-        status: 'paid',
-        hub: 'Sirumalai, Dindigul',
-        farmer: {
-          name: 'N. Balakrishnan',
-          phone: '+91 94438 90123',
-          location: 'Sirumalai Hills, Dindigul'
-        }
-      },
-      {
-        id: 'INV-2026-00075',
-        orderId: 'NU-2026-00075',
-        invoiceDate: '12 Oct 2026',
-        cropName: 'Green Capsicum',
-        tamilCropName: 'குடைமிளகாய்',
-        grade: 'Grade A',
-        quantityKg: 120,
-        unitPrice: 52,
-        totalAmount: 6240,
-        status: 'paid',
-        hub: 'Vedasandur, Dindigul',
-        farmer: {
-          name: 'V. Senthil',
-          phone: '+91 97890 12345',
-          location: 'Vedasandur, Dindigul'
-        }
-      }
-    ];
-
-    const invoices = dynamicInvoices.length > 0 ? dynamicInvoices : archivedInvoices;
 
     return res.json({
       count: invoices.length,
       invoices
     });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// GET /api/invoices/:id - Retrieve single invoice details
+router.get('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const inv = await Invoice.findOne({
+      $or: [{ invoiceNumber: id }, { orderId: id }]
+    });
+    if (!inv) {
+      return res.status(404).json({ message: 'Invoice not found.' });
+    }
+    return res.json({ success: true, invoice: inv });
   } catch (error) {
     next(error);
   }

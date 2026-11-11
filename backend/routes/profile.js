@@ -85,15 +85,6 @@ const resolveBuyerAuth = async (req, res, next) => {
       }
     }
 
-    // Default Fallback: First registered buyer or demo buyer
-    const fallbackBuyer =
-      (await Buyer.findOne({ email: 'demo@naamuzhavar.com' })) ||
-      (await Buyer.findOne({}));
-    if (fallbackBuyer) {
-      req.buyer = { id: fallbackBuyer._id.toString(), email: fallbackBuyer.email };
-      return next();
-    }
-
     return res
       .status(401)
       .json({ message: 'Authorization required. Please log in.' });
@@ -123,9 +114,6 @@ router.get('/', async (req, res, next) => {
       buyer = await Buyer.findOne({
         email: req.query.email.toLowerCase().trim()
       }).select('-password');
-    }
-    if (!buyer) {
-      buyer = (await Buyer.findOne({}).select('-password')) || DEMO_BUYER_RECORD;
     }
 
     if (!buyer) {
@@ -193,9 +181,6 @@ const updateBuyerProfile = async (req, res, next) => {
     if (!buyer && (email || req.buyer?.email)) {
       const searchEmail = (email || req.buyer.email).toLowerCase().trim();
       buyer = await Buyer.findOne({ email: searchEmail });
-    }
-    if (!buyer) {
-      buyer = (await Buyer.findOne({})) || { ...DEMO_BUYER_RECORD };
     }
 
     if (!buyer) {

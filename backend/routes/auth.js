@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const Buyer = require('../models/Buyer');
 const Farmer = require('../models/Farmer');
 const authMiddleware = require('../middleware/auth');
@@ -166,9 +167,9 @@ router.post('/register', async (req, res, next) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // 4. Create buyer document
+    // 4. Create buyer document in MongoDB
     let newBuyer = null;
-    try {
+    if (mongoose.connection.readyState === 1) {
       newBuyer = await Buyer.create({
         businessName: resolvedBusiness,
         contactPerson: resolvedContact,
@@ -180,7 +181,7 @@ router.post('/register', async (req, res, next) => {
         address: address.trim(),
         avatar: avatar || undefined
       });
-    } catch {
+    } else {
       newBuyer = {
         _id: `buyer_${Date.now()}`,
         businessName: resolvedBusiness,
@@ -483,16 +484,14 @@ const handleFarmerRegistration = async (req, res, next) => {
     };
 
     let createdFarmer = null;
-    try {
+    if (mongoose.connection.readyState === 1) {
       createdFarmer = await Farmer.create(newFarmerPayload);
-    } catch {
-      createdFarmer = null;
+    } else {
+      inMemoryFarmers.unshift({
+        ...newFarmerPayload,
+        _id: `farmer_mem_${Date.now()}`
+      });
     }
-
-    inMemoryFarmers.unshift({
-      ...newFarmerPayload,
-      _id: createdFarmer ? createdFarmer._id : `farmer_mem_${Date.now()}`
-    });
 
     const token = generateFarmerToken(farmerId, {
       name: resolvedName,

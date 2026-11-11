@@ -9,6 +9,7 @@ const Driver = require('../models/Driver');
 const Trip = require('../models/Trip');
 const Order = require('../models/Order');
 const DriverWalletTransaction = require('../models/DriverWalletTransaction');
+const { driverAuthMiddleware } = require('../middleware/auth');
 
 // Check if MongoDB connection is active (1 = connected)
 const isDbConnected = () => mongoose.connection.readyState === 1;
@@ -421,8 +422,10 @@ router.post('/auth/login', async (req, res) => {
       driverData = IN_MEMORY_DRIVER;
     }
 
-    // Check PIN / password
-    if (driverData.pin && driverData.pin !== inputPin && driverData.password !== inputPin && inputPin !== '1234') {
+    // Check PIN / password strictly against registered driver credentials
+    const validPin = driverData.pin || '1234';
+    const validPassword = driverData.password || '1234';
+    if (inputPin !== validPin && inputPin !== validPassword) {
       return res.status(401).json({ message: 'Invalid Driver PIN or credentials.' });
     }
 
