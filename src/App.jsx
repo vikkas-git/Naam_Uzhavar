@@ -16,6 +16,7 @@ import BuyerDashboardLayout from './components/BuyerDashboardLayout';
 import FarmerDashboardLayout from './components/farmer/FarmerDashboardLayout';
 import DriverDashboardLayout from './components/driver/DriverDashboardLayout';
 import { ModulePageSkeleton } from './components/Skeleton';
+import { AdminProvider } from './context/AdminContext';
 
 // Lazy-loaded buyer dashboard sub-pages directly without barrel files for optimal code splitting
 const Overview = lazy(() => import('./pages/buyer/Overview.jsx'));
@@ -35,6 +36,29 @@ const DriverOverview = lazy(() => import('./pages/driver/DriverOverview.jsx'));
 const DriverTrips = lazy(() => import('./pages/driver/DriverTrips.jsx'));
 const DriverEarnings = lazy(() => import('./pages/driver/DriverEarnings.jsx'));
 const DriverProfile = lazy(() => import('./pages/driver/DriverProfile.jsx'));
+
+// Lazy-loaded centralized admin dashboard sub-pages
+const AdminPage = lazy(() => import('./pages/admin/AdminPage.jsx'));
+const AdminOverview = lazy(() => import('./pages/admin/AdminOverview.jsx'));
+const AdminFarmers = lazy(() => import('./pages/admin/AdminFarmers.jsx'));
+const AdminBuyers = lazy(() => import('./pages/admin/AdminBuyers.jsx'));
+const AdminDrivers = lazy(() => import('./pages/admin/AdminDrivers.jsx'));
+const AdminRequests = lazy(() => import('./pages/admin/AdminRequests.jsx'));
+const AdminDeliveries = lazy(() => import('./pages/admin/AdminDeliveries.jsx'));
+const AdminOrders = lazy(() => import('./pages/admin/AdminOrders.jsx'));
+const AdminReports = lazy(() => import('./pages/admin/AdminReports.jsx'));
+const AdminProfile = lazy(() => import('./pages/admin/AdminProfile.jsx'));
+
+/**
+ * Fallback skeleton loader during lazy chunk transition for Admin pages
+ */
+function AdminPageFallback() {
+  return (
+    <div style={{ padding: '24px' }}>
+      <ModulePageSkeleton />
+    </div>
+  );
+}
 
 /**
  * Fallback skeleton loader during lazy chunk transition for Buyer pages
@@ -418,7 +442,93 @@ export default function App() {
         <Route path="/driver/register" element={<Navigate to={ROUTES.DRIVER_REGISTER} replace />} />
         <Route path="/driver/*" element={<Navigate to={ROUTES.DRIVER_DASHBOARD} replace />} />
 
-        {/* 8. Placeholder Portals */}
+        {/* 8. Centralized Operations Admin Dashboard */}
+        <Route
+          path="/admin"
+          element={
+            <AdminProvider>
+              <Suspense fallback={<AdminPageFallback />}>
+                <AdminPage />
+              </Suspense>
+            </AdminProvider>
+          }
+        >
+          <Route
+            index
+            element={
+              <Suspense fallback={<AdminPageFallback />}>
+                <AdminOverview />
+              </Suspense>
+            }
+          />
+          <Route
+            path="farmers"
+            element={
+              <Suspense fallback={<AdminPageFallback />}>
+                <AdminFarmers />
+              </Suspense>
+            }
+          />
+          <Route
+            path="buyers"
+            element={
+              <Suspense fallback={<AdminPageFallback />}>
+                <AdminBuyers />
+              </Suspense>
+            }
+          />
+          <Route
+            path="drivers"
+            element={
+              <Suspense fallback={<AdminPageFallback />}>
+                <AdminDrivers />
+              </Suspense>
+            }
+          />
+          <Route
+            path="requests"
+            element={
+              <Suspense fallback={<AdminPageFallback />}>
+                <AdminRequests />
+              </Suspense>
+            }
+          />
+          <Route
+            path="deliveries"
+            element={
+              <Suspense fallback={<AdminPageFallback />}>
+                <AdminDeliveries />
+              </Suspense>
+            }
+          />
+          <Route
+            path="orders"
+            element={
+              <Suspense fallback={<AdminPageFallback />}>
+                <AdminOrders />
+              </Suspense>
+            }
+          />
+          <Route
+            path="reports"
+            element={
+              <Suspense fallback={<AdminPageFallback />}>
+                <AdminReports />
+              </Suspense>
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              <Suspense fallback={<AdminPageFallback />}>
+                <AdminProfile />
+              </Suspense>
+            }
+          />
+          <Route path="*" element={<Navigate to="/admin" replace />} />
+        </Route>
+
+        {/* 9. Placeholder Portals */}
         <Route path={ROUTES.COMING_SOON} element={<ComingSoonPage />} />
 
         {/* 8. 404 Catch-All Page Not Found Fallback */}

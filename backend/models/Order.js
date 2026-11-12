@@ -121,6 +121,10 @@ const orderSchema = new mongoose.Schema(
     notes: {
       type: String,
       default: ''
+    },
+    adminNote: {
+      type: String,
+      default: ''
     }
   },
   {

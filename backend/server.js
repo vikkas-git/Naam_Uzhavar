@@ -81,6 +81,9 @@ app.use('/api/farmer', require('./routes/farmer'));
 // Register Integrated EV Driver Logistics API Routes
 app.use('/api/driver', require('./routes/driver'));
 
+// Register Integrated Central Admin API Routes
+app.use('/api/admin', require('./routes/admin'));
+
 // 404 Handler for undefined API routes
 app.use('/api/*', (req, res) => {
   res.status(404).json({ message: `API endpoint '${req.originalUrl}' does not exist.` });

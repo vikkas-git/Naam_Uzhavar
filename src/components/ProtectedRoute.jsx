@@ -12,6 +12,32 @@ import { ROUTES } from '../routes';
  * - mode='guest': For guest/auth routes (login/register).
  */
 export function ProtectedRoute({ role = 'buyer', mode = 'auth', children }) {
+  if (role === 'admin') {
+    let isAdminAuth = false;
+    try {
+      const profile = localStorage.getItem('admin_current_profile');
+      const token = localStorage.getItem('naam_uzhavar_admin_token');
+      if (profile && token) {
+        const parsed = JSON.parse(profile);
+        if (parsed && (parsed.role === 'admin' || parsed.email)) {
+          isAdminAuth = true;
+        }
+      }
+    } catch {
+      isAdminAuth = false;
+    }
+
+    if (mode === 'auth' && !isAdminAuth) {
+      return <Navigate to="/admin" replace />;
+    }
+
+    if (mode === 'guest' && isAdminAuth) {
+      return <Navigate to="/admin" replace />;
+    }
+
+    return children ? children : <Outlet />;
+  }
+
   if (role === 'driver') {
     const hasDriverSignedOut =
       typeof sessionStorage !== 'undefined' &&

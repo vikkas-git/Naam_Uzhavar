@@ -48,6 +48,15 @@ const buyerSchema = new mongoose.Schema(
     avatar: {
       type: String,
       default: 'https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=300&auto=format&fit=crop&q=80'
+    },
+    isVerified: {
+      type: Boolean,
+      default: true
+    },
+    status: {
+      type: String,
+      enum: ['active', 'suspended'],
+      default: 'active'
     }
   },
   {

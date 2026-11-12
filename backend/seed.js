@@ -19,6 +19,7 @@ const Driver = require('./models/Driver');
 const Trip = require('./models/Trip');
 const DriverWalletTransaction = require('./models/DriverWalletTransaction');
 const Invoice = require('./models/Invoice');
+const Admin = require('./models/Admin');
 
 const SEED_CROPS = [
   {
@@ -200,7 +201,7 @@ async function seed() {
     await mongoose.connect(mongoUri, { serverSelectionTimeoutMS: 2500 });
     console.log('✓ Connected to MongoDB');
 
-    // 1. Clear old collections across all 10 collections
+    // 1. Clear old collections across all collections
     console.log('Clearing existing collections...');
     await Promise.all([
       Crop.deleteMany({}),
@@ -212,9 +213,10 @@ async function seed() {
       Driver.deleteMany({}),
       Trip.deleteMany({}),
       DriverWalletTransaction.deleteMany({}),
-      Invoice.deleteMany({})
+      Invoice.deleteMany({}),
+      Admin.deleteMany({})
     ]);
-    console.log('✓ Cleaned all 10 collections');
+    console.log('✓ Cleaned all collections including admins');
 
     // 2. Insert Crops
     console.log(`Seeding ${SEED_CROPS.length} produce consignments...`);
@@ -333,6 +335,19 @@ async function seed() {
       }
     });
     console.log(`✓ Created demo driver: ${demoDriver.name} (${demoDriver.driverId})`);
+
+    // 5b. Create Central Administrator Account
+    console.log('Creating central administrator account (admin@naamuzhavar.com)...');
+    const adminEmail = process.env.ADMIN_EMAIL || 'admin@naamuzhavar.com';
+    const adminPassword = process.env.ADMIN_PASSWORD || 'Admin@2026';
+    await Admin.create({
+      name: 'Naam Uzhavar Central Administrator',
+      email: adminEmail,
+      password: adminPassword,
+      phone: '+91 94432 00000',
+      role: 'admin'
+    });
+    console.log('✓ Created central administrator in admins collection');
 
     // 6. Create Buyer Requests
     console.log('Creating initial buyer requests...');
@@ -542,12 +557,13 @@ async function seed() {
     console.log('✓ Created initial thread messages in messages collection');
 
     console.log('\n================================================================');
-    console.log('🌱 Naam Uzhavar 10-Collection Database Seed Complete!');
+    console.log('🌱 Naam Uzhavar Full Multi-Tenant Database Seed Complete!');
     console.log('MongoDB URI:        mongodb://localhost:27017/naam-uzhavar');
     console.log('Buyer Login:        demo@naamuzhavar.com / demo1234');
     console.log('Farmer Login:       farmer@naamuzhavar.com / farmer1234');
     console.log('Driver Login:       DRV-TN-2026-08 / PIN: 1234');
-    console.log('All 10 collections populated and ready for Compass inspection:');
+    console.log('Admin Login:        admin@naamuzhavar.com / Admin@2026');
+    console.log('All 11 collections populated and ready for Compass inspection:');
     console.log('  1. buyers');
     console.log('  2. farmers');
     console.log('  3. crops');
@@ -558,6 +574,7 @@ async function seed() {
     console.log('  8. drivers');
     console.log('  9. trips');
     console.log('  10. driverwallettransactions');
+    console.log('  11. admins');
     console.log('================================================================\n');
 
     process.exit(0);

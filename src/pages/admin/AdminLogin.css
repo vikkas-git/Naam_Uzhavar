@@ -1,0 +1,314 @@
+/* AdminLogin.css - Modern Bento Portal Theme (Nexora Executive Standard) */
+
+.admin-login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f4f7;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(79, 109, 245, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(166, 245, 53, 0.08) 0px, transparent 50%);
+  padding: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Plus Jakarta Sans', system-ui, sans-serif;
+  box-sizing: border-box;
+}
+
+.admin-login-card {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 24px;
+  box-shadow: 0 16px 40px -10px rgba(15, 23, 42, 0.07), 0 0 1px 1px rgba(0, 0, 0, 0.02);
+  padding: 44px 38px;
+  box-sizing: border-box;
+}
+
+.admin-login-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.admin-login-logo-img {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #16a34a;
+  box-shadow: 0 4px 16px rgba(22, 163, 74, 0.25);
+  margin: 0 auto 16px;
+  display: block;
+}
+
+.admin-login-badge-wrap {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #4f6df5 0%, #3554e8 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  margin: 0 auto 16px;
+  box-shadow: 0 10px 24px rgba(79, 109, 245, 0.28);
+}
+
+.admin-login-title {
+  font-size: 25px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.035em;
+  margin: 0 0 6px 0;
+}
+
+.admin-login-subtitle {
+  font-size: 13.5px;
+  color: #64748b;
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.admin-login-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.admin-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.admin-field-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.admin-input-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.admin-input-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.admin-input-control {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px 0 44px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #0f172a;
+  background: #ffffff;
+  outline: none;
+  box-sizing: border-box;
+  font-family: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.admin-input-control::placeholder {
+  color: #94a3b8;
+}
+
+.admin-input-control:hover {
+  border-color: #cbd5e1;
+}
+
+.admin-input-control:focus {
+  border-color: #4f6df5;
+  box-shadow: 0 0 0 3.5px rgba(79, 109, 245, 0.14);
+}
+
+.admin-input-control.with-eye {
+  padding-right: 46px;
+}
+
+.admin-input-eye-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  z-index: 2;
+  padding: 0;
+}
+
+.admin-input-eye-btn:hover {
+  color: #4f6df5;
+  background: #eff2fe;
+}
+
+.admin-submit-btn {
+  width: 100%;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #181e2b 0%, #2b3548 100%);
+  color: #ffffff;
+  border: none;
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(24, 30, 43, 0.18);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-top: 6px;
+  font-family: inherit;
+}
+
+.admin-submit-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #242c3d 0%, #354259 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(24, 30, 43, 0.24);
+}
+
+.admin-submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.admin-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.admin-demo-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px;
+  margin-top: 24px;
+  box-sizing: border-box;
+}
+
+.admin-demo-box-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+}
+
+.admin-demo-creds {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.admin-demo-cred-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12.5px;
+}
+
+.admin-demo-label {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.admin-demo-value {
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 12px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  padding: 2.5px 8px;
+  border-radius: 6px;
+}
+
+.admin-demo-fill-btn {
+  width: 100%;
+  height: 36px;
+  border-radius: 9px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #1e293b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.admin-demo-fill-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.admin-demo-fill-btn:active {
+  transform: translateY(1px);
+}
+
+@media (max-width: 480px) {
+  .admin-login-container {
+    padding: 16px;
+  }
+  .admin-login-card {
+    padding: 32px 22px;
+    border-radius: 20px;
+  }
+  .admin-login-title {
+    font-size: 21px;
+  }
+  .admin-login-subtitle {
+    font-size: 12.5px;
+  }
+  .admin-login-badge-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    margin-bottom: 14px;
+  }
+}

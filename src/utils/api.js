@@ -8,6 +8,7 @@ const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 export const FARMER_TOKEN_KEY = 'naam_uzhavar_farmer_token';
 export const BUYER_TOKEN_KEY = 'naam_uzhavar_buyer_token';
 export const DRIVER_TOKEN_KEY = 'naam_uzhavar_driver_token';
+export const ADMIN_TOKEN_KEY = 'naam_uzhavar_admin_token';
 export const TOKEN_STORAGE_KEY = 'naam_uzhavar_token'; // Legacy shared fallback
 
 // Cryptographically signed 365-day JSON Web Tokens for Farmer and Buyer demo evaluations
@@ -129,6 +130,28 @@ export const getBuyerToken = () => {
 };
 
 /**
+ * Retrieve verified Admin token
+ */
+export const getAdminToken = () => {
+  try {
+    const stored = localStorage.getItem(ADMIN_TOKEN_KEY);
+    if (stored) return stored;
+
+    const hasActiveAdmin = !!localStorage.getItem('admin_current_profile');
+    if (hasActiveAdmin) {
+      const demoToken = 'admin_demo_token';
+      try {
+        localStorage.setItem(ADMIN_TOKEN_KEY, demoToken);
+      } catch {}
+      return demoToken;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+};
+
+/**
  * Retrieve verified Driver token
  */
 export const getDriverToken = () => {
@@ -157,11 +180,13 @@ export const getDriverToken = () => {
 export const getToken = (roleOrEndpoint) => {
   try {
     let targetRole = null;
-    if (roleOrEndpoint === 'farmer' || roleOrEndpoint === 'buyer' || roleOrEndpoint === 'driver') {
+    if (roleOrEndpoint === 'farmer' || roleOrEndpoint === 'buyer' || roleOrEndpoint === 'driver' || roleOrEndpoint === 'admin') {
       targetRole = roleOrEndpoint;
     } else if (typeof roleOrEndpoint === 'string') {
       const ep = roleOrEndpoint.toLowerCase();
-      if (ep.startsWith('/farmer') || ep.startsWith('farmer')) {
+      if (ep.startsWith('/admin') || ep.startsWith('admin')) {
+        targetRole = 'admin';
+      } else if (ep.startsWith('/farmer') || ep.startsWith('farmer')) {
         targetRole = 'farmer';
       } else if (ep.startsWith('/driver') || ep.startsWith('driver')) {
         targetRole = 'driver';
@@ -182,7 +207,9 @@ export const getToken = (roleOrEndpoint) => {
     // If role not yet determined, infer from current browser route
     if (!targetRole && typeof window !== 'undefined' && window.location) {
       const path = window.location.pathname.toLowerCase();
-      if (path.startsWith('/driver')) {
+      if (path.startsWith('/admin')) {
+        targetRole = 'admin';
+      } else if (path.startsWith('/driver')) {
         targetRole = 'driver';
       } else if (path.startsWith('/farmer')) {
         targetRole = 'farmer';
@@ -191,6 +218,9 @@ export const getToken = (roleOrEndpoint) => {
       }
     }
 
+    if (targetRole === 'admin') {
+      return getAdminToken();
+    }
     if (targetRole === 'driver') {
       return getDriverToken();
     }
@@ -202,14 +232,16 @@ export const getToken = (roleOrEndpoint) => {
     }
 
     // Default: Check active profiles
+    const hasAdmin = !!localStorage.getItem('admin_current_profile');
     const hasDriver = !!localStorage.getItem('driver_current_profile');
     const hasFarmer = !!localStorage.getItem('farmer_current_profile');
     const hasBuyer = !!localStorage.getItem('buyer_current_profile');
+    if (hasAdmin && !hasDriver && !hasFarmer && !hasBuyer) return getAdminToken();
     if (hasDriver && !hasFarmer && !hasBuyer) return getDriverToken();
     if (hasFarmer && !hasBuyer) return getFarmerToken();
     if (hasBuyer && !hasFarmer) return getBuyerToken();
 
-    return getDriverToken() || getFarmerToken() || getBuyerToken();
+    return getAdminToken() || getDriverToken() || getFarmerToken() || getBuyerToken();
   } catch {
     return null;
   }
@@ -245,14 +277,16 @@ export const setToken = (token, role) => {
     // Decode JWT payload to inspect role if not passed explicitly
     if (!targetRole && typeof finalToken === 'string' && finalToken.startsWith('eyJ')) {
       const detectedRole = decodeTokenRole(finalToken);
-      if (detectedRole === 'farmer' || detectedRole === 'buyer' || detectedRole === 'driver') {
+      if (detectedRole === 'farmer' || detectedRole === 'buyer' || detectedRole === 'driver' || detectedRole === 'admin') {
         targetRole = detectedRole;
       }
     }
 
     // If still not determined, infer from current browser route
     if (!targetRole && typeof window !== 'undefined' && window.location) {
-      if (window.location.pathname.startsWith('/driver')) {
+      if (window.location.pathname.startsWith('/admin')) {
+        targetRole = 'admin';
+      } else if (window.location.pathname.startsWith('/driver')) {
         targetRole = 'driver';
       } else if (window.location.pathname.startsWith('/farmer')) {
         targetRole = 'farmer';
@@ -261,7 +295,9 @@ export const setToken = (token, role) => {
       }
     }
 
-    if (targetRole === 'driver') {
+    if (targetRole === 'admin') {
+      localStorage.setItem(ADMIN_TOKEN_KEY, finalToken);
+    } else if (targetRole === 'driver') {
       localStorage.setItem(DRIVER_TOKEN_KEY, finalToken);
     } else if (targetRole === 'farmer') {
       localStorage.setItem(FARMER_TOKEN_KEY, finalToken);
@@ -276,6 +312,7 @@ export const setToken = (token, role) => {
   }
 };
 
+export const setAdminToken = (token) => setToken(token, 'admin');
 export const setFarmerToken = (token) => setToken(token, 'farmer');
 export const setBuyerToken = (token) => setToken(token, 'buyer');
 export const setDriverToken = (token) => setToken(token, 'driver');
@@ -287,7 +324,9 @@ export const removeToken = (role) => {
   try {
     let targetRole = role;
     if (!targetRole && typeof window !== 'undefined' && window.location) {
-      if (window.location.pathname.startsWith('/driver')) {
+      if (window.location.pathname.startsWith('/admin')) {
+        targetRole = 'admin';
+      } else if (window.location.pathname.startsWith('/driver')) {
         targetRole = 'driver';
       } else if (window.location.pathname.startsWith('/farmer')) {
         targetRole = 'farmer';
@@ -299,7 +338,13 @@ export const removeToken = (role) => {
       }
     }
 
-    if (targetRole === 'driver') {
+    if (targetRole === 'admin') {
+      localStorage.removeItem(ADMIN_TOKEN_KEY);
+      localStorage.removeItem('admin_current_profile');
+      if (localStorage.getItem(TOKEN_STORAGE_KEY) === localStorage.getItem(ADMIN_TOKEN_KEY)) {
+        localStorage.removeItem(TOKEN_STORAGE_KEY);
+      }
+    } else if (targetRole === 'driver') {
       localStorage.removeItem(DRIVER_TOKEN_KEY);
       if (localStorage.getItem(TOKEN_STORAGE_KEY) === localStorage.getItem(DRIVER_TOKEN_KEY)) {
         localStorage.removeItem(TOKEN_STORAGE_KEY);
@@ -315,6 +360,8 @@ export const removeToken = (role) => {
         localStorage.removeItem(TOKEN_STORAGE_KEY);
       }
     } else {
+      localStorage.removeItem(ADMIN_TOKEN_KEY);
+      localStorage.removeItem('admin_current_profile');
       localStorage.removeItem(DRIVER_TOKEN_KEY);
       localStorage.removeItem(FARMER_TOKEN_KEY);
       localStorage.removeItem(BUYER_TOKEN_KEY);
@@ -324,6 +371,8 @@ export const removeToken = (role) => {
     console.error('Failed to remove token from localStorage:', e);
   }
 };
+
+export const removeAdminToken = () => removeToken('admin');
 
 export const removeFarmerToken = () => removeToken('farmer');
 export const removeBuyerToken = () => removeToken('buyer');

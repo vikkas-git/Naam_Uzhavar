@@ -1,0 +1,1249 @@
+/* AdminCommon.css - Nexora Modern Bento Architecture & Complete Component System */
+
+:root {
+  --bento-bg: #f3f4f7;
+  --bento-card: #ffffff;
+  --bento-border: #eaedf2;
+  --bento-border-hover: #cbd5e1;
+  --bento-radius: 24px;
+  --bento-radius-sm: 16px;
+  --bento-radius-xs: 12px;
+  --bento-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  --bento-shadow-hover: 0 10px 28px rgba(0, 0, 0, 0.04);
+  
+  /* Primary & Accent Palette (Nexora Standard) */
+  --bento-blue: #4f6df5;
+  --bento-blue-light: #eff2fe;
+  --bento-lime: #a6f535;
+  --bento-lime-text: #3f6212;
+  --bento-lime-light: #f5fee7;
+  --bento-dark: #181e2b;
+  --bento-slate: #64748b;
+  --bento-text: #111827;
+}
+
+/* ==========================================================================
+   1. BENTO GRID ARCHITECTURE (Overview 3-Column Layout)
+   ========================================================================== */
+.admin-bento-layout {
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr) 330px;
+  gap: 20px;
+  align-items: start;
+  margin-bottom: 28px;
+}
+
+.admin-bento-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.admin-bento-card {
+  background: var(--bento-card);
+  border-radius: var(--bento-radius);
+  border: 1px solid var(--bento-border);
+  padding: 24px;
+  box-shadow: var(--bento-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-bento-card:hover {
+  box-shadow: var(--bento-shadow-hover);
+}
+
+.admin-card-header-clean {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.admin-card-header-clean h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--bento-text);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.admin-card-header-clean p {
+  font-size: 12px;
+  color: var(--bento-slate);
+  margin: 2px 0 0;
+}
+
+/* Micro Circle Buttons */
+.admin-micro-circle-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.admin-micro-circle-btn:hover {
+  background: #f8fafc;
+  color: #111827;
+  border-color: #cbd5e1;
+}
+
+/* Top 3 Metric Tiles */
+.admin-top-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.admin-metric-tile {
+  background: var(--bento-card);
+  border-radius: var(--bento-radius-sm);
+  border: 1px solid var(--bento-border);
+  padding: 20px 22px;
+  box-shadow: var(--bento-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-metric-tile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-metric-label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.admin-metric-big-num {
+  font-size: 38px;
+  font-weight: 800;
+  color: var(--bento-text);
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  margin: 2px 0;
+}
+
+.admin-metric-footnote {
+  font-size: 11.5px;
+  color: var(--bento-slate);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Chart Tooltip */
+.admin-chart-floating-tooltip {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 8px 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+}
+
+.admin-chart-floating-tooltip .date-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--bento-slate);
+}
+
+.admin-chart-floating-tooltip .value-badge {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--bento-text);
+}
+
+.admin-chart-floating-tooltip .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--bento-lime);
+}
+
+/* Segmented Progress Bar */
+.admin-segmented-progress-bar {
+  display: flex;
+  height: 14px;
+  border-radius: 9999px;
+  overflow: hidden;
+  background: #f1f5f9;
+  gap: 3px;
+  padding: 2px;
+}
+
+.admin-progress-segment {
+  height: 100%;
+  border-radius: 9999px;
+}
+
+.admin-progress-segment.blue { background: var(--bento-blue); }
+.admin-progress-segment.lime { background: var(--bento-lime); }
+.admin-progress-segment.hatch {
+  background-image: repeating-linear-gradient(45deg, #cbd5e1, #cbd5e1 3px, #f1f5f9 3px, #f1f5f9 6px);
+}
+
+/* Schedule List */
+.admin-schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-schedule-item {
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.15s ease;
+  border: 1px solid transparent;
+}
+
+.admin-schedule-item:hover {
+  background: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.admin-schedule-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  color: #334155;
+}
+
+.admin-schedule-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-schedule-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--bento-text);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-schedule-sub {
+  font-size: 11.5px;
+  color: var(--bento-slate);
+  margin: 2px 0 0;
+}
+
+.admin-schedule-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 5px;
+}
+
+.admin-badge-time {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #1e293b;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+
+.admin-badge-hub {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #475569;
+  background: #f1f5f9;
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+
+/* ==========================================================================
+   2. KPI STAT CARDS (Used Across Reports & Overview)
+   ========================================================================== */
+.admin-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.admin-kpi-card {
+  background: #ffffff;
+  border: 1px solid var(--bento-border);
+  border-radius: var(--bento-radius-sm);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: var(--bento-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-kpi-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--bento-border-hover);
+  box-shadow: var(--bento-shadow-hover);
+}
+
+.admin-kpi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-kpi-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--bento-slate);
+  margin: 0;
+}
+
+.admin-kpi-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.admin-kpi-icon-wrap.blue {
+  background: var(--bento-blue-light);
+  color: var(--bento-blue);
+}
+
+.admin-kpi-icon-wrap.green {
+  background: var(--bento-lime-light);
+  color: var(--bento-lime-text);
+}
+
+.admin-kpi-icon-wrap.ochre {
+  background: #fffbeb;
+  color: #b45309;
+}
+
+.admin-kpi-icon-wrap.purple {
+  background: #f5f3ff;
+  color: #7c3aed;
+}
+
+.admin-kpi-icon-wrap.red {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.admin-kpi-value {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--bento-text);
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  margin: 3px 0 2px;
+}
+
+.admin-kpi-footer {
+  font-size: 12px;
+  color: var(--bento-slate);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: auto;
+}
+
+.badge-trend {
+  font-weight: 700;
+  padding: 2.5px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+}
+
+.badge-trend.success {
+  background: var(--bento-lime-light);
+  color: var(--bento-lime-text);
+}
+
+.badge-trend.neutral {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.badge-trend.warning {
+  background: #fffbeb;
+  color: #b45309;
+}
+
+/* ==========================================================================
+   3. CHARTS GRID & CARDS (Reports Section)
+   ========================================================================== */
+.admin-charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+  gap: 20px;
+  margin-bottom: 26px;
+}
+
+.admin-charts-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 20px;
+  margin-bottom: 26px;
+}
+
+.admin-chart-card {
+  background: #ffffff;
+  border: 1px solid var(--bento-border);
+  border-radius: var(--bento-radius);
+  padding: 24px;
+  box-shadow: var(--bento-shadow);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-chart-card:hover {
+  border-color: var(--bento-border-hover);
+  box-shadow: var(--bento-shadow-hover);
+}
+
+.admin-chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.admin-chart-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--bento-text);
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+.admin-chart-subtitle {
+  font-size: 12px;
+  color: var(--bento-slate);
+  margin-top: 3px;
+}
+
+.admin-chart-body {
+  flex: 1;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-bar-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.admin-bar-group:last-child {
+  margin-bottom: 0;
+}
+
+.admin-chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--bento-border);
+}
+
+.admin-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
+}
+
+.admin-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.admin-donut-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 24px;
+  width: 100%;
+}
+
+.admin-donut-metric {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.admin-donut-metric-val {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--bento-text);
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+
+.admin-donut-metric-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--bento-slate);
+  letter-spacing: 0.07em;
+}
+
+/* ==========================================================================
+   4. DATA TABLES & REUSABLE MODULE CARDS (Farmers, Buyers, Deliveries, etc.)
+   ========================================================================== */
+.admin-card {
+  background: #ffffff;
+  border: 1px solid var(--bento-border);
+  border-radius: var(--bento-radius);
+  box-shadow: var(--bento-shadow);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.admin-card-header {
+  padding: 20px 26px;
+  border-bottom: 1px solid var(--bento-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  background: #ffffff;
+}
+
+.admin-card-title-group h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--bento-text);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.admin-card-title-group p {
+  font-size: 12px;
+  color: var(--bento-slate);
+  margin: 3px 0 0;
+}
+
+.admin-controls-bar {
+  padding: 14px 26px;
+  background: #fafbfc;
+  border-bottom: 1px solid var(--bento-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.admin-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 340px;
+}
+
+.admin-search-wrap svg {
+  position: absolute;
+  left: 14px;
+  color: var(--bento-slate);
+  pointer-events: none;
+}
+
+.admin-search-input {
+  width: 100%;
+  height: 42px;
+  padding: 0 14px 0 40px;
+  border: 1px solid #d1d5db;
+  border-radius: var(--bento-radius-xs);
+  font-size: 13.5px;
+  background: #ffffff;
+  color: var(--bento-text);
+  transition: all 0.15s ease;
+}
+
+.admin-search-input:focus {
+  outline: none;
+  border-color: var(--bento-blue);
+  box-shadow: 0 0 0 3px rgba(79, 109, 245, 0.12);
+}
+
+.admin-select {
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid #d1d5db;
+  border-radius: var(--bento-radius-xs);
+  font-size: 13px;
+  background: #ffffff;
+  color: var(--bento-text);
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+.admin-select:focus {
+  border-color: var(--bento-blue);
+}
+
+.admin-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.admin-bento-split-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 20px;
+}
+
+.admin-module-pill-container {
+  background: #ffffff;
+  border-radius: 9999px;
+  padding: 5px 6px;
+  border: 1px solid #eaedf2;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.admin-module-pill-container::-webkit-scrollbar {
+  display: none;
+}
+
+.admin-chart-quick-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 18px;
+  background: #f8fafc;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid #eef1f5;
+}
+
+/* ==========================================================================
+   5. BUTTON STANDARDS (Nexora Dark Charcoal & Pill Badges)
+   ========================================================================== */
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: var(--bento-radius-xs);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.admin-btn.primary {
+  background: var(--bento-dark);
+  color: #ffffff;
+  border: 1px solid var(--bento-dark);
+  box-shadow: 0 2px 6px rgba(24, 30, 43, 0.15);
+}
+
+.admin-btn.primary:hover {
+  background: #2b3548;
+  border-color: #2b3548;
+  transform: translateY(-1px);
+}
+
+.admin-btn.outline {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  color: #334155;
+}
+
+.admin-btn.outline:hover {
+  background: #f8fafc;
+  color: var(--bento-text);
+  border-color: #94a3b8;
+}
+
+.admin-btn.sm {
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: 9999px;
+}
+
+.admin-btn.danger {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+}
+
+.admin-btn.danger:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Pill status indicators */
+.admin-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 11px;
+  border-radius: 9999px;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.admin-pill.active,
+.admin-pill.verified,
+.admin-pill.delivered,
+.admin-pill.confirmed,
+.admin-pill.accepted,
+.admin-pill.converted {
+  background: var(--bento-lime-light);
+  color: var(--bento-lime-text);
+  border: 1px solid #d9f99d;
+}
+
+.admin-pill.pending,
+.admin-pill.unassigned {
+  background: #fffbeb;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+.admin-pill.intransit,
+.admin-pill.pickedup {
+  background: var(--bento-blue-light);
+  color: var(--bento-blue);
+  border: 1px solid #c7d2fe;
+}
+
+.admin-pill.escrow {
+  background: #f5f3ff;
+  color: #7c3aed;
+  border: 1px solid #ddd6fe;
+}
+
+.admin-pill.suspended,
+.admin-pill.cancelled,
+.admin-pill.rejected {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+/* Pill Badges */
+.admin-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: var(--bento-text);
+}
+
+.admin-pill-badge.lime {
+  background: var(--bento-lime-light);
+  border-color: #d9f99d;
+  color: var(--bento-lime-text);
+}
+
+.admin-pill-badge.blue {
+  background: var(--bento-blue-light);
+  border-color: #c7d2fe;
+  color: var(--bento-blue);
+}
+
+/* ==========================================================================
+   6. CLEAN DATA TABLES
+   ========================================================================== */
+.admin-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+  text-align: left;
+}
+
+.admin-table th {
+  padding: 14px 24px;
+  background: #fafbfc;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--bento-border);
+  white-space: nowrap;
+}
+
+.admin-table td {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #1e293b;
+  vertical-align: middle;
+}
+
+.admin-table tbody tr:hover td {
+  background-color: #fafbfc;
+}
+
+.admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Pagination Bar */
+.admin-pagination-bar {
+  padding: 16px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fafbfc;
+  border-top: 1px solid var(--bento-border);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.admin-pagination-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-pagination-btn {
+  padding: 6px 14px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  border-radius: var(--bento-radius-xs);
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.admin-pagination-btn:hover:not(:disabled) {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.admin-pagination-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   7. SLIDE-OUT DETAIL DRAWER
+   ========================================================================== */
+.admin-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 2000;
+  display: flex;
+  justify-content: flex-end;
+  animation: fadeIn 0.2s ease;
+}
+
+.admin-drawer {
+  width: 100%;
+  max-width: 580px;
+  background: #ffffff;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+  border-left: 1px solid var(--bento-border);
+  animation: slideLeft 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.admin-drawer-header {
+  padding: 22px 26px;
+  border-bottom: 1px solid var(--bento-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-drawer-header h3 {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--bento-text);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.admin-drawer-body {
+  padding: 26px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.admin-drawer-footer {
+  padding: 18px 26px;
+  border-top: 1px solid var(--bento-border);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.admin-detail-section {
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.admin-detail-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.admin-detail-title {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 12px;
+}
+
+.admin-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.admin-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.admin-detail-label {
+  font-size: 11px;
+  color: var(--bento-slate);
+  font-weight: 600;
+}
+
+.admin-detail-val {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--bento-text);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+/* ==========================================================================
+   8. COMPREHENSIVE MULTI-DEVICE RESPONSIVENESS
+   ========================================================================== */
+
+/* Laptop / Medium Desktop (<= 1280px) */
+@media (max-width: 1280px) {
+  .admin-bento-layout {
+    grid-template-columns: 280px 1fr;
+  }
+  .admin-bento-col:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Tablets (<= 991px) */
+@media (max-width: 991px) {
+  .admin-bento-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .admin-bento-col:nth-child(3) {
+    grid-column: auto;
+  }
+  .admin-charts-grid,
+  .admin-charts-grid-3 {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .admin-top-metrics-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: 14px;
+  }
+  .admin-card-header {
+    padding: 18px 20px;
+  }
+  .admin-controls-bar {
+    padding: 14px 20px;
+  }
+}
+
+/* Small Tablets & Phablets (<= 768px) */
+@media (max-width: 768px) {
+  .admin-controls-bar {
+    padding: 14px 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .admin-search-wrap {
+    max-width: 100%;
+    width: 100%;
+  }
+  .admin-filter-group {
+    width: 100%;
+    gap: 8px;
+  }
+  .admin-select {
+    flex: 1 1 140px;
+    width: 100%;
+  }
+  .admin-bento-card,
+  .admin-kpi-card,
+  .admin-chart-card {
+    padding: 18px 16px;
+  }
+  .admin-kpi-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: 14px;
+  }
+}
+
+/* Mobile Screens (<= 640px) */
+@media (max-width: 640px) {
+  .admin-card {
+    border-radius: var(--bento-radius-sm);
+    margin-bottom: 18px;
+  }
+  .admin-card-header {
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .admin-card-header .admin-btn {
+    align-self: flex-start;
+  }
+  .admin-card-title-group h3 {
+    font-size: 15px;
+  }
+  .admin-top-metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .admin-bento-split-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .admin-metric-big-num {
+    font-size: clamp(28px, 6vw, 36px);
+  }
+  .admin-pagination-bar {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .admin-pagination-actions {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Slide-out Drawer takes full viewport on mobile for optimal thumb reach */
+  .admin-drawer {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    border-left: none;
+    border-radius: 0;
+  }
+  .admin-drawer-header {
+    padding: 16px 18px;
+  }
+  .admin-drawer-body {
+    padding: 18px 16px;
+  }
+  .admin-drawer-footer {
+    padding: 14px 18px;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .admin-drawer-footer .admin-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Compact Mobile (<= 480px) */
+@media (max-width: 480px) {
+  .admin-kpi-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .admin-kpi-card {
+    padding: 16px 14px;
+  }
+  .admin-kpi-value {
+    font-size: clamp(26px, 7vw, 32px);
+  }
+  .admin-filter-group {
+    flex-direction: column;
+  }
+  .admin-select {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+  .admin-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .admin-table th {
+    padding: 10px 14px;
+    font-size: 10.5px;
+  }
+  .admin-table td {
+    padding: 12px 14px;
+    font-size: 12px;
+  }
+  .admin-chart-quick-stats {
+    padding: 8px;
+    gap: 4px;
+  }
+  .admin-chart-floating-tooltip {
+    padding: 4px 10px;
+    top: 6px;
+  }
+  .admin-chart-floating-tooltip .value-badge {
+    font-size: 12px;
+  }
+  .admin-chart-card {
+    padding: 16px 12px;
+  }
+  .admin-schedule-item {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+  .admin-schedule-badges {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .admin-donut-wrap {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+/* ==========================================================================
+   8. PRINT ARCHITECTURE
+   ========================================================================== */
+@media print {
+  .admin-top-navbar,
+  .admin-btn,
+  .admin-select,
+  .d-print-none {
+    display: none !important;
+  }
+
+  body,
+  .admin-layout-wrapper,
+  .admin-content-view {
+    background: #ffffff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .admin-card,
+  .admin-chart-card,
+  .admin-kpi-card {
+    box-shadow: none !important;
+    border: 1px solid #d1d5db !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 16px !important;
+  }
+
+  .admin-kpi-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}

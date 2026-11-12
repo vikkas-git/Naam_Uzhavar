@@ -38,6 +38,18 @@ export const ROUTES = {
   DRIVER_DASHBOARD_TRIPS: '/driver-dashboard/trips',
   DRIVER_DASHBOARD_EARNINGS: '/driver-dashboard/earnings',
   DRIVER_DASHBOARD_PROFILE: '/driver-dashboard/profile',
+  // Centralized Operations Admin Dashboard Routes
+  ADMIN: '/admin',
+  ADMIN_LOGIN: '/admin',
+  ADMIN_DASHBOARD: '/admin',
+  ADMIN_FARMERS: '/admin/farmers',
+  ADMIN_BUYERS: '/admin/buyers',
+  ADMIN_DRIVERS: '/admin/drivers',
+  ADMIN_REQUESTS: '/admin/requests',
+  ADMIN_DELIVERIES: '/admin/deliveries',
+  ADMIN_ORDERS: '/admin/orders',
+  ADMIN_REPORTS: '/admin/reports',
+  ADMIN_PROFILE: '/admin/profile',
   // Shared
   COMING_SOON: '/coming-soon',
   NOT_FOUND: '/404',
