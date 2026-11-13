@@ -9,7 +9,6 @@ import {
   Store,
   Truck,
   Scale,
-  PieChart,
   RefreshCw,
   CheckCircle2,
   Clock,
@@ -380,7 +379,7 @@ export default function AdminReports() {
     window.print();
   };
 
-  const data = reportsData || {
+  const data = useMemo(() => reportsData || {
     farmerReports: { byDistrict: [], cropSupply: [] },
     buyerReports: { byType: [], topRequestedCrops: [] },
     deliveryReports: { statusBreakdown: [], fulfillmentRate: 100 },
@@ -394,7 +393,7 @@ export default function AdminReports() {
       orderStatusDistribution: [],
       commoditySupplyDemand: []
     }
-  };
+  }, [reportsData]);
 
   // Supply vs Demand items
   const commoditySupplyDemand = useMemo(() => {
@@ -617,18 +616,10 @@ export default function AdminReports() {
 
       {/* Module Navigation Tabs */}
       <div className="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4 d-print-none">
-        <div className="admin-module-pill-container">
+        <div className="admin-segmented-control" style={{ maxWidth: '480px' }}>
           <button
             type="button"
-            className="admin-btn sm"
-            style={{
-              background: activeTab === 'overall' ? '#181e2b' : 'transparent',
-              color: activeTab === 'overall' ? '#ffffff' : '#64748b',
-              border: 'none',
-              borderRadius: '9999px',
-              padding: '7px 18px',
-              fontWeight: activeTab === 'overall' ? '700' : '600'
-            }}
+            className={`admin-segment-btn ${activeTab === 'overall' ? 'active' : ''}`}
             onClick={() => setActiveTab('overall')}
           >
             <Layers size={13} />
@@ -637,15 +628,7 @@ export default function AdminReports() {
 
           <button
             type="button"
-            className="admin-btn sm"
-            style={{
-              background: activeTab === 'farmers' ? '#181e2b' : 'transparent',
-              color: activeTab === 'farmers' ? '#ffffff' : '#64748b',
-              border: 'none',
-              borderRadius: '9999px',
-              padding: '7px 18px',
-              fontWeight: activeTab === 'farmers' ? '700' : '600'
-            }}
+            className={`admin-segment-btn ${activeTab === 'farmers' ? 'active' : ''}`}
             onClick={() => setActiveTab('farmers')}
           >
             <Users size={13} />
@@ -654,15 +637,7 @@ export default function AdminReports() {
 
           <button
             type="button"
-            className="admin-btn sm"
-            style={{
-              background: activeTab === 'buyers' ? '#181e2b' : 'transparent',
-              color: activeTab === 'buyers' ? '#ffffff' : '#64748b',
-              border: 'none',
-              borderRadius: '9999px',
-              padding: '7px 18px',
-              fontWeight: activeTab === 'buyers' ? '700' : '600'
-            }}
+            className={`admin-segment-btn ${activeTab === 'buyers' ? 'active' : ''}`}
             onClick={() => setActiveTab('buyers')}
           >
             <Store size={13} />
@@ -671,15 +646,7 @@ export default function AdminReports() {
 
           <button
             type="button"
-            className="admin-btn sm"
-            style={{
-              background: activeTab === 'deliveries' ? '#181e2b' : 'transparent',
-              color: activeTab === 'deliveries' ? '#ffffff' : '#64748b',
-              border: 'none',
-              borderRadius: '9999px',
-              padding: '7px 18px',
-              fontWeight: activeTab === 'deliveries' ? '700' : '600'
-            }}
+            className={`admin-segment-btn ${activeTab === 'deliveries' ? 'active' : ''}`}
             onClick={() => setActiveTab('deliveries')}
           >
             <Truck size={13} />
@@ -691,7 +658,7 @@ export default function AdminReports() {
           <Calendar size={14} className="text-muted" />
           <select
             className="admin-select"
-            style={{ height: '36px', fontSize: '12px', borderRadius: '9999px', padding: '0 14px' }}
+            style={{ height: '36px', fontSize: '12px', padding: '0 12px' }}
             value={dateRange}
             onChange={(e) => setDateRange(e.target.value)}
           >

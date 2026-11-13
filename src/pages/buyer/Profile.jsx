@@ -27,10 +27,6 @@ export default function Profile() {
     t
   } = useBuyer();
 
-  if (isDataLoading && !profile) {
-    return <ProfileSkeleton />;
-  }
-
   const p = profile || {};
   const photoSrc = p.photo || p.photoPreview;
   const [failedPhoto, setFailedPhoto] = useState(null);
@@ -66,6 +62,10 @@ export default function Profile() {
         return Building2;
     }
   }, [p.buyerType]);
+
+  if (isDataLoading && !profile) {
+    return <ProfileSkeleton />;
+  }
 
   return (
     <div className="buyer-view-container animate-fade-in">
@@ -148,7 +148,7 @@ export default function Profile() {
               <span className="detail-label">
                 {t('profile.contactPersonLabel')}
               </span>
-              <span className="detail-value">{p.contactPerson || p.name || '—'}</span>
+              <span className="detail-value">{p.contactPerson || p.name || 'N/A'}</span>
               <span className="detail-subtext">
                 {t('profile.contactPersonSub')}
               </span>
@@ -159,7 +159,7 @@ export default function Profile() {
               <span className="detail-label">
                 {t('profile.mobileNumberLabel')}
               </span>
-              <span className="detail-value font-mono">{p.phone || '—'}</span>
+              <span className="detail-value font-mono">{p.phone || 'N/A'}</span>
               <span className="detail-status-pill green">
                 <Check size={11} /> {t('profile.verifiedMobile')}
               </span>
@@ -170,7 +170,7 @@ export default function Profile() {
               <span className="detail-label">
                 {t('profile.emailLabel')}
               </span>
-              <span className="detail-value">{p.email || '—'}</span>
+              <span className="detail-value">{p.email || 'N/A'}</span>
               <span className="detail-status-pill green">
                 <Check size={11} /> {t('profile.eInvoicingEnabled')}
               </span>
@@ -182,7 +182,7 @@ export default function Profile() {
                 {t('profile.shopNameLabel')}
               </span>
               <span className="detail-value font-semibold">
-                {p.shopName || p.name || '—'}
+                {p.shopName || p.name || 'N/A'}
               </span>
               <span className="detail-subtext">
                 {t('profile.shopNameSub')}
@@ -207,7 +207,7 @@ export default function Profile() {
               <span className="detail-label">
                 {t('profile.gstinLabel')}
               </span>
-              <span className="detail-value font-mono">{p.gstin || '—'}</span>
+              <span className="detail-value font-mono">{p.gstin || 'N/A'}</span>
               <span className="detail-status-pill green">
                 <ShieldCheck size={11} />{' '}
                 {t('profile.verifiedGst')}
@@ -219,7 +219,7 @@ export default function Profile() {
               <span className="detail-label">
                 {t('profile.addressLabel')}
               </span>
-              <span className="detail-value">{p.address || '—'}</span>
+              <span className="detail-value">{p.address || 'N/A'}</span>
               <span className="detail-subtext">
                 {t('profile.addressSub')}
               </span>

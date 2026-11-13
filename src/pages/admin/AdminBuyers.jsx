@@ -2,22 +2,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   Search,
-  Filter,
-  CheckCircle,
-  XCircle,
   Eye,
-  Store,
-  MapPin,
-  Phone,
-  Mail,
-  Calendar,
-  Building,
   RefreshCw,
   X,
   UserCheck,
-  UserX,
-  ShoppingCart,
-  FileText
+  UserX
 } from 'lucide-react';
 import api from '../../utils/api';
 import { useAdmin } from '../../context/AdminContext';
@@ -106,6 +95,7 @@ export default function AdminBuyers() {
         }
       }
     } catch (err) {
+      console.error('Update buyer status error:', err);
       showToast('error', 'Failed to update buyer status');
     }
   };
@@ -469,15 +459,27 @@ export default function AdminBuyers() {
 
       {/* CONFIRMATION MODAL */}
       {confirmModal && (
-        <div className="admin-drawer-backdrop" style={{ alignItems: 'center', justifyContent: 'center' }}>
-          <div className="admin-card p-4 m-3" style={{ maxWidth: '420px', width: '100%' }}>
-            <h4 className="fw-bold text-dark mb-2">
-              {confirmModal.buyer.status === 'suspended' ? 'Reactivate Buyer Account?' : 'Suspend Buyer Account?'}
-            </h4>
-            <p className="text-muted small mb-4">
-              Are you sure you want to change the status of <strong>{confirmModal.buyer.businessName}</strong>? Suspended buyers cannot place new purchase enquiries.
-            </p>
-            <div className="d-flex justify-content-end gap-2">
+        <div className="admin-dialog-backdrop">
+          <div className="admin-dialog" style={{ maxWidth: '420px' }}>
+            <div className="admin-dialog-header">
+              <h4>
+                {confirmModal.buyer.status === 'suspended' ? 'Reactivate Buyer Account?' : 'Suspend Buyer Account?'}
+              </h4>
+              <button
+                type="button"
+                className="admin-modal-close-btn"
+                onClick={() => setConfirmModal(null)}
+                aria-label="Close dialog"
+              >
+                <X size={14} />
+              </button>
+            </div>
+            <div className="admin-dialog-body">
+              <p className="text-muted small m-0">
+                Are you sure you want to change the status of <strong>{confirmModal.buyer.businessName}</strong>? Suspended buyers cannot place new purchase enquiries.
+              </p>
+            </div>
+            <div className="admin-dialog-footer">
               <button
                 type="button"
                 className="admin-btn outline sm"

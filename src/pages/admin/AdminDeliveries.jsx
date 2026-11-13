@@ -2,22 +2,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   Search,
-  Filter,
   Truck,
-  BatteryCharging,
-  MapPin,
-  Calendar,
-  CheckCircle2,
-  Clock,
-  AlertCircle,
   Eye,
   RefreshCw,
-  X,
-  User,
-  ShieldCheck,
-  Package,
-  Layers,
-  ArrowRight
+  X
 } from 'lucide-react';
 import api from '../../utils/api';
 import { useAdmin } from '../../context/AdminContext';
@@ -441,25 +429,37 @@ export default function AdminDeliveries() {
 
       {/* MILESTONE ADJUSTMENT MODAL */}
       {editStatusModal && (
-        <div className="admin-drawer-backdrop" style={{ alignItems: 'center', justifyContent: 'center' }}>
-          <div className="admin-card p-4 m-3" style={{ maxWidth: '420px', width: '100%' }}>
-            <h4 className="fw-bold text-dark mb-2">Adjust Delivery Milestone</h4>
-            <p className="text-muted small mb-3">
-              Change live milestone status for order #{editStatusModal.orderId || editStatusModal.id || editStatusModal._id}:
-            </p>
-            <div className="d-flex flex-column gap-2 mb-4">
-              {['NOT_ASSIGNED', 'READY_FOR_PICKUP', 'PICKED_UP', 'IN_TRANSIT', 'DELIVERED', 'CANCELLED'].map((st) => (
-                <button
-                  key={st}
-                  type="button"
-                  className={`admin-btn ${editStatusModal.deliveryStatus === st ? 'primary' : 'outline'} sm`}
-                  onClick={() => handleUpdateStatus(editStatusModal.orderId || editStatusModal.id || editStatusModal._id, st)}
-                >
-                  <span>Set as {st}</span>
-                </button>
-              ))}
+        <div className="admin-dialog-backdrop">
+          <div className="admin-dialog" style={{ maxWidth: '420px' }}>
+            <div className="admin-dialog-header">
+              <h4>Adjust Delivery Milestone</h4>
+              <button
+                type="button"
+                className="admin-modal-close-btn"
+                onClick={() => setEditStatusModal(null)}
+                aria-label="Close dialog"
+              >
+                <X size={14} />
+              </button>
             </div>
-            <div className="d-flex justify-content-end">
+            <div className="admin-dialog-body">
+              <p className="text-muted small mb-3">
+                Change live milestone status for order #{editStatusModal.orderId || editStatusModal.id || editStatusModal._id}:
+              </p>
+              <div className="d-flex flex-column gap-2">
+                {['NOT_ASSIGNED', 'READY_FOR_PICKUP', 'PICKED_UP', 'IN_TRANSIT', 'DELIVERED', 'CANCELLED'].map((st) => (
+                  <button
+                    key={st}
+                    type="button"
+                    className={`admin-btn ${editStatusModal.deliveryStatus === st ? 'primary' : 'outline'} sm`}
+                    onClick={() => handleUpdateStatus(editStatusModal.orderId || editStatusModal.id || editStatusModal._id, st)}
+                  >
+                    <span>Set as {st}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="admin-dialog-footer">
               <button
                 type="button"
                 className="admin-btn outline sm"

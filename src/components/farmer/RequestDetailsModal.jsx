@@ -115,7 +115,7 @@ export default function RequestDetailsModal({ request, onClose, onAccept, onReje
                   <MapPin size={12} /> {b.location || request.deliveryLocation}
                 </span>
                 <span className="d-flex align-items-center gap-1 font-mono">
-                  <Phone size={12} /> {b.phone || '—'}
+                  <Phone size={12} /> {b.phone || '-'}
                 </span>
               </div>
             </div>

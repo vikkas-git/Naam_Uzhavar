@@ -243,8 +243,8 @@ export default function CropModals({
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <h3 className="buyer-modal-title">
                     {workflowStep === 'CONFIRMATION' && (lang === 'ta' ? 'விளைபொருள் ஆர்டர் உறுதிப்படுத்தல்' : 'Order Confirmation')}
-                    {workflowStep === 'PENDING_APPROVAL' && (lang === 'ta' ? 'விவசாயி ஒப்புதலுக்கு காத்திருக்கிறது' : 'Order Placed — Pending Farmer Approval')}
-                    {workflowStep === 'CONFIRMED' && (lang === 'ta' ? 'விவசாயி ஒப்புதல் வழங்கினார்' : 'Order Confirmed — Farmer Approved')}
+                    {workflowStep === 'PENDING_APPROVAL' && (lang === 'ta' ? 'விவசாயி ஒப்புதலுக்கு காத்திருக்கிறது' : 'Order Placed - Pending Farmer Approval')}
+                    {workflowStep === 'CONFIRMED' && (lang === 'ta' ? 'விவசாயி ஒப்புதல் வழங்கினார்' : 'Order Confirmed - Farmer Approved')}
                     {workflowStep === 'DELIVERY_ARRANGED' && (lang === 'ta' ? 'விநியோகம் ஏற்பாடு செய்யப்பட்டது' : 'Delivery Dispatch Arranged')}
                     {workflowStep === 'REJECTED' && (lang === 'ta' ? 'ஆர்டர் நிராகரிக்கப்பட்டது' : 'Order Rejected by Farmer')}
                   </h3>
@@ -750,7 +750,7 @@ export default function CropModals({
                           letterSpacing: '0.5px'
                         }}
                       >
-                        DEMO MODE — Farmer Dashboard Not Available
+                        DEMO MODE: Farmer Dashboard Not Available
                       </span>
                     </div>
 

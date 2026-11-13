@@ -172,7 +172,9 @@ router.post('/register', async (req, res, next) => {
     if (mongoose.connection.readyState === 1) {
       newBuyer = await Buyer.create({
         businessName: resolvedBusiness,
+        shopName: resolvedBusiness,
         contactPerson: resolvedContact,
+        name: resolvedContact,
         buyerType: buyerType || 'hotel',
         email: email.toLowerCase().trim(),
         password: hashedPassword,
@@ -185,7 +187,9 @@ router.post('/register', async (req, res, next) => {
       newBuyer = {
         _id: `buyer_${Date.now()}`,
         businessName: resolvedBusiness,
+        shopName: resolvedBusiness,
         contactPerson: resolvedContact,
+        name: resolvedContact,
         buyerType: buyerType || 'hotel',
         email: email.toLowerCase().trim(),
         phone: phone.trim(),

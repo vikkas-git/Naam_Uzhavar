@@ -1907,6 +1907,154 @@ router.get('/requests/:id', adminAuthMiddleware, async (req, res, next) => {
   }
 });
 
+// POST /api/admin/requests/:id/accept - Central Admin converts purchase request into confirmed commercial order
+router.post('/requests/:id/accept', adminAuthMiddleware, async (req, res, next) => {
+  try {
+    const rawId = req.params.id;
+    let request = null;
+
+    if (isDbConnected()) {
+      request = await BuyerRequest.findOne(buildQuery(rawId, 'requestId'));
+      if (!request) return res.status(404).json({ message: 'Purchase request not found' });
+
+      if (request.status !== 'PENDING') {
+        return res.status(400).json({ message: `Cannot approve request with status ${request.status}` });
+      }
+
+      const numOnly = (request.requestId || '').match(/\d+$/)?.[0];
+      const orderSeq = numOnly || Math.floor(1000 + Math.random() * 9000);
+      const generatedOrderId = `ORD-2026-${orderSeq}`;
+
+      let assignedCropId = request.crop;
+      if (!assignedCropId) {
+        const foundCrop = (await Crop.findOne({ name: new RegExp(request.cropDetails?.name || '', 'i') })) || (await Crop.findOne({}));
+        assignedCropId = foundCrop?._id;
+      }
+
+      const newOrder = await Order.create({
+        orderId: generatedOrderId,
+        crop: assignedCropId,
+        farmerId: request.farmerId || 'FMR-TN-2026-01',
+        farmerName: request.farmerName || 'Ramesh Kumar',
+        buyerName: request.buyerDetails?.businessName || 'Commercial Buyer',
+        cropName: request.cropDetails?.name || 'Fresh Produce',
+        cropDetails: request.cropDetails || {},
+        quantityKg: request.quantity || 100,
+        unit: request.unit || 'Kg',
+        totalPrice: request.totalEstimatedValue || ((request.quantity || 100) * (request.offeredPrice || 25)),
+        orderStatus: 'CONFIRMED',
+        deliveryStatus: 'READY_FOR_PICKUP',
+        paymentStatus: 'ESCROW_LOCKED',
+        deliveryAddress: request.deliveryLocation || 'Commercial Hub, Coimbatore',
+        pickupDate: 'Tomorrow Morning',
+        driver: {
+          name: 'Kumar M.',
+          vehicle: 'Tata Ace EV Cargo (TN 57 AB 1234)',
+          phone: '+91 94432 11098',
+          deliveryPin: `${Math.floor(1000 + Math.random() * 9000)}`
+        }
+      });
+
+      request.status = 'CONVERTED_TO_ORDER';
+      request.orderId = generatedOrderId;
+      await request.save();
+
+      return res.json({
+        success: true,
+        message: `Purchase request approved and converted to Order #${generatedOrderId}!`,
+        order: newOrder,
+        request
+      });
+    }
+
+    // In-Memory
+    request = inMemoryBuyerRequests.find((r) => r._id === rawId || r.requestId === rawId);
+    if (!request) return res.status(404).json({ message: 'Purchase request not found' });
+
+    if (request.status !== 'PENDING') {
+      return res.status(400).json({ message: `Cannot approve request with status ${request.status}` });
+    }
+
+    const numOnly = (request.requestId || '').match(/\d+$/)?.[0];
+    const orderSeq = numOnly || Math.floor(1000 + Math.random() * 9000);
+    const generatedOrderId = `ORD-2026-${orderSeq}`;
+
+    request.status = 'CONVERTED_TO_ORDER';
+    request.orderId = generatedOrderId;
+
+    const newOrder = {
+      _id: `ord_${Date.now()}`,
+      orderId: generatedOrderId,
+      farmerId: request.farmerId || 'FMR-TN-2026-01',
+      farmerName: request.farmerName || 'Ramesh Kumar',
+      buyerName: request.buyerDetails?.businessName || 'Commercial Buyer',
+      cropName: request.cropDetails?.name || 'Fresh Produce',
+      cropDetails: request.cropDetails || {},
+      quantityKg: request.quantity || 100,
+      totalPrice: request.totalEstimatedValue || ((request.quantity || 100) * (request.offeredPrice || 25)),
+      orderStatus: 'CONFIRMED',
+      deliveryStatus: 'READY_FOR_PICKUP',
+      paymentStatus: 'ESCROW_LOCKED',
+      deliveryAddress: request.deliveryLocation || 'Commercial Hub, Coimbatore',
+      createdAt: new Date().toISOString(),
+      driver: {
+        name: 'Kumar M.',
+        vehicle: 'Tata Ace EV Cargo (TN 57 AB 1234)',
+        phone: '+91 94432 11098'
+      }
+    };
+    inMemoryOrders.unshift(newOrder);
+
+    return res.json({
+      success: true,
+      message: `Purchase request approved and converted to Order #${generatedOrderId}!`,
+      order: newOrder,
+      request
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// POST /api/admin/requests/:id/reject - Central Admin rejects a purchase inquiry
+router.post('/requests/:id/reject', adminAuthMiddleware, async (req, res, next) => {
+  try {
+    const rawId = req.params.id;
+    const { reason } = req.body;
+    let request = null;
+
+    if (isDbConnected()) {
+      request = await BuyerRequest.findOne(buildQuery(rawId, 'requestId'));
+      if (!request) return res.status(404).json({ message: 'Purchase request not found' });
+
+      request.status = 'REJECTED';
+      request.rejectionReason = reason || 'Declined by platform administrator due to inventory or logistic constraints';
+      await request.save();
+
+      return res.json({
+        success: true,
+        message: `Purchase request #${request.requestId} marked as REJECTED`,
+        request
+      });
+    }
+
+    // In-Memory
+    request = inMemoryBuyerRequests.find((r) => r._id === rawId || r.requestId === rawId);
+    if (!request) return res.status(404).json({ message: 'Purchase request not found' });
+
+    request.status = 'REJECTED';
+    request.rejectionReason = reason || 'Declined by platform administrator';
+
+    return res.json({
+      success: true,
+      message: `Purchase request #${request.requestId} marked as REJECTED`,
+      request
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // ============================================================================
 // 7. ORDER & FINANCIAL ESCROW MANAGEMENT ENDPOINTS
 // ============================================================================

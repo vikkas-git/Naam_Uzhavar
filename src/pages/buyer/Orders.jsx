@@ -375,7 +375,7 @@ export default function Orders() {
                       {profile?.shopName || profile?.businessName || profile?.fullName || profile?.name || 'Commercial Buyer'}
                     </strong>
                     <span className="party-sub">
-                      {profile?.contactPerson || profile?.fullName || profile?.name || 'Commercial Partner'} • {profile?.phone || '—'}
+                      {profile?.contactPerson || profile?.fullName || profile?.name || 'Commercial Partner'} • {profile?.phone || 'N/A'}
                     </span>
                     {profile?.gstin && (
                       <span className="party-sub font-mono">

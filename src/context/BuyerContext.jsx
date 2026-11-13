@@ -1011,7 +1011,7 @@ export function BuyerProvider({ children, buyerProfile, onLogout }) {
       },
       driver: assignedDriver,
       liveTracking: {
-        currentStatus: 'Order Placed — Pending Farmer Confirmation',
+        currentStatus: 'Order Placed - Pending Farmer Confirmation',
         currentLocation: `${workflowCrop.location || workflowCrop.hubName || 'Dindigul Central'} Hub`,
         estimatedMinutes: 45,
         distanceKm: workflowCrop.distanceKm || 18,
@@ -1224,7 +1224,7 @@ export function BuyerProvider({ children, buyerProfile, onLogout }) {
               deliveryStatus: o.deliveryStatus === 'NOT_ASSIGNED' ? 'READY_FOR_PICKUP' : o.deliveryStatus,
               liveTracking: {
                 ...o.liveTracking,
-                currentStatus: 'Farmer Approved — Driver notified and heading to farm for pickup'
+                currentStatus: 'Farmer Approved - Driver notified and heading to farm for pickup'
               }
             }
           : o
@@ -1240,7 +1240,7 @@ export function BuyerProvider({ children, buyerProfile, onLogout }) {
             deliveryStatus: prev.deliveryStatus === 'NOT_ASSIGNED' ? 'READY_FOR_PICKUP' : prev.deliveryStatus,
             liveTracking: {
               ...prev.liveTracking,
-              currentStatus: 'Farmer Approved — Driver notified and heading to farm for pickup'
+              currentStatus: 'Farmer Approved - Driver notified and heading to farm for pickup'
             }
           }
         : prev
@@ -1331,7 +1331,7 @@ export function BuyerProvider({ children, buyerProfile, onLogout }) {
               status: 'READY_FOR_PICKUP',
               liveTracking: {
                 ...o.liveTracking,
-                currentStatus: 'Consignment Prepared — Ready for EV Driver Pickup'
+                currentStatus: 'Consignment Prepared - Ready for EV Driver Pickup'
               }
             }
           : o
@@ -1346,7 +1346,7 @@ export function BuyerProvider({ children, buyerProfile, onLogout }) {
             status: 'READY_FOR_PICKUP',
             liveTracking: {
               ...prev.liveTracking,
-              currentStatus: 'Consignment Prepared — Ready for EV Driver Pickup'
+              currentStatus: 'Consignment Prepared - Ready for EV Driver Pickup'
             }
           }
         : prev
@@ -1397,7 +1397,7 @@ export function BuyerProvider({ children, buyerProfile, onLogout }) {
     let minutesEta = 15;
     let speed = 42;
     if (nextStatus === 'PICKED_UP') {
-      statusDescription = 'EV Cargo Picked Up from Hub — Cleared Checkpoint';
+      statusDescription = 'EV Cargo Picked Up from Hub - Cleared Checkpoint';
       minutesEta = 35;
       speed = 30;
     } else if (nextStatus === 'IN_TRANSIT') {

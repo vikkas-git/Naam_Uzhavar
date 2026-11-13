@@ -119,8 +119,8 @@ export default function AppSplashLoader({ duration = 2000, onStartExit, onFinish
 
         <p className="nu-splash-subtitle">
           {lang === 'ta'
-            ? 'விவசாயிகள் • வாங்குவோர் • ஓட்டுநர்கள் — இடைத்தரகர் இல்லாத வணிகம்'
-            : 'Farmers • Buyers • Drivers — Zero Middlemen'}
+            ? 'விவசாயிகள் • வாங்குவோர் • ஓட்டுநர்கள் - இடைத்தரகர் இல்லாத வணிகம்'
+            : 'Farmers • Buyers • Drivers - Zero Middlemen'}
         </p>
       </div>
     </div>

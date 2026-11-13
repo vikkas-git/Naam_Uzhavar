@@ -266,8 +266,8 @@ function BuyerDashboardContent() {
                     <h4 className="buyer-card-title">{p.shopName || p.businessName || 'Commercial Buyer'}</h4>
                     <p className="buyer-card-sub">👤 {p.contactPerson || p.fullName || p.name || 'Commercial Partner'}</p>
                     <p className="buyer-card-sub">🏢 {buyerCategoryLabel}</p>
-                    <p className="buyer-card-sub font-mono">📞 {p.phone || '—'}</p>
-                    <p className="buyer-card-sub">✉️ {p.email || '—'}</p>
+                    <p className="buyer-card-sub font-mono">📞 {p.phone || 'N/A'}</p>
+                    <p className="buyer-card-sub">✉️ {p.email || 'N/A'}</p>
                     {p.gstin && <span className="buyer-gstin-tag">GSTIN: {p.gstin}</span>}
                   </div>
                 </div>

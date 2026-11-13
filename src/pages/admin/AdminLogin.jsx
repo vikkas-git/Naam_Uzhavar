@@ -1,7 +1,7 @@
 // pages/admin/AdminLogin.jsx - Administrator authentication gate
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, Mail, Lock, Eye, EyeOff, ArrowRight, AlertCircle, KeyRound, Sparkles } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, ArrowRight, AlertCircle, KeyRound, Sparkles } from 'lucide-react';
 import { useAdmin } from '../../context/AdminContext';
 import { ROUTES } from '../../routes';
 import './AdminLogin.css';

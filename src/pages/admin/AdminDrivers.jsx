@@ -3,9 +3,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import {
   Truck,
   Zap,
-  MapPin,
-  Phone,
-  Mail,
   Search,
   RefreshCw,
   Eye,
@@ -14,8 +11,7 @@ import {
   X,
   CheckCircle2,
   Clock,
-  Navigation,
-  FileText
+  Navigation
 } from 'lucide-react';
 import api from '../../utils/api';
 import { useAdmin } from '../../context/AdminContext';
@@ -609,40 +605,35 @@ export default function AdminDrivers() {
 
       {/* Confirmation Modal */}
       {confirmModal && (
-        <div className="admin-drawer-backdrop" style={{ alignItems: 'center', justifyContent: 'center' }} onClick={() => setConfirmModal(null)}>
+        <div className="admin-dialog-backdrop" onClick={() => setConfirmModal(null)}>
           <div
-            className="admin-card position-relative p-4 m-3"
-            style={{ maxWidth: '420px', width: '100%', zIndex: 2100 }}
+            className="admin-dialog"
+            style={{ maxWidth: '420px' }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="d-flex align-items-center gap-3 mb-3">
-              <div
-                style={{
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '10px',
-                  background: '#eff2fe',
-                  color: '#4f6df5',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0
-                }}
-              >
-                <Zap size={18} />
-              </div>
-              <div>
+            <div className="admin-dialog-header">
+              <div className="d-flex align-items-center gap-2">
+                <Zap size={16} className="text-primary" />
                 <h4 className="m-0 fs-6 fw-bold text-dark">Update Driver Status</h4>
-                <p className="text-muted small m-0">Confirm duty status change</p>
               </div>
+              <button
+                type="button"
+                className="admin-modal-close-btn"
+                onClick={() => setConfirmModal(null)}
+                aria-label="Close dialog"
+              >
+                <X size={14} />
+              </button>
             </div>
 
-            <p className="text-dark small mb-4">
-              Change status for <strong>{confirmModal.driver.name}</strong> to{' '}
-              <span className="fw-bold text-primary">{confirmModal.nextStatus}</span>?
-            </p>
+            <div className="admin-dialog-body">
+              <p className="text-dark small m-0">
+                Change status for <strong>{confirmModal.driver.name}</strong> to{' '}
+                <span className="fw-bold text-primary">{confirmModal.nextStatus}</span>?
+              </p>
+            </div>
 
-            <div className="d-flex align-items-center justify-content-end gap-2">
+            <div className="admin-dialog-footer">
               <button
                 type="button"
                 className="admin-btn outline sm"

@@ -3,27 +3,19 @@ import React, { useState, useEffect, useCallback } from 'react';
 import {
   Search,
   Package,
-  Calendar,
   CheckCircle2,
   Clock,
-  AlertCircle,
   Eye,
   RefreshCw,
   X,
-  User,
-  ShieldCheck,
   Truck,
-  Layers,
-  ArrowRight,
   Download,
   Printer,
-  DollarSign,
   Lock,
   Unlock,
-  Sprout,
   Edit3,
-  MapPin,
-  ChevronRight
+  ChevronRight,
+  AlertCircle
 } from 'lucide-react';
 import api from '../../utils/api';
 import { useAdmin } from '../../context/AdminContext';
@@ -734,28 +726,29 @@ export default function AdminOrders() {
 
       {/* STATUS INTERVENTION MODAL */}
       {interventionModal && (
-        <div className="admin-modal-backdrop" onClick={() => setInterventionModal(null)}>
-          <div className="admin-modal-box" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '480px' }}>
-            <div className="admin-modal-header">
-              <h3>Admin Intervention: Order #{interventionModal.order.orderId}</h3>
+        <div className="admin-dialog-backdrop" onClick={() => setInterventionModal(null)}>
+          <div className="admin-dialog" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '480px' }}>
+            <div className="admin-dialog-header">
+              <h4>Admin Intervention: Order #{interventionModal.order.orderId}</h4>
               <button
                 type="button"
-                className="admin-drawer-close"
+                className="admin-modal-close-btn"
                 onClick={() => setInterventionModal(null)}
+                aria-label="Close dialog"
               >
-                <X size={16} />
+                <X size={14} />
               </button>
             </div>
 
-            <div className="admin-modal-body p-3">
+            <div className="admin-dialog-body">
               <p className="text-muted small mb-3">
                 Central Operations administrative override for order approval, payment escrow release, or delivery status.
               </p>
 
               <div className="mb-3">
-                <label className="form-label small fw-semibold">Order Approval Status</label>
+                <label className="admin-field-label">Order Approval Status</label>
                 <select
-                  className="form-select form-select-sm"
+                  className="admin-select w-100"
                   value={interventionModal.newOrderStatus}
                   onChange={(e) =>
                     setInterventionModal((prev) => ({ ...prev, newOrderStatus: e.target.value }))
@@ -769,9 +762,9 @@ export default function AdminOrders() {
               </div>
 
               <div className="mb-3">
-                <label className="form-label small fw-semibold">Payment / Escrow Status</label>
+                <label className="admin-field-label">Payment / Escrow Status</label>
                 <select
-                  className="form-select form-select-sm"
+                  className="admin-select w-100"
                   value={interventionModal.newPaymentStatus}
                   onChange={(e) =>
                     setInterventionModal((prev) => ({ ...prev, newPaymentStatus: e.target.value }))
@@ -785,9 +778,9 @@ export default function AdminOrders() {
               </div>
 
               <div className="mb-3">
-                <label className="form-label small fw-semibold">Delivery Logistics Milestone</label>
+                <label className="admin-field-label">Delivery Logistics Milestone</label>
                 <select
-                  className="form-select form-select-sm"
+                  className="admin-select w-100"
                   value={interventionModal.newDeliveryStatus}
                   onChange={(e) =>
                     setInterventionModal((prev) => ({ ...prev, newDeliveryStatus: e.target.value }))
@@ -801,10 +794,11 @@ export default function AdminOrders() {
                 </select>
               </div>
 
-              <div className="mb-3">
-                <label className="form-label small fw-semibold">Intervention Audit Reason / Note</label>
+              <div className="mb-0">
+                <label className="admin-field-label">Intervention Audit Reason / Note</label>
                 <textarea
-                  className="form-control form-control-sm"
+                  className="admin-form-input"
+                  style={{ height: '70px', padding: '8px 12px' }}
                   rows={2}
                   placeholder="e.g., Manual escrow disbursement confirmed after physical delivery audit"
                   value={interventionModal.note}
@@ -815,7 +809,7 @@ export default function AdminOrders() {
               </div>
             </div>
 
-            <div className="admin-modal-footer p-3 border-top d-flex justify-content-end gap-2">
+            <div className="admin-dialog-footer">
               <button
                 type="button"
                 className="admin-btn outline sm"

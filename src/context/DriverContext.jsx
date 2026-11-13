@@ -126,8 +126,8 @@ export function DriverProvider({ children }) {
       showToast(
         'info',
         next === 'ON_DUTY'
-          ? (lang === 'ta' ? 'பணியில் உள்ளார் (On Duty) — புதிய சரக்குகள் பெறத் தயார்' : 'You are now Online (On Duty) — Ready for dispatches')
-          : (lang === 'ta' ? 'பணியில் இல்லை (Off Duty) — இடைவேளை முறை' : 'You are now Offline (Off Duty) — Break mode')
+          ? (lang === 'ta' ? 'பணியில் உள்ளார் (On Duty) - புதிய சரக்குகள் பெறத் தயார்' : 'You are now Online (On Duty) - Ready for dispatches')
+          : (lang === 'ta' ? 'பணியில் இல்லை (Off Duty) - இடைவேளை முறை' : 'You are now Offline (Off Duty) - Break mode')
       );
       return next;
     });
@@ -207,11 +207,11 @@ export function DriverProvider({ children }) {
     let successToast = '';
 
     if (targetTrip.status === 'READY_FOR_PICKUP' || targetTrip.status === 'CONFIRMED') {
-      nextStatus = 'DRIVER_EN_ROUTE_PICKUP';
+      nextStatus = 'EN_ROUTE_PICKUP';
       successToast = lang === 'ta'
         ? 'பண்ணைக்கு புறப்பட்டது! GPS வழிசெலுத்தல் தொடங்கியது.'
         : 'Heading to Farm Gate! GPS route navigation started.';
-    } else if (targetTrip.status === 'DRIVER_EN_ROUTE_PICKUP') {
+    } else if (targetTrip.status === 'EN_ROUTE_PICKUP' || targetTrip.status === 'DRIVER_EN_ROUTE_PICKUP') {
       nextStatus = 'PICKED_UP';
       successToast = lang === 'ta'
         ? 'விளைச்சல் சரிபார்க்கப்பட்டு EV சரக்கு வாகனத்தில் ஏற்றப்பட்டது!'
@@ -287,7 +287,7 @@ export function DriverProvider({ children }) {
       };
     }
 
-    if (cleanPin !== expectedPin && cleanPin !== '4892' && cleanPin !== '1234') {
+    if (cleanPin !== expectedPin && cleanPin !== '4892') {
       return {
         success: false,
         message: lang === 'ta' ? 'தவறான பாதுகாப்பு பின். வாங்குபவரிடம் சரிபார்க்கவும்.' : 'Invalid delivery PIN. Please verify with the Buyer.'

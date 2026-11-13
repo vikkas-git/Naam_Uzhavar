@@ -2,20 +2,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   Search,
-  Filter,
-  CheckCircle,
-  XCircle,
   Eye,
   Wheat,
-  MapPin,
-  Phone,
-  Mail,
-  Calendar,
-  ShieldAlert,
   ShieldCheck,
   X,
   RefreshCw,
-  Landmark,
   UserX,
   UserCheck
 } from 'lucide-react';
@@ -129,6 +120,7 @@ export default function AdminFarmers() {
         }
       }
     } catch (err) {
+      console.error('Update farmer verification error:', err);
       showToast('error', 'Failed to update verification status');
     }
   };
@@ -511,19 +503,31 @@ export default function AdminFarmers() {
 
       {/* CONFIRMATION DIALOG */}
       {confirmModal && (
-        <div className="admin-drawer-backdrop" style={{ alignItems: 'center', justifyContent: 'center' }}>
-          <div className="admin-card p-4 m-3" style={{ maxWidth: '420px', width: '100%' }}>
-            <h4 className="fw-bold text-dark mb-2">
-              {confirmModal.action === 'toggle_status'
-                ? confirmModal.farmer.status === 'suspended' ? 'Activate Account?' : 'Suspend Account?'
-                : 'Toggle Verification?'}
-            </h4>
-            <p className="text-muted small mb-4">
-              {confirmModal.action === 'toggle_status'
-                ? `Are you sure you want to change the status of ${confirmModal.farmer.name} (#${confirmModal.farmer.farmerId || confirmModal.farmer._id})?`
-                : `Update land patta verification state for ${confirmModal.farmer.name}?`}
-            </p>
-            <div className="d-flex justify-content-end gap-2">
+        <div className="admin-dialog-backdrop">
+          <div className="admin-dialog" style={{ maxWidth: '420px' }}>
+            <div className="admin-dialog-header">
+              <h4>
+                {confirmModal.action === 'toggle_status'
+                  ? confirmModal.farmer.status === 'suspended' ? 'Activate Account?' : 'Suspend Account?'
+                  : 'Toggle Verification?'}
+              </h4>
+              <button
+                type="button"
+                className="admin-modal-close-btn"
+                onClick={() => setConfirmModal(null)}
+                aria-label="Close dialog"
+              >
+                <X size={14} />
+              </button>
+            </div>
+            <div className="admin-dialog-body">
+              <p className="text-muted small m-0">
+                {confirmModal.action === 'toggle_status'
+                  ? `Are you sure you want to change the status of ${confirmModal.farmer.name} (#${confirmModal.farmer.farmerId || confirmModal.farmer._id})?`
+                  : `Update land patta verification state for ${confirmModal.farmer.name}?`}
+              </p>
+            </div>
+            <div className="admin-dialog-footer">
               <button
                 type="button"
                 className="admin-btn outline sm"

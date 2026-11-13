@@ -176,7 +176,7 @@ export default function FarmerProfile() {
               <span className="detail-label">
                 {lang === 'ta' ? 'விவசாயி முழுப் பெயர்' : 'Farmer Full Name'}
               </span>
-              <span className="detail-value">{p.name || '—'}</span>
+              <span className="detail-value">{p.name || '-'}</span>
               <span className="detail-subtext">
                 {lang === 'ta' ? 'பதிவுசெய்யப்பட்ட முதன்மை விவசாய உற்பத்தியாளர்' : 'Registered Land Pattadhar & Primary Producer'}
               </span>
@@ -187,7 +187,7 @@ export default function FarmerProfile() {
               <span className="detail-label">
                 {lang === 'ta' ? 'கைபேசி எண்' : 'Mobile Number'}
               </span>
-              <span className="detail-value font-mono">{p.phone || '—'}</span>
+              <span className="detail-value font-mono">{p.phone || '-'}</span>
               <span className="detail-status-pill green">
                 <Check size={11} /> {lang === 'ta' ? 'சரிபார்க்கப்பட்ட கைபேசி எண்' : 'Verified Mobile & Instant Alerts'}
               </span>
@@ -198,7 +198,7 @@ export default function FarmerProfile() {
               <span className="detail-label">
                 {lang === 'ta' ? 'மின்னஞ்சல் முகவரி' : 'Email Address'}
               </span>
-              <span className="detail-value">{p.email || '—'}</span>
+              <span className="detail-value">{p.email || '-'}</span>
               <span className="detail-status-pill green">
                 <Check size={11} /> {lang === 'ta' ? 'மின்-ரசீதுகள் & அறிக்கைகள் இயக்கப்பட்டது' : 'E-Statements & Receipts Active'}
               </span>
@@ -210,7 +210,7 @@ export default function FarmerProfile() {
                 {lang === 'ta' ? 'பண்ணை பெயர்' : 'Farm / Estate Name'}
               </span>
               <span className="detail-value font-semibold">
-                {farm.farmName || p.name || '—'}
+                {farm.farmName || p.name || '-'}
               </span>
               <span className="detail-subtext">
                 {lang === 'ta' ? 'வணிக கொள்முதல் பண்ணை மையம்' : 'Commercial Farm Gate Procurement Center'}

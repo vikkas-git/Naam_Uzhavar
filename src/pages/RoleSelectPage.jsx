@@ -303,7 +303,7 @@ export default function RoleSelectPage({
       if (res && res.buyer) {
         let contactPersonName = res.buyer.contactPerson;
         if (!contactPersonName || contactPersonName === res.buyer.businessName) {
-          contactPersonName = res.buyer.name || 'Vimal Kumar';
+          contactPersonName = res.buyer.name || res.buyer.businessName || 'Procurement Partner';
         }
 
         const buyerData = {
@@ -438,14 +438,14 @@ export default function RoleSelectPage({
   // ---------------------------------------------------------------------------
   // AUTHENTICATION LOGIC: DRIVER
   // ---------------------------------------------------------------------------
-  const completeDriverLogin = (driverData) => {
+  const completeDriverLogin = (driverData, specificToken) => {
     try {
       localStorage.setItem('driver_current_profile', JSON.stringify(driverData));
       sessionStorage.removeItem('driver_explicit_signout');
     } catch (err) {
       console.warn('Could not store driver profile:', err);
     }
-    setToken('driver_token_kumar_m', 'driver');
+    setToken(specificToken || `driver_token_${driverData.driverId || 'active'}`, 'driver');
     setIsSubmitting(false);
     setAuthSuccess(
       lang === 'ta'
@@ -462,32 +462,58 @@ export default function RoleSelectPage({
     }, 700);
   };
 
-  const executeDriverLogin = async (trimmedUser, _trimmedPass) => {
+  const executeDriverLogin = async (trimmedUser, trimmedPass) => {
     try {
-      const driverData = {
-        driverId: 'DRV-TN-2026-08',
-        name: 'Kumar M.',
-        phone: trimmedUser.includes('@') ? '+91 94432 11098' : trimmedUser,
-        email: trimmedUser.includes('@') ? trimmedUser : 'kumar.logistics@naamuzhavar.com',
-        avatar: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=300&auto=format&fit=crop&q=80',
-        assignedHub: 'Dindigul Central Hub',
-        vehicle: {
-          model: 'Tata Ace EV Cargo',
-          vehicleNumber: 'TN 57 AB 1234',
-          type: 'Zero-Emission EV Light Commercial Vehicle (LCV)',
-          batteryCapacityKwh: 21.3,
-          currentBatteryPct: 82,
-          estimatedRangeKm: 68,
-          maxPayloadKg: 600,
-          healthPct: 98,
-          chargingStatus: 'DISCHARGING'
-        },
-        role: 'driver'
-      };
-      completeDriverLogin(driverData);
+      const res = await api.post('/driver/auth/login', {
+        identifier: trimmedUser,
+        phone: trimmedUser,
+        email: trimmedUser,
+        driverId: trimmedUser,
+        pin: trimmedPass,
+        password: trimmedPass
+      });
+
+      if (res && res.driver) {
+        completeDriverLogin(res.driver, res.token);
+        return;
+      }
+      throw new Error('Driver profile missing in server response.');
     } catch (err) {
+      console.warn('Driver login notice, checking registered driver credentials:', err.message);
+
+      // Check registered driver in localStorage
+      try {
+        const stored = localStorage.getItem('driver_current_profile');
+        if (stored) {
+          const reg = JSON.parse(stored);
+          const cleanDigits = trimmedUser.replace(/\D/g, '');
+          const matchEmail = reg.email && reg.email.toLowerCase() === trimmedUser.toLowerCase();
+          const matchPhone = reg.phone && cleanDigits.length >= 10 && reg.phone.replace(/\D/g, '').endsWith(cleanDigits.slice(-10));
+          const matchId = reg.driverId && reg.driverId.toLowerCase() === trimmedUser.toLowerCase();
+          if (matchEmail || matchPhone || matchId) {
+            const validPin = reg.pin || reg.password || '1234';
+            if (trimmedPass === validPin) {
+              completeDriverLogin(reg);
+              return;
+            }
+          }
+        }
+      } catch {}
+
+      // Fallback: Demo driver credentials
+      const cleanDigits = trimmedUser.replace(/\D/g, '');
+      const isDemoAccount =
+        trimmedUser.toLowerCase() === 'kumar.logistics@naamuzhavar.com' ||
+        trimmedUser === 'DRV-TN-2026-08' ||
+        (cleanDigits.length >= 10 && cleanDigits.endsWith('11098'));
+      const isDemoPin = trimmedPass === '4892' || trimmedPass === '1234';
+      if (isDemoAccount && isDemoPin) {
+        handleQuickDemoDriver();
+        return;
+      }
+
       setIsSubmitting(false);
-      setAuthError(err.message || 'Driver authentication failed.');
+      setAuthError(err.message || (lang === 'ta' ? 'ஓட்டுநர் அடையாள எண் அல்லது கடவுச்சொல் தவறானது.' : 'Invalid Driver Mobile/ID or PIN. Please check your credentials.'));
     }
   };
 

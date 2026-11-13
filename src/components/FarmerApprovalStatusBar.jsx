@@ -169,7 +169,7 @@ export default function FarmerApprovalStatusBar() {
             >
               {activeOrders.map((o) => (
                 <option key={o.orderId} value={o.orderId}>
-                  {o.orderId} — {o.cropName} ({o.quantityKg} kg)
+                  {o.orderId} - {o.cropName} ({o.quantityKg} kg)
                 </option>
               ))}
             </select>

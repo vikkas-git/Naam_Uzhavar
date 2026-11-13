@@ -1,25 +1,29 @@
-/* AdminCommon.css - Nexora Modern Bento Architecture & Complete Component System */
+/* AdminCommon.css - Premium Enterprise SaaS Design System & Reusable Component Standards */
 
 :root {
-  --bento-bg: #f3f4f7;
+  --bento-bg: #f8fafc;
   --bento-card: #ffffff;
-  --bento-border: #eaedf2;
+  --bento-border: #e2e8f0;
   --bento-border-hover: #cbd5e1;
-  --bento-radius: 24px;
-  --bento-radius-sm: 16px;
-  --bento-radius-xs: 12px;
-  --bento-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-  --bento-shadow-hover: 0 10px 28px rgba(0, 0, 0, 0.04);
+  --bento-radius: 12px;
+  --bento-radius-sm: 10px;
+  --bento-radius-xs: 8px;
+  --bento-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
+  --bento-shadow-hover: 0 4px 14px 0 rgba(15, 23, 42, 0.07);
   
-  /* Primary & Accent Palette (Nexora Standard) */
-  --bento-blue: #4f6df5;
-  --bento-blue-light: #eff2fe;
-  --bento-lime: #a6f535;
-  --bento-lime-text: #3f6212;
-  --bento-lime-light: #f5fee7;
-  --bento-dark: #181e2b;
+  /* Primary & Accent Palette (Premium Enterprise SaaS Standards) */
+  --bento-blue: #2563eb;
+  --bento-blue-light: #eff6ff;
+  --bento-lime: #10b981;
+  --bento-lime-text: #065f46;
+  --bento-lime-light: #ecfdf5;
+  --bento-dark: #0f172a;
   --bento-slate: #64748b;
-  --bento-text: #111827;
+  --bento-text: #0f172a;
+  
+  /* Focus rings & brand accents */
+  --admin-accent: #059669;
+  --admin-accent-focus: rgba(16, 185, 129, 0.2);
 }
 
 /* ==========================================================================
@@ -693,31 +697,32 @@
   align-items: center;
   justify-content: center;
   gap: 7px;
-  padding: 9px 18px;
+  padding: 8px 16px;
   border-radius: var(--bento-radius-xs);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.15s ease;
   white-space: nowrap;
+  line-height: 1.4;
 }
 
 .admin-btn.primary {
   background: var(--bento-dark);
   color: #ffffff;
   border: 1px solid var(--bento-dark);
-  box-shadow: 0 2px 6px rgba(24, 30, 43, 0.15);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.1);
 }
 
 .admin-btn.primary:hover {
-  background: #2b3548;
-  border-color: #2b3548;
+  background: #1e293b;
+  border-color: #1e293b;
   transform: translateY(-1px);
 }
 
 .admin-btn.outline {
   background: #ffffff;
-  border: 1px solid #d1d5db;
+  border: 1px solid #cbd5e1;
   color: #334155;
 }
 
@@ -728,9 +733,9 @@
 }
 
 .admin-btn.sm {
-  padding: 6px 14px;
+  padding: 5px 12px;
   font-size: 12px;
-  border-radius: 9999px;
+  border-radius: 6px;
 }
 
 .admin-btn.danger {
@@ -826,10 +831,13 @@
 .admin-table-wrap {
   width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
 }
 
 .admin-table {
   width: 100%;
+  min-width: 660px;
   border-collapse: separate;
   border-spacing: 0;
   font-size: 13px;
@@ -1005,6 +1013,153 @@
   font-size: 13.5px;
   font-weight: 700;
   color: var(--bento-text);
+}
+
+/* ==========================================================================
+   7.B MODAL DIALOG STANDARDS
+   ========================================================================== */
+.admin-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.48);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 2100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: fadeIn 0.15s ease;
+}
+
+.admin-dialog {
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  border-radius: var(--bento-radius);
+  border: 1px solid var(--bento-border);
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.18);
+  overflow: hidden;
+  animation: popoverFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.admin-dialog-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--bento-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-dialog-header h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--bento-text);
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+
+.admin-dialog-body {
+  padding: 22px 24px;
+}
+
+.admin-dialog-footer {
+  padding: 14px 24px;
+  background: #f8fafc;
+  border-top: 1px solid var(--bento-border);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* ==========================================================================
+   7.C ENTERPRISE FORM CONTROLS & SEGMENTED SWITCHERS
+   ========================================================================== */
+.admin-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.admin-field-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #334155;
+  margin: 0 0 4px;
+  display: block;
+}
+
+.admin-form-input {
+  width: 100%;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--bento-radius-xs);
+  font-size: 13.5px;
+  color: var(--bento-text);
+  background: #ffffff;
+  outline: none;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+.admin-form-input:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.admin-form-input:disabled {
+  background: #f1f5f9;
+  color: #64748b;
+  cursor: not-allowed;
+}
+
+.admin-segmented-control {
+  display: flex;
+  background: #f1f5f9;
+  border-radius: 8px;
+  padding: 3px;
+  gap: 2px;
+  border: 1px solid #e2e8f0;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.admin-segmented-control::-webkit-scrollbar {
+  display: none;
+}
+
+.admin-segment-btn {
+  flex: 1 0 auto;
+  border: none;
+  background: transparent;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.admin-segment-btn:hover {
+  color: #0f172a;
+}
+
+.admin-segment-btn.active {
+  background: #ffffff;
+  color: #0f172a;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 @keyframes fadeIn {
@@ -1211,6 +1366,28 @@
   .admin-donut-wrap {
     flex-direction: column;
     gap: 16px;
+  }
+  .admin-btn {
+    min-height: 38px;
+  }
+  .admin-btn.sm {
+    min-height: 32px;
+  }
+  .admin-dialog-header {
+    padding: 14px 16px;
+  }
+  .admin-dialog-body {
+    padding: 16px;
+  }
+  .admin-dialog-footer {
+    padding: 14px 16px;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .admin-dialog-footer .admin-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 

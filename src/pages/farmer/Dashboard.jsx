@@ -178,8 +178,8 @@ export default function Dashboard() {
         }
         subtitle={
           lang === 'ta'
-            ? `${p.farmDetails?.farmName || (p.name && p.name.toLowerCase() !== 'ramesh kumar' ? `${p.name} பண்ணை` : 'பசுமைப் பண்ணை')} • ${p.farmDetails?.village || 'பொள்ளாச்சி'}, ${p.farmDetails?.district || 'கோயம்புத்தூர்'} — இன்றைய பயிர் நிலவரம்`
-            : `${p.farmDetails?.farmName || (p.name && p.name.toLowerCase() !== 'ramesh kumar' ? `${p.name}'s Natural Farm` : 'Green Valley Farm')} • ${p.farmDetails?.village || 'Pollachi'}, ${p.farmDetails?.district || 'Coimbatore'} — Real-time Produce Ledger`
+            ? `${p.farmDetails?.farmName || (p.name && p.name.toLowerCase() !== 'ramesh kumar' ? `${p.name} பண்ணை` : 'பசுமைப் பண்ணை')} • ${p.farmDetails?.village || 'பொள்ளாச்சி'}, ${p.farmDetails?.district || 'கோயம்புத்தூர்'} | இன்றைய பயிர் நிலவரம்`
+            : `${p.farmDetails?.farmName || (p.name && p.name.toLowerCase() !== 'ramesh kumar' ? `${p.name}'s Natural Farm` : 'Green Valley Farm')} • ${p.farmDetails?.village || 'Pollachi'}, ${p.farmDetails?.district || 'Coimbatore'} | Real-time Produce Ledger`
         }
         action={
           <Button

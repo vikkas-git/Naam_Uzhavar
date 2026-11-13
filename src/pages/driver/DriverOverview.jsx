@@ -139,7 +139,7 @@ export default function DriverOverview() {
     if (status === 'DELIVERED') return 4;
     if (status === 'IN_TRANSIT') return 3;
     if (status === 'PICKED_UP') return 2;
-    if (status === 'DRIVER_EN_ROUTE_PICKUP') return 1;
+    if (status === 'DRIVER_EN_ROUTE_PICKUP' || status === 'EN_ROUTE_PICKUP') return 1;
     return 0;
   }, [activeTrip]);
 
@@ -220,7 +220,7 @@ export default function DriverOverview() {
         subtitle={
           lang === 'ta'
             ? `${vehicleName} (${vehicleNo}) • ${assignedHub} நேரலை சரக்கு வழித்தடம்`
-            : `${vehicleName} (${vehicleNo}) • ${assignedHub} — Active Consignment Corridor`
+            : `${vehicleName} (${vehicleNo}) • ${assignedHub} - Active Consignment Corridor`
         }
         action={
           <div className="d-flex align-items-center gap-2">
@@ -779,7 +779,7 @@ export default function DriverOverview() {
                     <p className="driver-action-desc">
                       {activeTrip.status === 'READY_FOR_PICKUP' || activeTrip.status === 'CONFIRMED'
                         ? (lang === 'ta' ? 'பண்ணைக்கு கிளம்பி காய்கறி ஏற்றுதலைத் தொடங்கவும்.' : 'Head to farm gate for produce loading & physical inspection.')
-                        : activeTrip.status === 'DRIVER_EN_ROUTE_PICKUP'
+                        : activeTrip.status === 'DRIVER_EN_ROUTE_PICKUP' || activeTrip.status === 'EN_ROUTE_PICKUP'
                         ? (lang === 'ta' ? 'பண்ணையை அடைந்ததும் பெட்டிகளை சரிபார்த்து உறுதி செய்யவும்.' : 'Arrived at farm gate. Verify crate count and confirm loading.')
                         : activeTrip.status === 'PICKED_UP'
                         ? (lang === 'ta' ? 'நெடுஞ்சாலை வழியாக வாங்குபவர் முனையத்திற்கு புறப்படவும்.' : 'Begin transit via NH-83 towards buyer commercial kitchen bay.')
@@ -805,7 +805,7 @@ export default function DriverOverview() {
                     </button>
                   )}
 
-                  {activeTrip.status === 'DRIVER_EN_ROUTE_PICKUP' && (
+                  {(activeTrip.status === 'DRIVER_EN_ROUTE_PICKUP' || activeTrip.status === 'EN_ROUTE_PICKUP') && (
                     <button
                       type="button"
                       className="driver-primary-cta"

@@ -559,7 +559,7 @@ export default function Invoices() {
                       {p.shopName || p.businessName || p.fullName || p.name || 'Commercial Buyer'}
                     </strong>
                     <span className="party-sub">
-                      {p.contactPerson || p.fullName || p.name || 'Commercial Partner'} • {p.phone || '—'}
+                      {p.contactPerson || p.fullName || p.name || 'Commercial Partner'} • {p.phone || 'N/A'}
                     </span>
                     {p.gstin && (
                       <span className="party-sub font-mono">

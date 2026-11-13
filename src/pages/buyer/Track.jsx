@@ -117,7 +117,7 @@ export default function Track() {
   const dynamicTelemetry = useMemo(() => {
     if (currentDeliveryStatus === 'READY_FOR_PICKUP') {
       return {
-        statusText: 'Consignment Graded & Packaged — Ready for Driver Pickup at Hub',
+        statusText: 'Consignment Graded & Packaged - Ready for Driver Pickup at Hub',
         locationText: `${trackingOrder?.hub || trackingOrder?.location || 'Central Supply'} Sorting Bay`,
         etaMinutes: 45,
         distanceKm: 24,
@@ -127,7 +127,7 @@ export default function Track() {
     }
     if (currentDeliveryStatus === 'PICKED_UP') {
       return {
-        statusText: 'EV Cargo Picked Up from Regional Hub — Checkpoint Cleared',
+        statusText: 'EV Cargo Picked Up from Regional Hub - Checkpoint Cleared',
         locationText: 'Kodai Road Logistics Corridor',
         etaMinutes: 30,
         distanceKm: 18,
@@ -219,7 +219,7 @@ export default function Track() {
                 const isAccessible = s !== 'NOT_ASSIGNED' && o.orderStatus !== 'REJECTED' && o.orderStatus !== 'PENDING_FARMER_APPROVAL';
                 return (
                   <option key={o.orderId} value={o.orderId}>
-                    {o.orderId} — {o.cropName} ({o.quantityKg} kg) [{formatOrderStatus(isAccessible ? s : o.orderStatus || 'Pending')}]
+                    {o.orderId} - {o.cropName} ({o.quantityKg} kg) [{formatOrderStatus(isAccessible ? s : o.orderStatus || 'Pending')}]
                   </option>
                 );
               })}
@@ -252,7 +252,7 @@ export default function Track() {
 
           <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: '#0f172a', margin: '0 0 8px 0' }}>
             {trackingOrder.orderStatus === 'REJECTED'
-              ? 'Delivery Tracking Inaccessible — Order Rejected'
+              ? 'Delivery Tracking Inaccessible - Order Rejected'
               : 'Delivery Tracking Not Available Yet'}
           </h3>
 
@@ -604,7 +604,7 @@ export default function Track() {
                   {currentDeliveryStatus === 'DELIVERED' && (
                     <div className="buyer-demo-delivered-pill">
                       <CheckCircle2 size={16} />
-                      <span>Order Delivered — Final Milestone Reached</span>
+                      <span>Order Delivered: Final Milestone Reached</span>
                     </div>
                   )}
                 </div>

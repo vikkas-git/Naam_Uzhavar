@@ -4,24 +4,18 @@ import { Link } from 'react-router-dom';
 import {
   Search,
   ShoppingCart,
-  Calendar,
   CheckCircle2,
   Clock,
-  AlertCircle,
   Eye,
   RefreshCw,
   X,
-  User,
-  ShieldCheck,
-  Package,
-  Layers,
-  ArrowRight,
   Download,
-  Printer,
-  TrendingUp,
-  MapPin,
-  DollarSign,
-  Sprout
+  Sprout,
+  AlertCircle,
+  ShieldCheck,
+  ArrowRight,
+  Check,
+  XCircle
 } from 'lucide-react';
 import api from '../../utils/api';
 import { useAdmin } from '../../context/AdminContext';
@@ -36,6 +30,10 @@ export default function AdminRequests() {
   const [search, setSearch] = useState('');
   const [status, setStatus] = useState('all');
   const [loading, setLoading] = useState(false);
+  const [actionLoading, setActionLoading] = useState(false);
+  const [rejectModalReqId, setRejectModalReqId] = useState(null);
+  const [rejectReason, setRejectReason] = useState('');
+
   const [metrics, setMetrics] = useState({
     total: 0,
     pending: 0,
@@ -97,6 +95,61 @@ export default function AdminRequests() {
     }
   };
 
+  const handleApprove = async (id) => {
+    if (!id) return;
+    setActionLoading(true);
+    try {
+      const res = await api.post(`/admin/requests/${id}/accept`);
+      if (res && res.success) {
+        showToast('success', res.message || `Request #${id} approved and converted to order!`);
+        if (requestDetails && (requestDetails.requestId === id || requestDetails._id === id)) {
+          setRequestDetails((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  status: 'CONVERTED_TO_ORDER',
+                  orderId: res.order?.orderId || res.request?.orderId
+                }
+              : null
+          );
+        }
+        loadRequests();
+      }
+    } catch (err) {
+      console.error('Failed to approve request:', err);
+      showToast('error', err.response?.data?.message || 'Failed to approve purchase request');
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  const handleReject = async (e) => {
+    if (e) e.preventDefault();
+    if (!rejectModalReqId) return;
+    setActionLoading(true);
+    try {
+      const res = await api.post(`/admin/requests/${rejectModalReqId}/reject`, {
+        reason: rejectReason.trim() || 'Declined by platform administrator'
+      });
+      if (res && res.success) {
+        showToast('success', `Request #${rejectModalReqId} has been rejected.`);
+        if (requestDetails && (requestDetails.requestId === rejectModalReqId || requestDetails._id === rejectModalReqId)) {
+          setRequestDetails((prev) =>
+            prev ? { ...prev, status: 'REJECTED', rejectionReason: rejectReason } : null
+          );
+        }
+        setRejectModalReqId(null);
+        setRejectReason('');
+        loadRequests();
+      }
+    } catch (err) {
+      console.error('Failed to reject request:', err);
+      showToast('error', err.response?.data?.message || 'Failed to reject purchase request');
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
   const handleExportCSV = async () => {
     try {
       showToast('info', 'Preparing purchase requests CSV export...');
@@ -144,6 +197,17 @@ export default function AdminRequests() {
     }
   };
 
+  const formatDate = (isoString) => {
+    if (!isoString) return 'Recent';
+    try {
+      const d = new Date(isoString);
+      if (isNaN(d.getTime())) return 'Recent';
+      return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
+    } catch {
+      return 'Recent';
+    }
+  };
+
   return (
     <div className="animate-fade-in">
       {/* Page Header */}
@@ -165,62 +229,64 @@ export default function AdminRequests() {
       </div>
 
       {/* Essential KPI Cards */}
-      <div className="row g-3 mb-4">
+      <div className="admin-kpi-grid">
         {/* Card 1: Total Requests */}
-        <div className="col-12 col-sm-6 col-xl-3">
-          <div className="admin-card p-3 h-100 d-flex flex-column justify-content-between">
-            <span className="text-muted small fw-semibold">Total Requests</span>
-            <div className="my-1">
-              <h3 className="fs-3 fw-bold text-dark m-0">{metrics.total}</h3>
+        <div className="admin-kpi-card">
+          <div className="admin-kpi-header">
+            <span className="admin-kpi-title">Total Requests</span>
+            <div className="admin-kpi-icon-wrap blue">
+              <ShoppingCart size={17} />
             </div>
-            <div className="small text-muted d-flex align-items-center gap-1">
-              <Clock size={12} className="text-muted" />
-              <span>{metrics.pending} pending approval</span>
-            </div>
+          </div>
+          <div className="admin-kpi-value">{metrics.total}</div>
+          <div className="admin-kpi-footer">
+            <span className="badge-trend neutral">{metrics.pending} Pending</span>
+            <span>Commercial purchase inquiries</span>
           </div>
         </div>
 
         {/* Card 2: Pending Approval */}
-        <div className="col-12 col-sm-6 col-xl-3">
-          <div className="admin-card p-3 h-100 d-flex flex-column justify-content-between">
-            <span className="text-muted small fw-semibold">Pending Approval</span>
-            <div className="my-1">
-              <h3 className="fs-3 fw-bold m-0" style={{ color: '#d97706' }}>{metrics.pending}</h3>
+        <div className="admin-kpi-card">
+          <div className="admin-kpi-header">
+            <span className="admin-kpi-title">Pending Approval</span>
+            <div className="admin-kpi-icon-wrap ochre">
+              <Clock size={17} />
             </div>
-            <div className="small text-muted d-flex align-items-center gap-1">
-              <Clock size={12} className="text-warning" />
-              <span>Awaiting farmer response</span>
-            </div>
+          </div>
+          <div className="admin-kpi-value">{metrics.pending}</div>
+          <div className="admin-kpi-footer">
+            <span className="badge-trend warning">Awaiting Action</span>
+            <span>Platform response pending</span>
           </div>
         </div>
 
         {/* Card 3: Converted Orders */}
-        <div className="col-12 col-sm-6 col-xl-3">
-          <div className="admin-card p-3 h-100 d-flex flex-column justify-content-between">
-            <span className="text-muted small fw-semibold">Converted Orders</span>
-            <div className="my-1">
-              <h3 className="fs-3 fw-bold m-0" style={{ color: '#16a34a' }}>{metrics.converted}</h3>
+        <div className="admin-kpi-card">
+          <div className="admin-kpi-header">
+            <span className="admin-kpi-title">Converted Orders</span>
+            <div className="admin-kpi-icon-wrap green">
+              <CheckCircle2 size={17} />
             </div>
-            <div className="small text-muted d-flex align-items-center gap-1">
-              <CheckCircle2 size={12} className="text-success" />
-              <span>Converted to confirmed orders</span>
-            </div>
+          </div>
+          <div className="admin-kpi-value">{metrics.converted}</div>
+          <div className="admin-kpi-footer">
+            <span className="badge-trend success">Converted</span>
+            <span>Fulfilled to confirmed orders</span>
           </div>
         </div>
 
         {/* Card 4: Total Value */}
-        <div className="col-12 col-sm-6 col-xl-3">
-          <div className="admin-card p-3 h-100 d-flex flex-column justify-content-between">
-            <span className="text-muted small fw-semibold">Total Value</span>
-            <div className="my-1">
-              <h3 className="fs-3 fw-bold text-dark m-0">
-                ₹{(metrics.totalInquiredValue || 0).toLocaleString('en-IN')}
-              </h3>
+        <div className="admin-kpi-card">
+          <div className="admin-kpi-header">
+            <span className="admin-kpi-title">Total Inquired Value</span>
+            <div className="admin-kpi-icon-wrap purple">
+              <Sprout size={17} />
             </div>
-            <div className="small text-muted d-flex align-items-center gap-1">
-              <Sprout size={12} className="text-success" />
-              <span>{(metrics.totalInquiredKg || 0).toLocaleString('en-IN')} Kg vegetables</span>
-            </div>
+          </div>
+          <div className="admin-kpi-value">₹{(metrics.totalInquiredValue || 0).toLocaleString('en-IN')}</div>
+          <div className="admin-kpi-footer">
+            <span className="badge-trend neutral">{(metrics.totalInquiredKg || 0).toLocaleString('en-IN')} Kg</span>
+            <span>Aggregate volume</span>
           </div>
         </div>
       </div>
@@ -234,7 +300,7 @@ export default function AdminRequests() {
             <input
               type="text"
               className="admin-search-input"
-              placeholder="Search by Request ID, Buyer, Farmer, Crop, Bay..."
+              placeholder="Search by Request ID, Buyer, Farmer, Crop, Location..."
               value={search}
               onChange={(e) => {
                 setSearch(e.target.value);
@@ -244,21 +310,12 @@ export default function AdminRequests() {
           </div>
 
           <div className="admin-filter-group">
-            <div className="admin-module-pill-container" style={{ padding: '3px' }}>
+            <div className="admin-segmented-control">
               {['all', 'PENDING', 'ACCEPTED', 'CONVERTED_TO_ORDER', 'REJECTED'].map((st) => (
                 <button
                   key={st}
                   type="button"
-                  className="admin-btn sm"
-                  style={{
-                    background: status === st ? '#181e2b' : 'transparent',
-                    color: status === st ? '#ffffff' : '#64748b',
-                    border: 'none',
-                    borderRadius: '9999px',
-                    padding: '6px 14px',
-                    fontSize: '12px',
-                    fontWeight: status === st ? '700' : '600'
-                  }}
+                  className={`admin-segment-btn ${status === st ? 'active' : ''}`}
                   onClick={() => {
                     setStatus(st);
                     setPage(1);
@@ -279,7 +336,7 @@ export default function AdminRequests() {
               onClick={loadRequests}
               title="Refresh requests"
             >
-              <RefreshCw size={12} className={loading ? 'spin' : ''} />
+              <RefreshCw size={12} className={loading ? 'animate-spin' : ''} />
               <span>Refresh</span>
             </button>
           </div>
@@ -297,21 +354,21 @@ export default function AdminRequests() {
                 <th>Quantity & Rate</th>
                 <th>Total Value</th>
                 <th>Status</th>
-                <th style={{ textAlign: 'right' }}>Action</th>
+                <th style={{ textAlign: 'right' }}>Actions</th>
               </tr>
             </thead>
             <tbody>
               {loading && requests.length === 0 ? (
                 <tr>
                   <td colSpan="8" className="text-center py-5 text-muted">
-                    <RefreshCw size={24} className="spin mb-2" />
+                    <RefreshCw size={24} className="animate-spin mb-2 d-inline-block" />
                     <div>Loading purchase requests...</div>
                   </td>
                 </tr>
               ) : requests.length === 0 ? (
                 <tr>
                   <td colSpan="8" className="text-center py-5 text-muted">
-                    <AlertCircle size={24} className="mb-2 text-warning" />
+                    <AlertCircle size={24} className="mb-2 text-warning d-inline-block" />
                     <div>No purchase requests found matching the filter criteria.</div>
                   </td>
                 </tr>
@@ -320,26 +377,25 @@ export default function AdminRequests() {
                   const reqId = req.requestId || req._id;
                   const crop = req.cropDetails || {};
                   const buyer = req.buyerDetails || {};
+                  const isPending = req.status === 'PENDING';
+
                   return (
                     <tr key={req._id || req.requestId}>
                       <td>
                         <div className="d-flex align-items-center gap-1">
-                          <ShoppingCart size={13} className="text-primary" />
-                          <span className="font-mono fw-bold text-dark">{req.requestId}</span>
+                          <ShoppingCart size={13} className="text-primary flex-shrink-0" />
+                          <span className="font-monospace fw-bold text-dark">{reqId}</span>
                         </div>
                         <div className="text-muted" style={{ fontSize: '11px' }}>
-                          {new Date(req.createdAt || Date.now()).toLocaleDateString('en-IN', {
-                            day: 'numeric',
-                            month: 'short'
-                          })}
+                          {formatDate(req.createdAt)}
                         </div>
                       </td>
                       <td>
                         <div className="small">
                           <div className="fw-semibold text-dark d-flex align-items-center gap-1">
-                            <span>{buyer.businessName || 'Commercial Buyer'}</span>
+                            <span>{buyer.businessName || req.buyerName || 'Commercial Buyer'}</span>
                             {buyer.verified && (
-                              <ShieldCheck size={12} className="text-success" title="Verified Buyer" />
+                              <ShieldCheck size={12} className="text-success flex-shrink-0" title="Verified Buyer" />
                             )}
                           </div>
                           <div className="text-muted" style={{ fontSize: '11px' }}>
@@ -350,7 +406,7 @@ export default function AdminRequests() {
                       <td>
                         <div className="small">
                           <div className="fw-semibold text-dark">{req.farmerName || 'Farmer'}</div>
-                          <div className="text-muted font-mono" style={{ fontSize: '11px' }}>
+                          <div className="text-muted font-monospace" style={{ fontSize: '11px' }}>
                             {req.farmerId || 'FMR-TN'}
                           </div>
                         </div>
@@ -365,16 +421,16 @@ export default function AdminRequests() {
                       </td>
                       <td>
                         <div className="small">
-                          <div className="font-mono fw-bold text-dark">
+                          <div className="font-monospace fw-bold text-dark">
                             {(req.quantity || 0).toLocaleString('en-IN')} {req.unit || 'Kg'}
                           </div>
-                          <div className="text-muted font-mono" style={{ fontSize: '11px' }}>
+                          <div className="text-muted font-monospace" style={{ fontSize: '11px' }}>
                             @ ₹{req.offeredPrice || 0}/Kg
                           </div>
                         </div>
                       </td>
                       <td>
-                        <span className="font-mono fw-bold text-dark fs-6">
+                        <span className="font-monospace fw-bold text-dark fs-6">
                           ₹{(req.totalEstimatedValue || 0).toLocaleString('en-IN')}
                         </span>
                       </td>
@@ -384,15 +440,55 @@ export default function AdminRequests() {
                         </span>
                       </td>
                       <td style={{ textAlign: 'right' }}>
-                        <button
-                          type="button"
-                          className="admin-btn outline sm"
-                          onClick={() => openRequestDetails(reqId)}
-                          title="View Request Details"
-                        >
-                          <Eye size={12} />
-                          <span>Details</span>
-                        </button>
+                        <div className="d-flex align-items-center justify-content-end gap-1">
+                          {isPending && (
+                            <>
+                              <button
+                                type="button"
+                                className="admin-btn sm"
+                                style={{
+                                  background: '#dcfce7',
+                                  color: '#15803d',
+                                  border: '1px solid #bbf7d0',
+                                  padding: '4px 8px'
+                                }}
+                                onClick={() => handleApprove(reqId)}
+                                disabled={actionLoading}
+                                title="Approve & Convert to Order"
+                              >
+                                <Check size={12} />
+                                <span>Approve</span>
+                              </button>
+                              <button
+                                type="button"
+                                className="admin-btn sm"
+                                style={{
+                                  background: '#fee2e2',
+                                  color: '#b91c1c',
+                                  border: '1px solid #fecaca',
+                                  padding: '4px 8px'
+                                }}
+                                onClick={() => {
+                                  setRejectModalReqId(reqId);
+                                  setRejectReason('');
+                                }}
+                                disabled={actionLoading}
+                                title="Reject Request"
+                              >
+                                <X size={12} />
+                              </button>
+                            </>
+                          )}
+                          <button
+                            type="button"
+                            className="admin-btn outline sm"
+                            onClick={() => openRequestDetails(reqId)}
+                            title="View Request Details"
+                          >
+                            <Eye size={12} />
+                            <span>Details</span>
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );
@@ -447,13 +543,13 @@ export default function AdminRequests() {
             <div className="admin-drawer-body">
               {loadingDetails || !requestDetails ? (
                 <div className="text-center py-5 text-muted">
-                  <RefreshCw size={24} className="spin mb-2" />
+                  <RefreshCw size={24} className="animate-spin mb-2 d-inline-block" />
                   <div>Loading inquiry details...</div>
                 </div>
               ) : (
                 <div className="d-flex flex-column gap-3">
                   {/* Status Banner */}
-                  <div className="p-3 rounded-3 bg-light border d-flex align-items-center justify-content-between">
+                  <div className="p-3 rounded-3 bg-light border d-flex align-items-center justify-content-between flex-wrap gap-2">
                     <div>
                       <span className="text-muted small d-block">Negotiation Status</span>
                       <span className={`admin-pill ${getStatusBadgeClass(requestDetails.status)} mt-1 d-inline-block`}>
@@ -482,7 +578,7 @@ export default function AdminRequests() {
                       <div className="row g-2 small">
                         <div className="col-6">
                           <span className="text-muted d-block">Produce Name</span>
-                          <span className="fw-bold text-dark">{requestDetails.cropDetails?.name}</span>
+                          <span className="fw-bold text-dark">{requestDetails.cropDetails?.name || 'Fresh Produce'}</span>
                           {requestDetails.cropDetails?.nameTa && (
                             <div className="text-muted font-tamil">{requestDetails.cropDetails.nameTa}</div>
                           )}
@@ -493,20 +589,20 @@ export default function AdminRequests() {
                         </div>
                         <div className="col-6 mt-2">
                           <span className="text-muted d-block">Requested Volume</span>
-                          <span className="fw-bold text-dark font-mono">
+                          <span className="fw-bold text-dark font-monospace">
                             {requestDetails.quantity} {requestDetails.unit || 'Kg'}
                           </span>
                         </div>
                         <div className="col-6 mt-2">
                           <span className="text-muted d-block">Offered Farmgate Rate</span>
-                          <span className="fw-bold text-primary font-mono">
+                          <span className="fw-bold text-primary font-monospace">
                             ₹{requestDetails.offeredPrice} / Kg
                           </span>
                         </div>
                         <div className="col-12 mt-2 pt-2 border-top">
                           <div className="d-flex justify-content-between align-items-center">
                             <span className="fw-semibold text-muted">Total Proposed Valuation:</span>
-                            <span className="fs-5 fw-bold text-success font-mono">
+                            <span className="fs-5 fw-bold text-success font-monospace">
                               ₹{(requestDetails.totalEstimatedValue || 0).toLocaleString('en-IN')}
                             </span>
                           </div>
@@ -526,19 +622,19 @@ export default function AdminRequests() {
                       <div className="row g-2 small">
                         <div className="col-6">
                           <span className="text-muted d-block">Business Entity</span>
-                          <span className="fw-bold text-dark">{requestDetails.buyerDetails?.businessName}</span>
+                          <span className="fw-bold text-dark">{requestDetails.buyerDetails?.businessName || 'Commercial Buyer'}</span>
                         </div>
                         <div className="col-6">
                           <span className="text-muted d-block">Entity Type</span>
-                          <span className="text-capitalize text-dark">{requestDetails.buyerDetails?.buyerType}</span>
+                          <span className="text-capitalize text-dark">{requestDetails.buyerDetails?.buyerType || 'Hotel / Wholesaler'}</span>
                         </div>
                         <div className="col-6 mt-2">
                           <span className="text-muted d-block">Contact Phone</span>
-                          <span className="text-dark font-mono">{requestDetails.buyerDetails?.phone}</span>
+                          <span className="text-dark font-monospace">{requestDetails.buyerDetails?.phone || '+91 98401 23456'}</span>
                         </div>
                         <div className="col-6 mt-2">
                           <span className="text-muted d-block">Official Email</span>
-                          <span className="text-dark">{requestDetails.buyerDetails?.email}</span>
+                          <span className="text-dark">{requestDetails.buyerDetails?.email || 'procurement@buyer.com'}</span>
                         </div>
                       </div>
                     </div>
@@ -555,11 +651,11 @@ export default function AdminRequests() {
                       <div className="row g-2 small">
                         <div className="col-6">
                           <span className="text-muted d-block">Farmer Name</span>
-                          <span className="fw-bold text-dark">{requestDetails.farmerName}</span>
+                          <span className="fw-bold text-dark">{requestDetails.farmerName || 'Ramesh Kumar'}</span>
                         </div>
                         <div className="col-6">
                           <span className="text-muted d-block">Farmer System ID</span>
-                          <span className="font-mono text-dark">{requestDetails.farmerId}</span>
+                          <span className="font-monospace text-dark">{requestDetails.farmerId || 'FMR-TN-2026-01'}</span>
                         </div>
                       </div>
                     </div>
@@ -575,11 +671,11 @@ export default function AdminRequests() {
                     <div className="p-3 small">
                       <div className="mb-2">
                         <span className="text-muted d-block">Receiving Dock / Delivery Bay</span>
-                        <span className="text-dark fw-semibold">{requestDetails.deliveryLocation}</span>
+                        <span className="text-dark fw-semibold">{requestDetails.deliveryLocation || 'Commercial Hub, Coimbatore'}</span>
                       </div>
                       <div className="mb-2">
                         <span className="text-muted d-block">Preferred Delivery Date</span>
-                        <span className="text-dark font-mono">
+                        <span className="text-dark font-monospace">
                           {requestDetails.preferredDeliveryDate || 'Immediate Dispatch'}
                         </span>
                       </div>
@@ -601,19 +697,114 @@ export default function AdminRequests() {
               )}
             </div>
 
-            <div className="admin-drawer-footer">
+            <div className="admin-drawer-footer d-flex align-items-center gap-2">
+              {requestDetails && requestDetails.status === 'PENDING' ? (
+                <>
+                  <button
+                    type="button"
+                    className="admin-btn primary sm flex-grow-1 justify-content-center"
+                    onClick={() => handleApprove(requestDetails.requestId || requestDetails._id)}
+                    disabled={actionLoading}
+                  >
+                    <Check size={13} />
+                    <span>Approve & Convert</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="admin-btn sm"
+                    style={{ background: '#fee2e2', color: '#b91c1c', border: '1px solid #fecaca' }}
+                    onClick={() => {
+                      setRejectModalReqId(requestDetails.requestId || requestDetails._id);
+                      setRejectReason('');
+                    }}
+                    disabled={actionLoading}
+                  >
+                    <XCircle size={13} />
+                    <span>Reject</span>
+                  </button>
+                  <button
+                    type="button"
+                    className="admin-btn outline sm"
+                    onClick={() => setSelectedRequestId(null)}
+                  >
+                    Close
+                  </button>
+                </>
+              ) : (
+                <button
+                  type="button"
+                  className="admin-btn outline sm w-100 justify-content-center"
+                  onClick={() => setSelectedRequestId(null)}
+                >
+                  Close Drawer
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* REJECT CONFIRMATION MODAL */}
+      {rejectModalReqId && (
+        <div className="admin-modal-backdrop" onClick={() => setRejectModalReqId(null)}>
+          <div className="admin-modal" style={{ maxWidth: '440px' }} onClick={(e) => e.stopPropagation()}>
+            <div className="admin-modal-header">
+              <h3 className="fs-6 fw-bold text-dark m-0">Reject Purchase Request</h3>
               <button
                 type="button"
-                className="admin-btn outline sm w-100 justify-content-center"
-                onClick={() => setSelectedRequestId(null)}
+                className="admin-drawer-close"
+                onClick={() => setRejectModalReqId(null)}
               >
-                Close Drawer
+                <X size={16} />
               </button>
             </div>
+            <form onSubmit={handleReject}>
+              <div className="admin-modal-body p-3">
+                <p className="text-muted small mb-3">
+                  Please provide a reason for declining purchase request <strong>#{rejectModalReqId}</strong>.
+                  This note will be recorded for audit and communicated to the buyer.
+                </p>
+                <div className="mb-2">
+                  <label className="form-label small fw-semibold text-dark">
+                    Rejection Reason
+                  </label>
+                  <textarea
+                    className="form-control form-control-sm"
+                    rows="3"
+                    placeholder="e.g., Requested volume exceeds current farm harvest capacity or logistic constraint..."
+                    value={rejectReason}
+                    onChange={(e) => setRejectReason(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+              <div className="admin-modal-footer p-3 border-top d-flex align-items-center justify-content-end gap-2">
+                <button
+                  type="button"
+                  className="admin-btn outline sm"
+                  onClick={() => setRejectModalReqId(null)}
+                  disabled={actionLoading}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="admin-btn sm"
+                  style={{ background: '#dc2626', color: '#fff', border: '1px solid #b91c1c' }}
+                  disabled={actionLoading}
+                >
+                  {actionLoading ? (
+                    <RefreshCw size={12} className="animate-spin" />
+                  ) : (
+                    <XCircle size={12} />
+                  )}
+                  <span>Confirm Rejection</span>
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}
     </div>
   );
 }
-

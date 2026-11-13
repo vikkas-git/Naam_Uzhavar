@@ -1,16 +1,9 @@
 // pages/admin/AdminProfile.jsx - Centralized Administrator Account & Security Settings
 import React, { useState } from 'react';
 import {
-  UserCheck,
   ShieldCheck,
-  Mail,
-  Phone,
-  Lock,
   Save,
-  KeyRound,
-  CheckCircle2,
-  Server,
-  Database
+  Server
 } from 'lucide-react';
 import { useAdmin } from '../../context/AdminContext';
 import './AdminCommon.css';
@@ -118,8 +111,7 @@ export default function AdminProfile() {
               <label className="admin-field-label">Administrator Name</label>
               <input
                 type="text"
-                className="admin-search-input"
-                style={{ paddingLeft: '12px' }}
+                className="admin-form-input"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -130,8 +122,7 @@ export default function AdminProfile() {
               <label className="admin-field-label">Administrative Email</label>
               <input
                 type="email"
-                className="admin-search-input"
-                style={{ paddingLeft: '12px', background: '#f9fafb' }}
+                className="admin-form-input"
                 value={adminProfile?.email || 'admin@naamuzhavar.com'}
                 disabled
               />
@@ -141,8 +132,7 @@ export default function AdminProfile() {
               <label className="admin-field-label">Contact Phone</label>
               <input
                 type="text"
-                className="admin-search-input"
-                style={{ paddingLeft: '12px' }}
+                className="admin-form-input"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
@@ -152,8 +142,7 @@ export default function AdminProfile() {
               <label className="admin-field-label">Custom Avatar Image URL (Optional)</label>
               <input
                 type="text"
-                className="admin-search-input"
-                style={{ paddingLeft: '12px' }}
+                className="admin-form-input"
                 placeholder="Leave blank for executive initials badge"
                 value={avatar.includes('photo-1534528741775-53994a69daeb') ? '' : avatar}
                 onChange={(e) => setAvatar(e.target.value)}
@@ -177,8 +166,7 @@ export default function AdminProfile() {
                 <label className="admin-field-label">Current Password</label>
                 <input
                   type="password"
-                  className="admin-search-input"
-                  style={{ paddingLeft: '12px' }}
+                  className="admin-form-input"
                   placeholder="••••••••"
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
@@ -189,8 +177,7 @@ export default function AdminProfile() {
                 <label className="admin-field-label">New Password</label>
                 <input
                   type="password"
-                  className="admin-search-input"
-                  style={{ paddingLeft: '12px' }}
+                  className="admin-form-input"
                   placeholder="••••••••"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
@@ -201,8 +188,7 @@ export default function AdminProfile() {
                 <label className="admin-field-label">Confirm New Password</label>
                 <input
                   type="password"
-                  className="admin-search-input"
-                  style={{ paddingLeft: '12px' }}
+                  className="admin-form-input"
                   placeholder="••••••••"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}

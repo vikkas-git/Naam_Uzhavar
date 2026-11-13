@@ -9,6 +9,16 @@ const buyerSchema = new mongoose.Schema(
       required: [true, 'Business or shop name is required'],
       trim: true
     },
+    shopName: {
+      type: String,
+      trim: true,
+      default: ''
+    },
+    name: {
+      type: String,
+      trim: true,
+      default: ''
+    },
     contactPerson: {
       type: String,
       trim: true,
